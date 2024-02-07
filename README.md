@@ -79,7 +79,8 @@ Tasks to be solved -
    5. Bias
    6. Subjectivity
 7. Summarisation
-
+   1. https://huggingface.co/models?pipeline_tag=summarization&sort=trending 
+   2. Text summarisation with Annotation
 
 ### Tech stack
 
@@ -119,10 +120,76 @@ Generating questions in different contexts like -
 
 Answering agent can have different personalities like Easy going, difficult to talk to etc
 
-### Control Flows
+### Requirements and User Experience
 
+1. Chatbot - user interface
+   1. Streamlit app for it’s simplicity and as team has familiarity with it
+   2. Bot can start like - What do you want to document today
+   3. User describes the topic to some extent
+   4. Two options (We will decide exact one with POC)
+      1. Generating questions
+         1. Single prompt with instructions to be curious and friendly
+         2. Or sequence of agents - Curious agent chained to friendly agent
+      2. Fetch other relevant context (to evaluate)
+         1. Unless the bot is somewhat aware of the content and challenges involved it might not be able to ask good questions
+   5. User feedback - repeated question, irrelevant question (Streamlit has integration to take feedback too)
+   6. Repeat questioning
+   7. When to stop (POC needs to be done)
+      1. Explicit action in the UI for the user to end the conversation
+      2. Stopping implied by the conversation
+      3. Giving the user an option to pick the conversation back up at any time will be useful
+   8. Stores the conversation in a structured format automatically in the background
+2. Cataloging 
+   1. Moderation flagging
+   2. Tagging the content for unsafe content to filter out for showing to others
+   3. Conversation topic summarisation
+3. Showcase portal (will make a basic website)
+   1. User experience (Like stack overflow + wikipedia)
+      1. Search
+      2. Moderation filtering
+      3. View the conversation web page
+         1. Comment / feedback section
+      4. Topic summary page (collates different conversation from conversation pages)
+         1. Comment / feedback section
+      5. Traceback information to conversation it came from
+   2. Component
+      1. Moderation
+      2. Subjectivity detection
+      3. Bias detection
+      4.  Noting human crowdsourced validation of recorded information
 
 
 ### Task Breakdown
 
-
+1. Chatbot
+   1. Prompting POC
+   2. Basic Streamlit UI
+   3. TTS and STT integration
+   4. Prompting engineering experiments
+   5. Store conversation information in the background
+   6. User feedback UI
+2. Cataloging
+   1. Convert from format saved by bot to write in database
+   2. Moderation tagging
+   3. Conversation topic summarisation
+3. Platform
+   1. Frontend functionality
+      1. Search
+         1. Basic Search page
+         2. Moderation filtering
+      2. View the conversation web page
+         1. Basic conversation web page
+         2. Comment / feedback section
+      3. Topic summary page (collates different conversation from conversation pages)
+         1. Basic Topic summary page
+         2. Comment / feedback section
+         3. Traceback information to conversation it came from
+   2. Backend functionality
+      1. Search build the index
+      2. Search API
+      3. Search Moderation filtering functionality
+      4. Conversation web page view API
+      5. Add Comment / feedback Conversation web page API
+      6. Topic summary page view API
+      7. Add Comment / feedback Topic summary page section
+      8. Show traceback information to conversation it came from
