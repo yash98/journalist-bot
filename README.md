@@ -120,6 +120,15 @@ Generating questions in different contexts like -
 
 Answering agent can have different personalities like Easy going, difficult to talk to etc
 
+#### Subtask
+
+Question Question Paraphrase - will be useful for determining if a question is repeated
+The machine learning task for determining if one question is a paraphrase of another is known as "Question-Question Pairing" (QQP) or more broadly as "Paraphrase Identification." In the context of natural language processing (NLP), this task involves assessing whether two textual questions have the same meaning, despite potentially being phrased differently.
+
+Natural Language Inference - might be useful for truth, contradiction detection in converstaion. Also, for checking our summarisation task
+The machine learning task for determining if a statement is correct given a context is known as "Natural Language Inference" (NLI). NLI involves assessing whether a given hypothesis (a statement) is true (entailment), false (contradiction), or undetermined (neutral) based on a given premise (context). This task is fundamental in natural language understanding (NLU) and is key to many applications in artificial intelligence related to text comprehension and reasoning.
+
+
 ### Requirements and User Experience
 
 1. Chatbot - user interface
