@@ -175,8 +175,22 @@ The machine learning task for determining if a statement is correct given a cont
    2. Basic Streamlit UI
    3. TTS and STT integration
    4. Prompting engineering experiments
-   5. Store conversation information in the background
-   6. User feedback UI
+   5. Fine tuning
+      1. Dataset curation research
+      2. Dataset curation execution
+      3. Finetuning VM setup
+      4. LLM evaluation metrics to track
+      5. Running the finetuning
+      6. May take Multiple iterations
+   6. RAG
+      1. Journalism books
+      2. Can be rule based or vector search
+   7. Store conversation information in the background
+   8. User feedback UI
+   9. Maintaining conversation history
+      1. Which conversation to catalogue
+   10. Manual End to end Experiments
+   11. Fix minor but not crtical issues encountered
 2. Cataloging
    1. Convert from format saved by bot to write in database
    2. Moderation tagging

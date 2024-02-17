@@ -1,0 +1,2 @@
+1. Generate 2 questions regarding whether to go in depth about the last answer or ask about a different angle. User chooses with by answering back (no explicit UI) which one to asnwer
+    1. Take input from user in the start, detail oriented or generic. We can keep it changeable in between but not prompt back the user
