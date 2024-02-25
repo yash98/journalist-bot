@@ -49,4 +49,4 @@ def objective_met_agent(chat_history, main_question, objectives_left):
     parsed_response = end_of_turn_tags[0].strip().split('\n')[0]
 
     print("Parsed LLM response :", parsed_response)
-    return parsed_response
+    return parsed_response.lower() == "true"
