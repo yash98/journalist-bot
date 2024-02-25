@@ -1,5 +1,7 @@
 from pydantic import BaseModel
 from typing import List, Dict, Union, Tuple
+from check_objective import objective_met_agent
+from generate_question import question_generation_agent
 
 class QuestionConfig(BaseModel):
 	followup_depth: int
@@ -18,7 +20,11 @@ class SurveyBotV1(BaseModel):
 	current_question_index: int = 0
 	current_question_followup_depth: int = 0
 
+	def __init__(self, fixed_questions):
+		self.fixed_questions = fixed_questions
+
 	def get_next_question(user_answer: str):
+		# Track chat history
 		objective_remaining_list = question_generation_agent(chat_history, \
 		fixed_questions[current_question_index].question, fixed_questions[current_question_index][1])
 		if len(objective_remaining_list) == 0 or current_question_followup_depth >= fixed_questions[current_question_index][0].question_config.followup_depth:

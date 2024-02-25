@@ -12,7 +12,10 @@ class UserRequest(BaseModel):
 # Temporary persistence work around
 survey_store = {}
 
-@app.post("/get_next_question/")
+# form_id -> fixed questions
+fixed_questions_store = {}
+
+@app.post("/user/get_next_question")
 async def generate_follow_up(userRequest: UserRequest):
 	try:
 		user_answer = userRequest.user_answer
@@ -22,7 +25,11 @@ async def generate_follow_up(userRequest: UserRequest):
 		if (email, form_id) in survey_store:
 			survey_bot = survey_store[(email, form_id)]
 		else:
-			survey_bot = SurveyBotV1()
+			if form_id in fixed_questions_store:
+				survey_bot = SurveyBotV1(fixed_questions_store[form_id])
+				survey_store[(email, form_id)] = survey_bot
+			else:
+				raise HTTPException(status_code=404, detail="Form ID not found")
 		next_question = survey_bot.get_next_question(user_answer)
 		return {"next_question": next_question}
 	except Exception as e:
