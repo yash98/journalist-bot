@@ -7,7 +7,7 @@ SUCCESS="success"
 API_FAILURE="api failure"
 
 def generate_bot_response(prompt_input):
-    response = requests.post(backend_url, payload={"email": st.session_state.email, "form_id": st.session_state.form_id, "user_answer": prompt_input})
+    response = requests.post(backend_url, json={"email": st.session_state.email, "form_id": st.session_state.form_id, "user_answer": prompt_input})
     if response.status_code == 200:
         output = (response.json()["next_question"], SUCCESS)
     else:
