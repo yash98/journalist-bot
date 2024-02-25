@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 
-backend_url = "http://127.0.0.1:8080/get_next_question"
+backend_url = "http://127.0.0.1:8080/user/get_next_question"
 
 SUCCESS="success"
 API_FAILURE="api failure"
