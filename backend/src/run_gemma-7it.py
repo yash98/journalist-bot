@@ -1,11 +1,12 @@
 from fastapi import FastAPI, HTTPException
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 from pydantic import BaseModel
-
+import os
 
 app = FastAPI()
 
 quantization_config = BitsAndBytesConfig(load_in_4bit=True)
+token = os.environ['HF_AUTH']
 tokenizer = AutoTokenizer.from_pretrained("google/gemma-7b-it", token=token)
 model = AutoModelForCausalLM.from_pretrained("google/gemma-7b-it", quantization_config=quantization_config, token=token)
 
