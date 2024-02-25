@@ -1,28 +1,16 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from survey_bot_v1 import SurveyBotV1
+from request import Question
+from typing import List
 
 app = FastAPI()
-
-class UserRequest(BaseModel):
-	email: str
-	form_id: int
-	user_answer: str
 
 # Temporary persistence work around
 survey_store = {}
 
 # form_id -> fixed questions
 fixed_questions_store = {}
-
-<<<<<<< HEAD
-class QuestionConfig(BaseModel):
-	followup_depth: int
-	criteria: List[str]
-
-class Question(BaseModel):
-	question: str
-	question_config: QuestionConfig
 
 class FormRequest(BaseModel):
 	form_id : int
@@ -36,8 +24,11 @@ async def store_data(formRequest: FormRequest):
 	# print("Current value of dictionary : ", fixed_questions_store)
 	return {"message": "Data stored successfully"}
 
-=======
->>>>>>> 26a86a8 (skeleton ready)
+class UserRequest(BaseModel):
+	email: str
+	form_id: int
+	user_answer: str
+
 @app.post("/user/get_next_question")
 async def generate_follow_up(userRequest: UserRequest):
 	try:
