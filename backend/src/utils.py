@@ -1,9 +1,8 @@
 import requests
 
-def generate_response(prompt, max_new_tokens=200):
-    # Set the API endpoint URL
-    api_url = "http://10.12.0.67:8080/generate-response"  # Update with your actual server URL
-    
+api_url = "http://127.0.0.1:8080/generate-response"
+
+def generate_response(prompt, max_new_tokens=200):    
     # Prepare the request payload
     prompt_data = {"prompt": prompt, "max_new_tokens" : max_new_tokens}
     
