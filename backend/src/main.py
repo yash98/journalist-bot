@@ -15,6 +15,26 @@ survey_store = {}
 # form_id -> fixed questions
 fixed_questions_store = {}
 
+class QuestionConfig(BaseModel):
+	followup_depth: int
+	criteria: List[str]
+
+class Question(BaseModel):
+	question: str
+	question_config: QuestionConfig
+
+class FormRequest(BaseModel):
+	form_id : int
+	questions : List[Question]
+
+@app.post("/store_data/")
+async def store_data(formRequest: FormRequest):
+	key = formRequest.form_id
+	value = formRequest.questions
+	fixed_questions_store[key] = value
+	# print("Current value of dictionary : ", fixed_questions_store)
+	return {"message": "Data stored successfully"}
+
 @app.post("/user/get_next_question")
 async def generate_follow_up(userRequest: UserRequest):
 	try:
