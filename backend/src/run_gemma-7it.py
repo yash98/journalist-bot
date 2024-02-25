@@ -6,7 +6,6 @@ from pydantic import BaseModel
 app = FastAPI()
 
 quantization_config = BitsAndBytesConfig(load_in_4bit=True)
-token = "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"
 tokenizer = AutoTokenizer.from_pretrained("google/gemma-7b-it", token=token)
 model = AutoModelForCausalLM.from_pretrained("google/gemma-7b-it", quantization_config=quantization_config, token=token)
 
