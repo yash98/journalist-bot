@@ -27,7 +27,7 @@ class SurveyBotV1(BaseModel):
 	def __init__(self, questions):
 		super().__init__()
 		self.fixed_questions = [(question, question.question_config.criteria) for question in questions]
-		next_question = self.fixed_questions[self.current_question_index][0]
+		next_question = self.fixed_questions[self.current_question_index][0].question
 		self.append_question_to_chat_history(next_question)
 
 	def parallel_objective_met_agent(self):
