@@ -45,6 +45,6 @@ def chat():
             with st.spinner("Thinking..."):
                 response = generate_bot_response(prompt)
                 placeholder = st.empty()
-                placeholder.markdown(response[1])
-        message = {"role": "assistant", "content": response[1]}
+                placeholder.markdown(response[0])
+        message = {"role": "assistant", "content": response[0]}
         st.session_state.messages.append(message)
