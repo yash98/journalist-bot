@@ -31,12 +31,25 @@ class SurveyBotV1(BaseModel):
 		self.append_question_to_chat_history(next_question)
 
 	def parallel_objective_met_agent(self):
-		futures = [parallel_objective_met_agent_executor.submit(self.objective_met_agent, self.chat_history, \
-			self.fixed_questions[self.current_question_index][0].question, criteria) \
+		futures = [parallel_objective_met_agent_executor.submit(self.objective_met_agent, \
+			self.transform_chat_history(self.chat_history), self.fixed_questions[self.current_question_index][0].question, criteria) \
 			for criteria in self.fixed_questions[self.current_question_index][1]]
 		results = [future.result() for future in concurrent.futures.as_completed(futures)]
 		objective_left_list = [criteria for criteria, result in zip(self.fixed_questions[self.current_question_index][1], results) if not result]
 		return objective_left_list
+	
+	def transform_chat_history(self, chat_history: List[Tuple[int, str, str]], question_prefix="Interviewer: ", answer_prefix="Participant: ") -> str:
+		chat_history_str = ""
+		for chat in chat_history:
+			question = chat[1]
+			answer = chat[2]
+
+			if question is not None and len(question) > 0:
+				chat_history_str += question_prefix + question + "\n"
+
+			if answer is not None and len(answer) > 0:
+				chat_history_str += answer_prefix + answer + "\n"
+		return chat_history_str
 
 	def get_next_question(self, user_answer: str):
 		if len(self.chat_history) == 0:
@@ -62,7 +75,7 @@ class SurveyBotV1(BaseModel):
 				return None
 		
 		current_question_follow_up_depth += 1
-		next_question = self.question_generation_agent(self.chat_history, self.fixed_questions[self.current_question_index][0].question, \
+		next_question = self.question_generation_agent(self.transform_chat_history(self.chat_history), self.fixed_questions[self.current_question_index][0].question, \
 			self.fixed_questions[self.current_question_index][1], self.user_charecteristics)
 		self.append_question_to_chat_history(next_question)
 		return next_question
