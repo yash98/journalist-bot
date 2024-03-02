@@ -74,7 +74,11 @@ async def get_history(email: str, form_id: int) -> List[HistoryMessage]:
 		if (email, form_id) in survey_store:
 			return survey_store[(email, form_id)].get_chat_history()
 		else:
-			return create_new_survey_bot(email, form_id).get_chat_history()
+			survey_bot = create_new_survey_bot(email, form_id)
+			if survey_bot:
+				return survey_bot.get_chat_history()
+			else:
+				raise HTTPException(status_code=404, detail="Survey bot for Email, Form ID pair not found")
 	except Exception as e:
 		logging.exception("/user/get_history failed email: " + email + " form_id: " + str(form_id) + " error: " + str(e))
 		raise HTTPException(status_code=500, detail=str(e))

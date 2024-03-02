@@ -11,6 +11,7 @@ def generate_bot_response(prompt_input):
     if response.status_code == 200:
         output = (response.json()["next_question"], SUCCESS)
     else:
+        st.error("Oops! Something went wrong. Please try reloading the page")
         output = (None, API_FAILURE)
     return output
 

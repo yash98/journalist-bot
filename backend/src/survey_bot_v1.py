@@ -32,7 +32,7 @@ class SurveyBotV1(BaseModel):
 
 	def parallel_objective_met_agent(self):
 		futures = [parallel_objective_met_agent_executor.submit(self.objective_met_agent, self.chat_history, \
-			self.fixed_questions[self.current_question_index].question, criteria) \
+			self.fixed_questions[self.current_question_index][0].question, criteria) \
 			for criteria in self.fixed_questions[self.current_question_index][1]]
 		results = [future.result() for future in concurrent.futures.as_completed(futures)]
 		objective_left_list = [criteria for criteria, result in zip(self.fixed_questions[self.current_question_index][1], results) if not result]
