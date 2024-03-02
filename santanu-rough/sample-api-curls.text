@@ -1,7 +1,0 @@
-curl for adding fixed questions for survey
-------------------------------------------
-topic : healthcare facility in rural areas
-
-curl -X POST -H "Content-Type: application/json" \
-    -d '{"form_id":1001, "questions":[{"question":"How would you rate the availability and affordability of healthcare services in your rural area?","question_config":{"followup_depth":1,"criteria":["The answer should have a perception healthcare availability in rural areas"]}},{"question":"Have you experienced any difficulties in accessing healthcare facilities due to distance or transportation issues?","question_config":{"followup_depth":3,"criteria":["To evaluate the impact of distance and transportation on healthcare access in rural areas","To identify areas where transportation infrastructure or services need improvement to enhance healthcare accessibility"]}},{"question":"How satisfied are you with the quality of healthcare services, including the availability of medical professionals and equipment, in your rural area?","question_config":{"followup_depth":3,"criteria":["To gauge satisfaction levels with the quality of healthcare services, identifying areas for improvement","To assess the availability of medical professionals and equipment, highlighting any deficiencies in healthcare infrastructure"]}}]}' \
-    http://localhost:8000/store_data/
