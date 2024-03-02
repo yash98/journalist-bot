@@ -22,53 +22,54 @@ class SurveyBotV1(BaseModel):
 	current_question_followup_depth: int = 0
 
 	def append_question_to_chat_history(self, question: str):
-		chat_history.append((current_question_index, question, None))
+		self.chat_history.append((self.current_question_index, question, None))
 
 	def __init__(self, questions):
+		super().__init__()
 		self.fixed_questions = [(question, question.question_config.criteria) for question in questions]
-		next_question = fixed_questions[current_question_index][0]
-		append_question_to_chat_history(next_question)
+		next_question = self.fixed_questions[self.current_question_index][0]
+		self.append_question_to_chat_history(next_question)
 
 	def parallel_objective_met_agent(self):
-		futures = [parallel_objective_met_agent_executor.submit(self.objective_met_agent, chat_history, \
-			fixed_questions[current_question_index].question, criteria) \
-			for criteria in fixed_questions[current_question_index][1]]
+		futures = [parallel_objective_met_agent_executor.submit(self.objective_met_agent, self.chat_history, \
+			self.fixed_questions[self.current_question_index].question, criteria) \
+			for criteria in self.fixed_questions[self.current_question_index][1]]
 		results = [future.result() for future in concurrent.futures.as_completed(futures)]
-		objective_left_list = [criteria for criteria, result in zip(fixed_questions[current_question_index][1], results) if not result]
+		objective_left_list = [criteria for criteria, result in zip(self.fixed_questions[self.current_question_index][1], results) if not result]
 		return objective_left_list
 
 	def get_next_question(self, user_answer: str):
-		if len(chat_history) == 0:
-			next_question = fixed_questions[current_question_index][0]
-			append_question_to_chat_history(next_question)
+		if len(self.chat_history) == 0:
+			next_question = self.fixed_questions[self.current_question_index][0]
+			self.append_question_to_chat_history(next_question)
 			return next_question
 
 		# Add answer to chat history
-		last_tuple = chat_history[-1]
-		chat_history[-1] = (current_question_index, last_tuple[1], user_answer)
+		last_tuple = self.chat_history[-1]
+		self.chat_history[-1] = (self.current_question_index, last_tuple[1], user_answer)
 
-		objective_remaining_list = parallel_objective_met_agent()
-		fixed_questions[current_question_index][1] = objective_remaining_list
+		objective_remaining_list = self.parallel_objective_met_agent()
+		self.fixed_questions[self.current_question_index][1] = objective_remaining_list
 
-		if len(objective_remaining_list) == 0 or current_question_followup_depth >= fixed_questions[current_question_index][0].question_config.followup_depth:
-			current_question_index += 1
-			current_question_follow_up_depth = 0
-			if len(fixed_questions) > current_question_index:
-				next_question = fixed_questions[current_question_index][0].question
-				append_question_to_chat_history(next_question)
+		if len(objective_remaining_list) == 0 or self.current_question_followup_depth >= self.fixed_questions[self.current_question_index][0].question_config.followup_depth:
+			self.current_question_index += 1
+			self.current_question_follow_up_depth = 0
+			if len(self.fixed_questions) > self.current_question_index:
+				next_question = self.fixed_questions[self.current_question_index][0].question
+				self.append_question_to_chat_history(next_question)
 				return next_question
 			else:
 				return None
 		
 		current_question_follow_up_depth += 1
-		next_question = question_generation_agent(chat_history, fixed_questions[current_question_index][0].question, \
-			fixed_questions[current_question_index][1], user_charecteristics)
-		append_question_to_chat_history(next_question)
+		next_question = self.question_generation_agent(self.chat_history, self.fixed_questions[self.current_question_index][0].question, \
+			self.fixed_questions[self.current_question_index][1], self.user_charecteristics)
+		self.append_question_to_chat_history(next_question)
 		return next_question
 	
-	def get_chat_history(self):
+	def get_chat_history(self) -> List[HistoryMessage]:
 		history = []
-		for chat in chat_history:
+		for chat in self.chat_history:
 			question = chat[1]
 			answer = chat[2]
 
