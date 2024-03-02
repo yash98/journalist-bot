@@ -4,6 +4,7 @@ from survey_bot_v1 import SurveyBotV1
 from request import Question
 from typing import List
 from response import HistoryMessage
+import logging
 
 app = FastAPI()
 
@@ -66,11 +67,12 @@ async def clear_history(email: str, form_id: int):
 
 # Get API takes email and form_id as input and returns the survey_bot object from the survey_store
 @app.get("/user/get_history")
-async def get_history(email: str, form_id: int)-> List[HistoryMessage]:
+async def get_history(email: str, form_id: int) -> List[HistoryMessage]:
 	try:
 		if (email, form_id) in survey_store:
 			return survey_store[(email, form_id)].get_chat_history()
 		else:
 			return create_new_survey_bot(email, form_id).get_chat_history()
 	except Exception as e:
+		logging.error("/user/get_history failed email: " + email + " form_id: " + str(form_id) + " error: " + str(e))
 		raise HTTPException(status_code=500, detail=str(e))
