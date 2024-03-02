@@ -52,6 +52,7 @@ async def generate_follow_up(userRequest: UserRequest):
 		next_question = survey_bot.get_next_question(user_answer)
 		return {"next_question": next_question}
 	except Exception as e:
+		logging.exception("/user/get_next_question userRequest: " + userRequest + " error: " + str(e))
 		raise HTTPException(status_code=500, detail=str(e))
 
 # Get API takes email and form_id as input and deletes the survey_bot object from the survey_store
@@ -63,6 +64,7 @@ async def clear_history(email: str, form_id: int):
 			return {"message": "History cleared successfully"}
 		return {"message": "No history found for given email and form_id"}
 	except Exception as e:
+		logging.exception("/user/clear_history failed email: " + email + " form_id: " + str(form_id) + " error: " + str(e))
 		raise HTTPException(status_code=500, detail=str(e))
 
 # Get API takes email and form_id as input and returns the survey_bot object from the survey_store
@@ -74,5 +76,5 @@ async def get_history(email: str, form_id: int) -> List[HistoryMessage]:
 		else:
 			return create_new_survey_bot(email, form_id).get_chat_history()
 	except Exception as e:
-		logging.error("/user/get_history failed email: " + email + " form_id: " + str(form_id) + " error: " + str(e))
+		logging.exception("/user/get_history failed email: " + email + " form_id: " + str(form_id) + " error: " + str(e))
 		raise HTTPException(status_code=500, detail=str(e))
