@@ -31,7 +31,7 @@ class SurveyBotV1(BaseModel):
 		self.append_question_to_chat_history(next_question)
 
 	def parallel_objective_met_agent(self):
-		futures = [parallel_objective_met_agent_executor.submit(self.objective_met_agent, \
+		futures = [parallel_objective_met_agent_executor.submit(objective_met_agent, \
 			self.transform_chat_history(self.chat_history), self.fixed_questions[self.current_question_index][0].question, criteria) \
 			for criteria in self.fixed_questions[self.current_question_index][1]]
 		results = [future.result() for future in concurrent.futures.as_completed(futures)]
@@ -62,7 +62,7 @@ class SurveyBotV1(BaseModel):
 		self.chat_history[-1] = (self.current_question_index, last_tuple[1], user_answer)
 
 		objective_remaining_list = self.parallel_objective_met_agent()
-		self.fixed_questions[self.current_question_index][1] = objective_remaining_list
+		self.fixed_questions[self.current_question_index] = (self.fixed_questions[self.current_question_index][0], objective_remaining_list)
 
 		if len(objective_remaining_list) == 0 or self.current_question_followup_depth >= self.fixed_questions[self.current_question_index][0].question_config.followup_depth:
 			self.current_question_index += 1
