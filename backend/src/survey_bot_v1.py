@@ -59,7 +59,7 @@ class SurveyBotV1(BaseModel):
 
 		# Add answer to chat history
 		last_tuple = self.chat_history[-1]
-		self.chat_history[-1] = (self.current_question_index, last_tuple[1], user_answer)
+		self.chat_history[-1] = (last_tuple[0], last_tuple[1], user_answer)
 
 		objective_remaining_list = self.parallel_objective_met_agent()
 		self.fixed_questions[self.current_question_index] = (self.fixed_questions[self.current_question_index][0], objective_remaining_list)
@@ -90,7 +90,7 @@ class SurveyBotV1(BaseModel):
 				history.append(HistoryMessage(role="assistant", content=question))
 
 			if answer is not None and len(answer) > 0:
-				history.append(HistoryMessage(role="user", content=question))
+				history.append(HistoryMessage(role="user", content=answer))
 		return history
 
 	
