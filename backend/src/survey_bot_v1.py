@@ -66,7 +66,7 @@ class SurveyBotV1(BaseModel):
 
 		if len(objective_remaining_list) == 0 or self.current_question_followup_depth >= self.fixed_questions[self.current_question_index][0].question_config.followup_depth:
 			self.current_question_index += 1
-			self.current_question_follow_up_depth = 0
+			self.current_question_followup_depth = 0
 			if len(self.fixed_questions) > self.current_question_index:
 				next_question = self.fixed_questions[self.current_question_index][0].question
 				self.append_question_to_chat_history(next_question)
@@ -74,7 +74,7 @@ class SurveyBotV1(BaseModel):
 			else:
 				return None
 		
-		current_question_follow_up_depth += 1
+		self.current_question_followup_depth += 1
 		next_question = self.question_generation_agent(self.transform_chat_history(self.chat_history), self.fixed_questions[self.current_question_index][0].question, \
 			self.fixed_questions[self.current_question_index][1], self.user_charecteristics)
 		self.append_question_to_chat_history(next_question)
