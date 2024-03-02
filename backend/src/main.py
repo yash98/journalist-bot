@@ -54,7 +54,7 @@ async def generate_follow_up(userRequest: UserRequest):
 		raise HTTPException(status_code=500, detail=str(e))
 
 # Get API takes email and form_id as input and deletes the survey_bot object from the survey_store
-@app.get("/user/clear_history?email={email}&form_id={form_id}")
+@app.get("/user/clear_history")
 async def clear_history(email: str, form_id: int):
 	try:
 		if (email, form_id) in survey_store:
@@ -65,7 +65,7 @@ async def clear_history(email: str, form_id: int):
 		raise HTTPException(status_code=500, detail=str(e))
 
 # Get API takes email and form_id as input and returns the survey_bot object from the survey_store
-@app.get("/user/get_history?email={email}&form_id={form_id}")
+@app.get("/user/get_history")
 async def get_history(email: str, form_id: int)-> List[HistoryMessage]:
 	try:
 		if (email, form_id) in survey_store:
