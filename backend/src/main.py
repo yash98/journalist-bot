@@ -52,7 +52,7 @@ async def generate_follow_up(userRequest: UserRequest):
 		next_question = survey_bot.get_next_question(user_answer)
 		return {"next_question": next_question}
 	except Exception as e:
-		logging.exception("/user/get_next_question userRequest: " + userRequest + " error: " + str(e))
+		logging.exception("/user/get_next_question userRequest: " + str(userRequest) + " error: " + str(e))
 		raise HTTPException(status_code=500, detail=str(e))
 
 # Get API takes email and form_id as input and deletes the survey_bot object from the survey_store
