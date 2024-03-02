@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from survey_bot_v1 import SurveyBotV1
 from request import Question
 from typing import List
+from response import HistoryMessage
 
 app = FastAPI()
 
@@ -29,6 +30,13 @@ class UserRequest(BaseModel):
 	form_id: int
 	user_answer: str
 
+def create_new_survey_bot(email: str, form_id: int):
+	if form_id in fixed_questions_store:
+		survey_bot = SurveyBotV1(fixed_questions_store[form_id])
+		survey_store[(email, form_id)] = survey_bot
+		return survey_bot
+	return None
+
 @app.post("/user/get_next_question")
 async def generate_follow_up(userRequest: UserRequest):
 	try:
@@ -39,12 +47,30 @@ async def generate_follow_up(userRequest: UserRequest):
 		if (email, form_id) in survey_store:
 			survey_bot = survey_store[(email, form_id)]
 		else:
-			if form_id in fixed_questions_store:
-				survey_bot = SurveyBotV1(fixed_questions_store[form_id])
-				survey_store[(email, form_id)] = survey_bot
-			else:
-				raise HTTPException(status_code=404, detail="Form ID not found")
+			raise HTTPException(status_code=404, detail="Survey bot for Email, Form ID pair not found")
 		next_question = survey_bot.get_next_question(user_answer)
 		return {"next_question": next_question}
+	except Exception as e:
+		raise HTTPException(status_code=500, detail=str(e))
+
+# Get API takes email and form_id as input and deletes the survey_bot object from the survey_store
+@app.get("/user/clear_history?email={email}&form_id={form_id}")
+async def clear_history(email: str, form_id: int):
+	try:
+		if (email, form_id) in survey_store:
+			del survey_store[(email, form_id)]
+			return {"message": "History cleared successfully"}
+		return {"message": "No history found for given email and form_id"}
+	except Exception as e:
+		raise HTTPException(status_code=500, detail=str(e))
+
+# Get API takes email and form_id as input and returns the survey_bot object from the survey_store
+@app.get("/user/get_history?email={email}&form_id={form_id}")
+async def get_history(email: str, form_id: int)-> List[HistoryMessage]:
+	try:
+		if (email, form_id) in survey_store:
+			return survey_store[(email, form_id)].get_chat_history()
+		else:
+			return create_new_survey_bot(email, form_id).get_chat_history()
 	except Exception as e:
 		raise HTTPException(status_code=500, detail=str(e))

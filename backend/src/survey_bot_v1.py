@@ -3,6 +3,7 @@ from typing import List, Dict, Union, Tuple
 from check_objective import objective_met_agent
 from generate_question import question_generation_agent
 from request import Question
+from response import HistoryMessage
 
 import concurrent.futures
 
@@ -20,8 +21,13 @@ class SurveyBotV1(BaseModel):
 	current_question_index: int = 0
 	current_question_followup_depth: int = 0
 
+	def append_question_to_chat_history(self, question: str):
+		chat_history.append((current_question_index, question, None))
+
 	def __init__(self, questions):
 		self.fixed_questions = [(question, question.question_config.criteria) for question in questions]
+		next_question = fixed_questions[current_question_index][0]
+		append_question_to_chat_history(next_question)
 
 	def parallel_objective_met_agent(self):
 		futures = [parallel_objective_met_agent_executor.submit(self.objective_met_agent, chat_history, \
@@ -30,11 +36,8 @@ class SurveyBotV1(BaseModel):
 		results = [future.result() for future in concurrent.futures.as_completed(futures)]
 		objective_left_list = [criteria for criteria, result in zip(fixed_questions[current_question_index][1], results) if not result]
 		return objective_left_list
-			
-	def append_question_to_chat_history(self, question: str):
-		chat_history.append((current_question_index, question, None))
 
-	def get_next_question(user_answer: str):
+	def get_next_question(self, user_answer: str):
 		if len(chat_history) == 0:
 			next_question = fixed_questions[current_question_index][0]
 			append_question_to_chat_history(next_question)
@@ -62,4 +65,18 @@ class SurveyBotV1(BaseModel):
 			fixed_questions[current_question_index][1], user_charecteristics)
 		append_question_to_chat_history(next_question)
 		return next_question
+	
+	def get_chat_history(self):
+		history = []
+		for chat in chat_history:
+			question = chat[1]
+			answer = chat[2]
+
+			if question is not None and len(question) > 0:
+				history.append(HistoryMessage(role="assistant", content=question))
+
+			if answer is not None and len(answer) > 0:
+				history.append(HistoryMessage(role="user", content=question))
+		return history
+
 	

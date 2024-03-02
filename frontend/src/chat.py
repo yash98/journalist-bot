@@ -1,25 +1,31 @@
 import streamlit as st
 import requests
 
-backend_url = "http://127.0.0.1:8080/user/get_next_question"
+backend_url = "http://127.0.0.1:8080"
 
 SUCCESS="success"
 API_FAILURE="api failure"
 
 def generate_bot_response(prompt_input):
-    response = requests.post(backend_url, json={"email": st.session_state.email, "form_id": st.session_state.form_id, "user_answer": prompt_input})
+    response = requests.post(backend_url+"/user/get_next_question", json={"email": st.session_state.email, "form_id": st.session_state.form_id, "user_answer": prompt_input})
     if response.status_code == 200:
         output = (response.json()["next_question"], SUCCESS)
     else:
         output = (None, API_FAILURE)
     return output
 
-def chat():
-    STARTING_MSG = "What topic would you describe today?"
+def get_chat_history():
+    response = requests.get(backend_url+"/user/get_history?email="+st.session_state.email+"&form_id="+str(st.session_state.form_id))
+    if response.status_code == 200:
+        return response.json()
+    else:
+        st.error("Oops! Something went wrong. Please try reloading the page")
+        return []
 
+def chat():
     # Store LLM generated responses
     if "messages" not in st.session_state.keys():
-        st.session_state.messages = [{"role": "assistant", "content": STARTING_MSG}]
+        st.session_state.messages = get_chat_history()
 
     # Display or clear chat messages
     for message in st.session_state.messages:
