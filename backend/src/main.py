@@ -55,9 +55,9 @@ async def generate_follow_up(userRequest: UserRequest):
 			raise HTTPException(status_code=404, detail="Survey bot for Email, Form ID pair not found")
 		next_question = survey_bot.get_next_question(user_answer)
 		if next_question:
-			return FollowUpResponse(next_question, "inprogress")
+			return FollowUpResponse(next_question=next_question, status="in progress")
 		else:
-			return FollowUpResponse(None, "completed")
+			return FollowUpResponse(next_question=None, status="completed")
 	except Exception as e:
 		logging.exception("/user/get_next_question userRequest: " + str(userRequest) + " error: " + str(e))
 		raise HTTPException(status_code=500, detail=str(e))
