@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from survey_bot_v1 import SurveyBotV1
 from request import Question
-from typing import List
+from typing import List, Optional
 from response import HistoryMessage
 import logging
 
@@ -19,7 +19,7 @@ class FormRequest(BaseModel):
 	questions : List[Question]
 
 class FollowUpResponse(BaseModel):
-	next_question: str
+	next_question: Optional[str]
 	status: str
 
 @app.post("/store_data/")
