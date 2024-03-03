@@ -51,5 +51,5 @@ def chat():
                     st.stop()
                 placeholder = st.empty()
                 placeholder.markdown(response["next_question"])
-        message = {"role": "assistant", "content": response[0]}
+        message = {"role": "assistant", "content": response["next_question"]}
         st.session_state.messages.append(message)

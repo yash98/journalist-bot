@@ -12,8 +12,11 @@ def login():
         st.session_state.email = st.text_input("Enter your email:")
         st.session_state.form_id = st.text_input("Enter form id:")
 
-    if state_values_exists_eq("survey_started", True) or st.button("Start Survey"):
-        st.session_state.survey_started = True
+    if state_values_exists_eq("survey_started", False):
+        if st.button("Start Survey"):
+            st.session_state.survey_started = True
+            chat()
+    else:
         chat()
 
 if __name__ == "__main__":
