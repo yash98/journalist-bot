@@ -9,6 +9,9 @@ import concurrent.futures
 
 PARALLEL_WORKERS = 4
 parallel_objective_met_agent_executor = concurrent.futures.ThreadPoolExecutor(max_workers=PARALLEL_WORKERS)
+COMPLETION_MESSAGE = "You have completed the survey. Thank you for your time!"
+COMPLETED_STATUS = "completed"
+IN_PROGRESS_STATUS = "in progress"
 
 class SurveyBotV1(BaseModel):
 	question_generation_agent = question_generation_agent
@@ -20,6 +23,7 @@ class SurveyBotV1(BaseModel):
 	fixed_questions: List[Tuple[Question, List[str]]] = []
 	current_question_index: int = 0
 	current_question_followup_depth: int = 0
+	state: str = IN_PROGRESS_STATUS
 
 	def append_question_to_chat_history(self, question: str):
 		self.chat_history.append((self.current_question_index, question, None))
@@ -52,10 +56,13 @@ class SurveyBotV1(BaseModel):
 		return chat_history_str
 
 	def get_next_question(self, user_answer: str):
+		if (self.state == COMPLETED_STATUS):
+			return (None, self.state)
+
 		if len(self.chat_history) == 0:
 			next_question = self.fixed_questions[self.current_question_index][0]
 			self.append_question_to_chat_history(next_question)
-			return next_question
+			return (next_question, self.state)
 
 		# Add answer to chat history
 		last_tuple = self.chat_history[-1]
@@ -70,15 +77,17 @@ class SurveyBotV1(BaseModel):
 			if len(self.fixed_questions) > self.current_question_index:
 				next_question = self.fixed_questions[self.current_question_index][0].question
 				self.append_question_to_chat_history(next_question)
-				return next_question
+				return (next_question, self.state)
 			else:
-				return None
+				self.state = COMPLETED_STATUS
+				self.append_question_to_chat_history(COMPLETION_MESSAGE)
+				return (COMPLETION_MESSAGE, self.state)
 		
 		self.current_question_followup_depth += 1
 		next_question = self.question_generation_agent(self.transform_chat_history(self.chat_history), self.fixed_questions[self.current_question_index][0].question, \
 			self.fixed_questions[self.current_question_index][1], self.user_charecteristics)
 		self.append_question_to_chat_history(next_question)
-		return next_question
+		return (next_question, self.state)
 	
 	def get_chat_history(self) -> List[HistoryMessage]:
 		history = []

@@ -5,8 +5,6 @@ backend_url = "http://127.0.0.1:8080"
 
 COMPLETION_STATUS="completed"
 
-COMPLETION_MESSAGE = "You have completed the survey. Thank you for your time!"
-
 def generate_bot_response(prompt_input):
     response = requests.post(backend_url+"/user/get_next_question", json={"email": st.session_state.email, "form_id": st.session_state.form_id, "user_answer": prompt_input})
     if response.status_code == 200:
@@ -46,11 +44,10 @@ def chat():
         with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
                 response = generate_bot_response(prompt)
-                if response["status"] == COMPLETION_STATUS:
-                    placeholder = st.empty()
-                    placeholder.markdown(COMPLETION_MESSAGE)
-                    st.stop()
                 placeholder = st.empty()
-                placeholder.markdown(response["next_question"])
+                if response["next_question"]:
+                        placeholder.markdown(response["next_question"])
+                if response["status"] == COMPLETION_STATUS:
+                    st.stop()
         message = {"role": "assistant", "content": response["next_question"]}
         st.session_state.messages.append(message)
