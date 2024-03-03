@@ -47,7 +47,8 @@ def chat():
             with st.spinner("Thinking..."):
                 response = generate_bot_response(prompt)
                 if response["status"] == COMPLETION_STATUS:
-                    st.write(COMPLETION_MESSAGE)
+                    placeholder = st.empty()
+                    placeholder.markdown(COMPLETION_MESSAGE)
                     st.stop()
                 placeholder = st.empty()
                 placeholder.markdown(response["next_question"])
