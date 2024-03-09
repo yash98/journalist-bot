@@ -18,7 +18,7 @@ def chat():
     STARTING_MSG = "What topic would you describe today?"
 
     # Store LLM generated responses
-    if "messages" not in st.session_state.keys():
+    if "messages" not in st.session_state:
         st.session_state.messages = [{"role": "assistant", "content": STARTING_MSG}]
 
     # Display or clear chat messages
