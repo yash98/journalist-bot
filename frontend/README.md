@@ -1,10 +1,8 @@
 # How to run
 
 ```
-<<<<<<< HEAD
 cd frontend
 pip3 install -R requirements.txt
-=======
->>>>>>> main
+cd src
 streamlit run main.py
 ```

@@ -10,17 +10,17 @@ OBJECTIVE_KEY = "objective"
 FOLLOWUP_DEPTH_KEY = "followup_depth"
 
 def add_empty_question():
-    st.session_state[USER_INPUT_KEY].append({QUESTION_KEY: "", OBJECTIVE_KEY: [""]})
+    st.session_state[USER_INPUT_KEY].append({QUESTION_KEY: "", OBJECTIVE_KEY: [""], FOLLOWUP_DEPTH_KEY: 0})
 
 def add_empty_objective(id_q):
     st.session_state[USER_INPUT_KEY][id_q][OBJECTIVE_KEY].append("")
 
 def display_survey():
-    for id_q, input_data in enumerate(st.session_state[USER_INPUT_KEY], start=0):
-        saved_question = input_data[QUESTION_KEY]
+    for id_q, input_data in enumerate(st.session_state[USER_INPUT_KEY]):
         saved_objective = input_data[OBJECTIVE_KEY]
         question = st.text_area(f"Enter the question {id_q+1}:", key=f"q_{id_q}")
-        for id_o, obj in enumerate(saved_objective, start=0):
+        followup_depth = st.number_input(f"Enter the followup depth for question {id_q+1}:", key=f"fd_{id_q}", min_value=0)
+        for id_o in range(len(saved_objective)):
             objective = st.text_area(f"Enter question {id_q+1} objective {id_o+1}:", key=f"o_{id_q}_{id_o}")
         if st.button("Add Objective", key=f"aob_{id_q}"):
             add_empty_objective(id_q)
@@ -38,8 +38,10 @@ def update_user_input_based_on_session_keys():
             id_q = int(key.split("_")[1])
             id_o = int(key.split("_")[2])
             st.session_state[USER_INPUT_KEY][id_q][OBJECTIVE_KEY][id_o] = st.session_state[key]
-
-"""
+        elif key.startswith("o_"):
+            id_q = int(key.split("_")[1])
+            st.session_state[USER_INPUT_KEY][id_q][FOLLOWUP_DEPTH_KEY] = st.session_state[key]
+_ = """
 curl -X POST -H "Content-Type: application/json" \
     -d '{"form_id":1001, "questions":[{"question":"How would you rate the availability and affordability of healthcare services in your rural area?","question_config":{"followup_depth":1,"criteria":["The answer should have a perception healthcare availability in rural areas"]}},{"question":"Have you experienced any difficulties in accessing healthcare facilities due to distance or transportation issues?","question_config":{"followup_depth":3,"criteria":["To evaluate the impact of distance and transportation on healthcare access in rural areas","To identify areas where transportation infrastructure or services need improvement to enhance healthcare accessibility"]}},{"question":"How satisfied are you with the quality of healthcare services, including the availability of medical professionals and equipment, in your rural area?","question_config":{"followup_depth":3,"criteria":["To gauge satisfaction levels with the quality of healthcare services, identifying areas for improvement","To assess the availability of medical professionals and equipment, highlighting any deficiencies in healthcare infrastructure"]}}]}' \
     http://localhost:8080/store_data/
@@ -54,6 +56,9 @@ def make_submit_survey_call():
 
         question_data["question"] = input_data[QUESTION_KEY]
         question_data["question_config"] = {}
+
+        if input_data[FOLLOWUP_DEPTH_KEY]:
+            question_data["question_config"]["followup_depth"] = input_data[FOLLOWUP_DEPTH_KEY]
 
         for objective in input_data[OBJECTIVE_KEY]:
             if objective != "":
