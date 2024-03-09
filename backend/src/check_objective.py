@@ -37,6 +37,7 @@ prompt_template = \
     Based on your analysis you can decide whether or not the particpant's answer meets the objective of the question asked.
     Answer "True" if it meets the objective and "False" if it does not. Only answer True or False and do not try to justify your answer.
     """
+# Answer between a score from 0.0 to 1.0, where 1 meets the objective completely and 0 completely misses the objective
 
 def objective_met_agent(chat_history, main_question, objectives_left):
 
