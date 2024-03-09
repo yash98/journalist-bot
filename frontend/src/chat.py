@@ -1,25 +1,37 @@
 import streamlit as st
 import requests
 
-backend_url = "http://127.0.0.1:8080/get_next_question"
+backend_url = "http://127.0.0.1:8080"
 
-SUCCESS="success"
-API_FAILURE="api failure"
+COMPLETION_STATUS="completed"
 
 def generate_bot_response(prompt_input):
-    response = requests.post(backend_url, json={"email": st.session_state.email, "form_id": st.session_state.form_id, "user_answer": prompt_input})
+    response = requests.post(backend_url+"/user/get_next_question", json={"email": st.session_state.email, "form_id": st.session_state.form_id, "user_answer": prompt_input})
     if response.status_code == 200:
-        output = (response.json()["next_question"], SUCCESS)
+        return response.json()
     else:
-        output = (None, API_FAILURE)
-    return output
+        st.error("Oops! Something went wrong. Please try reloading the page")
+        st.stop()
+        return None
+
+def get_chat_history():
+    response = requests.get(backend_url+"/user/get_history?email="+st.session_state.email+"&form_id="+str(st.session_state.form_id))
+    if response.status_code == 200:
+        return response.json()
+    else:
+        st.error("Oops! Something went wrong. Please try reloading the page")
+        st.stop()
+        return []
 
 def chat():
-    STARTING_MSG = "What topic would you describe today?"
-
     # Store LLM generated responses
+<<<<<<< HEAD
     if "messages" not in st.session_state:
         st.session_state.messages = [{"role": "assistant", "content": STARTING_MSG}]
+=======
+    if "messages" not in st.session_state.keys():
+        st.session_state.messages = get_chat_history()
+>>>>>>> main
 
     # Display or clear chat messages
     for message in st.session_state.messages:
@@ -38,10 +50,9 @@ def chat():
             with st.spinner("Thinking..."):
                 response = generate_bot_response(prompt)
                 placeholder = st.empty()
-                full_response = ''
-                for item in response:
-                    full_response += item
-                    placeholder.markdown(full_response)
-                placeholder.markdown(full_response)
-        message = {"role": "assistant", "content": full_response}
+                if response["next_question"]:
+                        placeholder.markdown(response["next_question"])
+                if response["status"] == COMPLETION_STATUS:
+                    st.stop()
+        message = {"role": "assistant", "content": response["next_question"]}
         st.session_state.messages.append(message)

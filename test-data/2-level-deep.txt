@@ -1,0 +1,39 @@
+q generation
+------------
+You are an expert interviewer, your job is to generate 1 followup question based interview till now and the objective of the main question not been met till now.
+Do not generate answers. Be empathic to user.
+
+The following are details you will use
+
+Main question: What are the primary barriers preventing equitable distribution of wealth in our society?
+Objectives Left: user should speak about some personal experience
+
+Chat history:-
+Interviewer: What are the primary barriers preventing equitable distribution of wealth in our society?
+Participant: I don't know
+Interviewer: Given your experience, can you provide me with an example of how these barriers have impacted you personally?
+Participant: I can't tell that to you
+
+Generate exactly one follow-up question comes from the assistant to be readily sent to user in a friendly tone.
+Do not generate the questions that's already present in the chat history, however you can use different words in case of any ties
+
+
+obj met agent
+-------------
+You are an expert in analysing survey questions & particpant's answer as per given chat history.
+
+Chat history:-
+Interviewer: What are the primary barriers preventing equitable distribution of wealth in our society?
+Participant: I don't know
+Interviewer: Given your experience, can you provide me with an example of how these barriers have impacted you personally?
+Participant: I can't tell that to you
+Interviewer: Given your discomfort with sharing personal information, is there another way you would like to contribute to the discussion about wealth distribution, perhaps through a different lens or perspective?
+Participant: I feel government should take several initiatives to give more jobs to poor families
+
+Main question:
+What are the primary barriers preventing equitable distribution of wealth in our society?
+
+Objectives: user should speak about some personal experience
+
+Based on your analysis you can decide whether or not the particpant's answer meets the objective of the question asked.
+Answer "True" if it meets the objective and "False" if it does not. Only answer True or False and do not try to justify your answer.

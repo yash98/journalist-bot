@@ -2,40 +2,104 @@ from pydantic import BaseModel
 from typing import List, Dict, Union, Tuple
 from check_objective import objective_met_agent
 from generate_question import question_generation_agent
+from request import Question
+from response import HistoryMessage
 
-class QuestionConfig(BaseModel):
-	followup_depth: int
-	criteria: List[str]
+import concurrent.futures
 
-class Question(BaseModel):
-	question: str
-	question_config: QuestionConfig
+PARALLEL_WORKERS = 4
+parallel_objective_met_agent_executor = concurrent.futures.ThreadPoolExecutor(max_workers=PARALLEL_WORKERS)
+COMPLETION_MESSAGE = "You have completed the survey. Thank you for your time!"
+COMPLETED_STATUS = "completed"
+IN_PROGRESS_STATUS = "in progress"
 
 class SurveyBotV1(BaseModel):
 	question_generation_agent = question_generation_agent
 	objective_met_agent = objective_met_agent
 	user_characteristics: Dict[str, Union[str, int, float, bool, None]] = {}
-	chat_history: List[List[Tuple[int, str, str]]] = []
+	# List of tuples of main question index, main question or followup question, user answer
+	chat_history: List[Tuple[int, str, str]] = []
+	# List of tuples of question and its left criteria
 	fixed_questions: List[Tuple[Question, List[str]]] = []
 	current_question_index: int = 0
 	current_question_followup_depth: int = 0
+	state: str = IN_PROGRESS_STATUS
 
-	def __init__(self, fixed_questions):
-		self.fixed_questions = fixed_questions
+	def append_question_to_chat_history(self, question: str):
+		self.chat_history.append((self.current_question_index, question, None))
 
-	def get_next_question(user_answer: str):
-		# Track chat history
-		objective_remaining_list = question_generation_agent(chat_history, \
-		fixed_questions[current_question_index].question, fixed_questions[current_question_index][1])
-		if len(objective_remaining_list) == 0 or current_question_followup_depth >= fixed_questions[current_question_index][0].question_config.followup_depth:
-			current_question_index += 1
-			current_question_follow_up_depth = 0
-			if len(fixed_questions) > current_question_index:
-				return fixed_questions[current_question_index]
+	def __init__(self, questions):
+		super().__init__()
+		self.fixed_questions = [(question, question.question_config.criteria) for question in questions]
+		next_question = self.fixed_questions[self.current_question_index][0].question
+		self.append_question_to_chat_history(next_question)
+
+	def parallel_objective_met_agent(self):
+		futures = [parallel_objective_met_agent_executor.submit(objective_met_agent, \
+			self.transform_chat_history(self.chat_history), self.fixed_questions[self.current_question_index][0].question, criteria) \
+			for criteria in self.fixed_questions[self.current_question_index][1]]
+		results = [future.result() for future in concurrent.futures.as_completed(futures)]
+		objective_left_list = [criteria for criteria, result in zip(self.fixed_questions[self.current_question_index][1], results) if not result]
+		return objective_left_list
+	
+	def transform_chat_history(self, chat_history: List[Tuple[int, str, str]], question_prefix="Interviewer: ", answer_prefix="Participant: ") -> str:
+		chat_history_str = ""
+		for chat in chat_history:
+			question = chat[1]
+			answer = chat[2]
+
+			if question is not None and len(question) > 0:
+				chat_history_str += question_prefix + question + "\n"
+
+			if answer is not None and len(answer) > 0:
+				chat_history_str += answer_prefix + answer + "\n"
+		return chat_history_str
+
+	def get_next_question(self, user_answer: str):
+		if (self.state == COMPLETED_STATUS):
+			return (None, self.state)
+
+		if len(self.chat_history) == 0:
+			next_question = self.fixed_questions[self.current_question_index][0]
+			self.append_question_to_chat_history(next_question)
+			return (next_question, self.state)
+
+		# Add answer to chat history
+		last_tuple = self.chat_history[-1]
+		self.chat_history[-1] = (last_tuple[0], last_tuple[1], user_answer)
+
+		objective_remaining_list = self.parallel_objective_met_agent()
+		self.fixed_questions[self.current_question_index] = (self.fixed_questions[self.current_question_index][0], objective_remaining_list)
+
+		if len(objective_remaining_list) == 0 or self.current_question_followup_depth >= self.fixed_questions[self.current_question_index][0].question_config.followup_depth:
+			self.current_question_index += 1
+			self.current_question_followup_depth = 0
+			if len(self.fixed_questions) > self.current_question_index:
+				next_question = self.fixed_questions[self.current_question_index][0].question
+				self.append_question_to_chat_history(next_question)
+				return (next_question, self.state)
 			else:
-				None
+				self.state = COMPLETED_STATUS
+				self.append_question_to_chat_history(COMPLETION_MESSAGE)
+				return (COMPLETION_MESSAGE, self.state)
 		
-		current_question_follow_up_depth += 1
-		return question_generation_agent(chat_history, fixed_questions[current_question_index][0].question, \
-			fixed_questions[current_question_index][1], user_charecteristics)
+		self.current_question_followup_depth += 1
+		next_question = self.question_generation_agent(self.transform_chat_history(self.chat_history), self.fixed_questions[self.current_question_index][0].question, \
+			self.fixed_questions[self.current_question_index][1], self.user_charecteristics)
+		self.append_question_to_chat_history(next_question)
+		return (next_question, self.state)
+	
+	def get_chat_history(self) -> List[HistoryMessage]:
+		history = []
+		for chat in self.chat_history:
+			question = chat[1]
+			answer = chat[2]
+
+			if question is not None and len(question) > 0:
+				history.append(HistoryMessage(role="assistant", content=question))
+
+			if answer is not None and len(answer) > 0:
+				history.append(HistoryMessage(role="user", content=answer))
+		return history
+
 	

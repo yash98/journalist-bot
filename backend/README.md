@@ -3,5 +3,9 @@
 ```sh
 cd backend
 pip3 install -R requirements.txt
+<<<<<<< HEAD
 uvicorn main:app  --host 0.0.0.0 --port 8080 --reload
+=======
+uvicorn 
+>>>>>>> main
 ```

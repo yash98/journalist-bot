@@ -1,0 +1,23 @@
+q0
+a0
+q1 (o1, criteria = c1, c2, c3)
+a1 -> obj_agent (no) -> q_gen_agent -> q1.1
+q1.1
+a1.1 -> obj_agent (no) -> q_gen_agent -> q1.2
+q1.2
+a1.2 -> obj_agent (yes)
+q2
+a2
+
+obj_agent
+---------
+inputs - chats from root question
+         non-met objective & criteria of root question : {1:"vfdvbd",2:"bdfb",3:"fdvbdfb"}
+output - [1,3] (which objective met)
+
+q_gen_agent
+-----------
+inputs - chats from root question
+         non-met objective & criteria of root question : {2:"bdfb"}
+         user persona : {"city":"tier 2", "education":"post graduate"}
+output - 1 follow up question
