@@ -76,6 +76,7 @@ def make_submit_survey_call():
     return response
 
 def survey_creator():
+    st.title("Create Survey")
     if USER_INPUT_KEY not in st.session_state:
         st.session_state[USER_INPUT_KEY] = []
         add_empty_question()

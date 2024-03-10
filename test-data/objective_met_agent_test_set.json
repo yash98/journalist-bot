@@ -1,0 +1,1290 @@
+[
+    {
+        "conversation": "Interviewer: Hello Rajesh, thank you for taking the time to speak with me today. Can you tell me if you have access to clean drinking water?\nInterviewee: Yes, we have a well nearby.\n",
+        "main_question": "Do you have access to clean drinking water?",
+        "objective": "To know if the person is affected by the problem or not.",
+        "user_characteristics": {
+            "Name": "Rajesh",
+            "Age": 45,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Rajasthan"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: That's good to hear. Can you tell me how far you have to travel to get clean drinking water?\nInterviewee: We have to walk for about 2 kilometers to reach the well.\n",
+        "main_question": "How far do you have to travel to get clean drinking water?",
+        "objective": "To know the distance the person has to travel.",
+        "user_characteristics": {
+            "Name": "Rajesh",
+            "Age": 45,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Rajasthan"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: That's good to hear. Can you tell me how far you have to travel to get clean drinking water?\nInterviewee: We have to walk for about 2 kilometers to reach the well.\n",
+        "main_question": "How far do you have to travel to get clean drinking water?",
+        "objective": "Was the user answer specific?",
+        "user_characteristics": {
+            "Name": "Rajesh",
+            "Age": 45,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Rajasthan"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: I see. And do you have to pay for clean drinking water?\nInterviewee: No, we don't have to pay for the water from the well.\n",
+        "main_question": "Do you have to pay for clean drinking water?",
+        "objective": "To know if the person has to pay for water.",
+        "user_characteristics": {
+            "Name": "Rajesh",
+            "Age": 45,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Rajasthan"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: I see. And do you have to pay for clean drinking water?\nInterviewee: No, we don't have to pay for the water from the well.\n",
+        "main_question": "Do you have to pay for clean drinking water?",
+        "objective": "Did the user answer the question directly?",
+        "user_characteristics": {
+            "Name": "Rajesh",
+            "Age": 45,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Rajasthan"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Hello Amit, thank you for taking the time to speak with me today. Can you tell me if you have access to healthcare?\nInterviewee: No, I don't have access to healthcare.\n",
+        "main_question": "Do you have access to healthcare?",
+        "objective": "To know if the person has access to healthcare or not.",
+        "user_characteristics": {
+            "Name": "Amit",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Uttar Pradesh"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: I'm sorry to hear that. How far do you have to travel to get to a hospital?\nInterviewee: I have to travel a long distance to get to a hospital.\n",
+        "main_question": "How far do you have to travel to get to a hospital?",
+        "objective": "To know the distance the person has to travel.",
+        "user_characteristics": {
+            "Name": "Amit",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Uttar Pradesh"
+        },
+        "objective_met": false
+    },
+    {
+        "conversation": "Interviewer: I'm sorry to hear that. How far do you have to travel to get to a hospital?\nInterviewee: I have to travel a long distance to get to a hospital.\n",
+        "main_question": "How far do you have to travel to get to a hospital?",
+        "objective": "Was the user answer specific?",
+        "user_characteristics": {
+            "Name": "Amit",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Uttar Pradesh"
+        },
+        "objective_met": false
+    },
+    {
+        "conversation": "Interviewer: I'm sorry to hear that. How far do you have to travel to get to a hospital?\nInterviewee: I have to travel a long distance to get to a hospital.\nInterviewer: Can you tell me how far exactly?\nInterviewee: I have to travel around 20 kilometers to get to a hospital.\n",
+        "main_question": "How far do you have to travel to get to a hospital?",
+        "objective": "To know the distance the person has to travel.",
+        "user_characteristics": {
+            "Name": "Amit",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Uttar Pradesh"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: I'm sorry to hear that. How far do you have to travel to get to a hospital?\nInterviewee: I have to travel a long distance to get to a hospital.\nInterviewer: Can you tell me how far exactly?\nInterviewee: I have to travel around 20 kilometers to get to a hospital.\n",
+        "main_question": "How far do you have to travel to get to a hospital?",
+        "objective": "Was the user answer specific?",
+        "user_characteristics": {
+            "Name": "Amit",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Uttar Pradesh"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for letting me know. Do you have to pay for healthcare?\nInterviewee: Yes, I have to pay for healthcare.\n",
+        "main_question": "Do you have to pay for healthcare?",
+        "objective": "To know how much the person has to pay for healthcare.",
+        "user_characteristics": {
+            "Name": "Amit",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Uttar Pradesh"
+        },
+        "objective_met": false
+    },
+    {
+        "conversation": "Interviewer: Thank you for letting me know. Do you have to pay for healthcare?\nInterviewee: Yes, I have to pay for healthcare.\n",
+        "main_question": "Do you have to pay for healthcare?",
+        "objective": "Did the user answer the question directly?",
+        "user_characteristics": {
+            "Name": "Amit",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Uttar Pradesh"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for letting me know. Do you have to pay for healthcare?\nInterviewee: Yes, I have to pay for healthcare.\nInterviewer: Can you tell me how much you have to pay?\nInterviewee: I have to pay around 500 rupees for a check-up.\n",
+        "main_question": "Do you have to pay for healthcare?",
+        "objective": "To know how much the person has to pay for healthcare.",
+        "user_characteristics": {
+            "Name": "Amit",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Uttar Pradesh"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for letting me know. Do you have to pay for healthcare?\nInterviewee: Yes, I have to pay for healthcare.\nInterviewer: Can you tell me how much you have to pay?\nInterviewee: I have to pay around 500 rupees for a check-up.\n",
+        "main_question": "Do you have to pay for healthcare?",
+        "objective": "Did the user answer the question directly?",
+        "user_characteristics": {
+            "Name": "Amit",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Uttar Pradesh"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for sharing that information. Do you think the quality of healthcare is good?\nInterviewee: No, the quality of healthcare is not good.\n",
+        "main_question": "Do you think the quality of healthcare is good?",
+        "objective": "To know the person's opinion on the quality of healthcare and why they have that opinion.",
+        "user_characteristics": {
+            "Name": "Amit",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Uttar Pradesh"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for sharing that information. Do you think the quality of healthcare is good?\nInterviewee: No, the quality of healthcare is not good.\nInterviewer: Can you tell me more about why you think the quality of healthcare is not good?\nInterviewee: The doctors are not available all the time and the medicines are not always available.\n",
+        "main_question": "Do you think the quality of healthcare is good?",
+        "objective": "To know the person's opinion on the quality of healthcare and why they have that opinion.",
+        "user_characteristics": {
+            "Name": "Amit",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Uttar Pradesh"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for sharing that information. Do you think the quality of healthcare is good?\nInterviewee: No, the quality of healthcare is not good.\nInterviewer: Can you tell me more about why you think the quality of healthcare is not good?\nInterviewee: The doctors are not available all the time and the medicines are not always available.\n",
+        "main_question": "Do you think the quality of healthcare is good?",
+        "objective": "Did the user answer the question directly?",
+        "user_characteristics": {
+            "Name": "Amit",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Uttar Pradesh"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Hello Anjali, thank you for taking the time to speak with me today. Can you tell me if you have access to public transportation?\nInterviewee: No, I don't have access to public transportation.\n",
+        "main_question": "Do you have access to public transportation?",
+        "objective": "To know if the person has access to public transportation or not.",
+        "user_characteristics": {
+            "Name": "Anjali",
+            "Age": 35,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Madhya Pradesh"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: I see. How far do you have to travel to get to the nearest bus stop?\nInterviewee: It's about 5 kilometers away from my village.\n",
+        "main_question": "How far do you have to travel to get to the nearest bus stop?",
+        "objective": "To know the distance the person has to travel.",
+        "user_characteristics": {
+            "Name": "Anjali",
+            "Age": 35,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Madhya Pradesh"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: I see. How far do you have to travel to get to the nearest bus stop?\nInterviewee: It's about 5 kilometers away from my village.\n",
+        "main_question": "How far do you have to travel to get to the nearest bus stop?",
+        "objective": "Was the user answer specific?",
+        "user_characteristics": {
+            "Name": "Anjali",
+            "Age": 35,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Madhya Pradesh"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for letting me know. Do you think the cost of public transportation is fair?\nInterviewee: I don't know.\n",
+        "main_question": "Do you think the cost of public transportation is fair?",
+        "objective": "To know the person's opinion on the cost of public transportation.",
+        "user_characteristics": {
+            "Name": "Anjali",
+            "Age": 35,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Madhya Pradesh"
+        },
+        "objective_met": false
+    },
+    {
+        "conversation": "Interviewer: Thank you for letting me know. Do you think the cost of public transportation is fair?\nInterviewee: I don't know.\n",
+        "main_question": "Do you think the cost of public transportation is fair?",
+        "objective": "Did the user answer the question directly?",
+        "user_characteristics": {
+            "Name": "Anjali",
+            "Age": 35,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Madhya Pradesh"
+        },
+        "objective_met": false
+    },
+    {
+        "conversation": "Interviewer: Thank you for your response. Is there anything else you would like to share about the lack of access to public transportation in your area?\nInterviewee: Yes, it's difficult for me to get to the market to sell my produce without public transportation. I have to rely on others for rides or walk long distances.\n",
+        "main_question": "Anything else you would like to share about the lack of access to public transportation in your area?",
+        "objective": "To get to know about the user's other obstacles due to lack of public transportation.",
+        "user_characteristics": {
+            "Name": "Anjali",
+            "Age": 35,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Madhya Pradesh"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for your response. Is there anything else you would like to share about the lack of access to public transportation in your area?\nInterviewee: Yes, it's difficult for me to get to the market to sell my produce without public transportation. I have to rely on others for rides or walk long distances.\n",
+        "main_question": "Anything else you would like to share about the lack of access to public transportation in your area?",
+        "objective": "Did the user answer contain atleast 2 examples from personal experience?",
+        "user_characteristics": {
+            "Name": "Anjali",
+            "Age": 35,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Madhya Pradesh"
+        },
+        "objective_met": false
+    },
+    {
+        "conversation": "Interviewer: Hello Rajendra, thank you for taking the time to speak with me today. Can you tell me if you have access to sanitation facilities?\nInterviewee: No, I don't have access to any sanitation facilities.\n",
+        "main_question": "Do you have access to sanitation facilities?",
+        "objective": "To know if the person has access to sanitation facilities or not.",
+        "user_characteristics": {
+            "Name": "Rajendra",
+            "Age": 50,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Rajasthan"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: I'm sorry to hear that. Can you tell me how far you have to travel to get to the nearest toilet?\nInterviewee: I have to travel about 2 kilometers to get to the nearest toilet.\n",
+        "main_question": "How far do you have to travel to get to the nearest toilet?",
+        "objective": "To understand how the distance the person has to travel to access toilet causes difficulties.",
+        "user_characteristics": {
+            "Name": "Rajendra",
+            "Age": 50,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Rajasthan"
+        },
+        "objective_met": false
+    },
+    {
+        "conversation": "Interviewer: I'm sorry to hear that. Can you tell me how far you have to travel to get to the nearest toilet?\nInterviewee: I have to travel about 2 kilometers to get to the nearest toilet.\n",
+        "main_question": "How far do you have to travel to get to the nearest toilet?",
+        "objective": "Was the user answer specific?",
+        "user_characteristics": {
+            "Name": "Rajendra",
+            "Age": 50,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Rajasthan"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: I'm sorry to hear that. Can you tell me how far you have to travel to get to the nearest toilet?\nInterviewee: I have to travel about 2 kilometers to get to the nearest toilet.\nInterviewer: That's quite a distance. Do you face any difficulties in traveling that far?\nInterviewee: Yes, it's especially difficult for me during the monsoon season when the roads are muddy and slippery.\n",
+        "main_question": "How far do you have to travel to get to the nearest toilet?",
+        "objective": "To understand how the distance the person has to travel to access toilet and toilet hygeine causes difficulties.",
+        "user_characteristics": {
+            "Name": "Rajendra",
+            "Age": 50,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Rajasthan"
+        },
+        "objective_met": false
+    },
+    {
+        "conversation": "Interviewer: I'm sorry to hear that. Can you tell me how far you have to travel to get to the nearest toilet?\nInterviewee: I have to travel about 2 kilometers to get to the nearest toilet.\nInterviewer: That's quite a distance. Do you face any difficulties in traveling that far?\nInterviewee: Yes, it's especially difficult for me during the monsoon season when the roads are muddy and slippery.\n",
+        "main_question": "How far do you have to travel to get to the nearest toilet?",
+        "objective": "Was the user answer specific?",
+        "user_characteristics": {
+            "Name": "Rajendra",
+            "Age": 50,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Rajasthan"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: I'm sorry to hear that. Can you tell me how far you have to travel to get to the nearest toilet?\nInterviewee: I have to travel about 2 kilometers to get to the nearest toilet.\nInterviewer: That's quite a distance. Do you face any difficulties in traveling that far?\nInterviewee: Yes, it's especially difficult for me during the monsoon season when the roads are muddy and slippery.\nInterviewer: I understand. Can you tell me more about the condition of the toilets?\nInterviewee: The condition of the toilets is very poor. They are often dirty and there is no running water.\n",
+        "main_question": "How far do you have to travel to get to the nearest toilet?",
+        "objective": "To understand how the distance the person has to travel to access toilet and toilet hygeine causes difficulties.",
+        "user_characteristics": {
+            "Name": "Rajendra",
+            "Age": 50,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Rajasthan"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: I'm sorry to hear that. Can you tell me how far you have to travel to get to the nearest toilet?\nInterviewee: I have to travel about 2 kilometers to get to the nearest toilet.\nInterviewer: That's quite a distance. Do you face any difficulties in traveling that far?\nInterviewee: Yes, it's especially difficult for me during the monsoon season when the roads are muddy and slippery.\nInterviewer: I understand. Can you tell me more about the condition of the toilets?\nInterviewee: The condition of the toilets is very poor. They are often dirty and there is no running water.\n",
+        "main_question": "How far do you have to travel to get to the nearest toilet?",
+        "objective": "Was the user answer specific?",
+        "user_characteristics": {
+            "Name": "Rajendra",
+            "Age": 50,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Rajasthan"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Hello Sarita, thank you for taking the time to speak with me today. Can you tell me if you have access to banking facilities?\nInterviewee: No, I don't have access to banking facilities.\n",
+        "main_question": "Do you have access to banking facilities?",
+        "objective": "To know if the person has access to banking facilities or not.",
+        "user_characteristics": {
+            "Name": "Sarita",
+            "Age": 30,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Bihar"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: I see. How far do you have to travel to get to the nearest bank?\nInterviewee: It's quite far, I have to travel long distance to get to the nearest bank.\n",
+        "main_question": "How far do you have to travel to get to the nearest bank?",
+        "objective": "To know the distance the person has to travel.",
+        "user_characteristics": {
+            "Name": "Sarita",
+            "Age": 30,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Bihar"
+        },
+        "objective_met": false
+    },
+    {
+        "conversation": "Interviewer: I see. How far do you have to travel to get to the nearest bank?\nInterviewee: It's quite far, I have to travel long distnace to get to the nearest bank.\n",
+        "main_question": "How far do you have to travel to get to the nearest bank?",
+        "objective": "Was the user answer specific?",
+        "user_characteristics": {
+            "Name": "Sarita",
+            "Age": 30,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Bihar"
+        },
+        "objective_met": false
+    },
+    {
+        "conversation": "Interviewer: Thank you for letting me know. Do you think the fees charged by banks are fair?\nInterviewee: I don't think they are fair. They charge a lot of money for basic services.\n",
+        "main_question": "Do you think the fees charged by banks are fair?",
+        "objective": "To know the person's opinion on bank fees and why they have that opionion.",
+        "user_characteristics": {
+            "Name": "Sarita",
+            "Age": 30,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Bihar"
+        },
+        "objective_met": false
+    },
+    {
+        "conversation": "Interviewer: Thank you for letting me know. Do you think the fees charged by banks are fair?\nInterviewee: I don't think they are fair. They charge a lot of money for basic services.\n",
+        "main_question": "Do you think the fees charged by banks are fair?",
+        "objective": "Did the user answer the question directly?",
+        "user_characteristics": {
+            "Name": "Sarita",
+            "Age": 30,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Bihar"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for letting me know. Do you think the fees charged by banks are fair?\nInterviewee: I don't think they are fair. They charge a lot of money for basic services.\nInterviewer: Can you tell me more about why you think the fees are unfair?\nInterviewee: Well, I have to pay a lot of money just to withdraw my own money. It's not fair to charge so much for basic services.\nInterviewer: I understand your frustration. Is there anything else you would like to share about your experience with banking facilities?\nInterviewee: Yes, sometimes the banks are closed when I need to use them. It's very inconvenient.\n",
+        "main_question": "Do you think the fees charged by banks are fair?",
+        "objective": "To know the person's opinion on bank fees.",
+        "user_characteristics": {
+            "Name": "Sarita",
+            "Age": 30,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Bihar"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for letting me know. Do you think the fees charged by banks are fair?\nInterviewee: I don't think they are fair. They charge a lot of money for basic services.\nInterviewer: Can you tell me more about why you think the fees are unfair?\nInterviewee: Well, I have to pay a lot of money just to withdraw my own money. It's not fair to charge so much for basic services.\nInterviewer: I understand your frustration. Is there anything else you would like to share about your experience with banking facilities?\nInterviewee: Yes, sometimes the banks are closed when I need to use them. It's very inconvenient.\n",
+        "main_question": "Do you think the fees charged by banks are fair?",
+        "objective": "Did the user answer the question directly?",
+        "user_characteristics": {
+            "Name": "Sarita",
+            "Age": 30,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Bihar"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Hello Rajesh, thank you for taking the time to speak with me today. Can you tell me if you have access to the internet?\nInterviewee: No, I don't have access to the internet.\n",
+        "main_question": "Do you have access to the internet?",
+        "objective": "To know if the person has access to the internet or not.",
+        "user_characteristics": {
+            "Name": "Rajesh",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Uttar Pradesh"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: I see. How far do you have to travel to get to the nearest internet cafe?\nInterviewee: I have to travel around 10 kilometers to get to the nearest internet cafe.\n",
+        "main_question": "How far do you have to travel to get to the nearest internet cafe?",
+        "objective": "To know the distance the person has to travel.",
+        "user_characteristics": {
+            "Name": "Rajesh",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Uttar Pradesh"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: I see. How far do you have to travel to get to the nearest internet cafe?\nInterviewee: I have to travel around 10 kilometers to get to the nearest internet cafe.\n",
+        "main_question": "How far do you have to travel to get to the nearest internet cafe?",
+        "objective": "Was the user answer specific?",
+        "user_characteristics": {
+            "Name": "Rajesh",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Uttar Pradesh"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: That's quite a distance. Do you think the cost of internet access is fair?\nInterviewee: I don't think the cost of internet access is fair. It's too expensive for me.\n",
+        "main_question": "Do you have access to the internet?",
+        "objective": "To know if the person has access to the internet or not.",
+        "user_characteristics": {
+            "Name": "Rajesh",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Uttar Pradesh"
+        },
+        "objective_met": false
+    },
+    {
+        "conversation": "Interviewer: Hello Sunita, thank you for taking the time to speak with me today. Can you tell me if you have access to clean toilets in public places?\nInterviewee: No, I don't have access to clean toilets in public places.\n",
+        "main_question": "Do you have access to clean toilets in public places?",
+        "objective": "To know if the person has access to clean toilets in public places or not.",
+        "user_characteristics": {
+            "Name": "Sunita",
+            "Age": 28,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Madhya Pradesh"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: I see. How far do you have to travel to get to the nearest clean toilet?\nInterviewee: I have to travel around 2 kilometers to get to the nearest clean toilet.\n",
+        "main_question": "How far do you have to travel to get to the nearest clean toilet?",
+        "objective": "To know the distance the person has to travel.",
+        "user_characteristics": {
+            "Name": "Sunita",
+            "Age": 28,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Madhya Pradesh"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: I see. How far do you have to travel to get to the nearest clean toilet?\nInterviewee: I have to travel around 2 kilometers to get to the nearest clean toilet.\n",
+        "main_question": "How far do you have to travel to get to the nearest clean toilet?",
+        "objective": "Was the user answer specific?",
+        "user_characteristics": {
+            "Name": "Sunita",
+            "Age": 28,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Madhya Pradesh"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for letting me know. Do you think the condition of the toilets is good?\nInterviewee: No, the condition of the toilets is not good. They are usually dirty and unhygienic.\n",
+        "main_question": "Do you think the condition of the toilets is good?",
+        "objective": "To know the person's opinion on the condition of the toilets.",
+        "user_characteristics": {
+            "Name": "Sunita",
+            "Age": 28,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Madhya Pradesh"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for letting me know. Do you think the condition of the toilets is good?\nInterviewee: No, the condition of the toilets is not good. They are usually dirty and unhygienic.\n",
+        "main_question": "Do you think the condition of the toilets is good?",
+        "objective": "Did the user answer the question directly?",
+        "user_characteristics": {
+            "Name": "Sunita",
+            "Age": 28,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Madhya Pradesh"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for letting me know. Do you think the condition of the toilets is good?\nInterviewee: No, the condition of the toilets is not good. They are usually dirty and unhygienic.\nInterviewer: I understand. Can you tell me more about the condition of the toilets?\nInterviewee: The toilets are usually not cleaned regularly and there is no water supply. Sometimes, there is no door or lock on the toilet which makes it difficult to use.\n",
+        "main_question": "Do you think the condition of the toilets is good?",
+        "objective": "To know the person's opinion on the condition of the toilets.",
+        "user_characteristics": {
+            "Name": "Sunita",
+            "Age": 28,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Madhya Pradesh"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for letting me know. Do you think the condition of the toilets is good?\nInterviewee: No, the condition of the toilets is not good. They are usually dirty and unhygienic.\nInterviewer: I understand. Can you tell me more about the condition of the toilets?\nInterviewee: The toilets are usually not cleaned regularly and there is no water supply. Sometimes, there is no door or lock on the toilet which makes it difficult to use.\n",
+        "main_question": "Do you think the condition of the toilets is good?",
+        "objective": "Did the user answer the question directly?",
+        "user_characteristics": {
+            "Name": "Sunita",
+            "Age": 28,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Madhya Pradesh"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Hello Amit, thank you for taking the time to speak with me today. Can you tell me if you have access to affordable housing?\nInterviewee: No, I don't have access to affordable housing.\n",
+        "main_question": "Do you have access to affordable housing?",
+        "objective": "To know if the person has access to affordable housing or not.",
+        "user_characteristics": {
+            "Name": "Amit",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Delhi"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: I see. How much do you pay for rent?\nInterviewee: I pay around 10,000 rupees per month for rent.\n",
+        "main_question": "How much do you pay for rent?",
+        "objective": "To know the amount the person pays for rent.",
+        "user_characteristics": {
+            "Name": "Amit",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Delhi"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: I see. How much do you pay for rent?\nInterviewee: I pay around 10,000 rupees per month for rent.\n",
+        "main_question": "How much do you pay for rent?",
+        "objective": "Did the user answer the question directly?",
+        "user_characteristics": {
+            "Name": "Amit",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Delhi"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for sharing that information. Do you think the cost of housing is fair?\nInterviewee: No, I don't think the cost of housing is fair. It's too expensive for people like me.\n",
+        "main_question": "Do you think the cost of housing is fair?",
+        "objective": "To know the person's opinion on the cost of housing.",
+        "user_characteristics": {
+            "Name": "Amit",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Delhi"
+        },
+        "objective_met": false
+    },
+    {
+        "conversation": "Interviewer: Thank you for sharing that information. Do you think the cost of housing is fair?\nInterviewee: No, I don't think the cost of housing is fair. It's too expensive for people like me.\n",
+        "main_question": "Do you think the cost of housing is fair?",
+        "objective": "Did the user answer the question directly?",
+        "user_characteristics": {
+            "Name": "Amit",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Delhi"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for sharing that information. Do you think the cost of housing is fair?\nInterviewee: No, I don't think the cost of housing is fair. It's too expensive for people like me.\nInterviewer: Can you tell me more about why you think the cost of housing is unfair?\nInterviewee: Well, I think the landlords charge too much for rent. They know that people like me don't have many options, so they take advantage of us.\n",
+        "main_question": "Do you think the cost of housing is fair?",
+        "objective": "To know the person's opinion on the cost of housing.",
+        "user_characteristics": {
+            "Name": "Amit",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Delhi"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for sharing that information. Do you think the cost of housing is fair?\nInterviewee: No, I don't think the cost of housing is fair. It's too expensive for people like me.\nInterviewer: Can you tell me more about why you think the cost of housing is unfair?\nInterviewee: Well, I think the landlords charge too much for rent. They know that people like me don't have many options, so they take advantage of us.\n",
+        "main_question": "Do you think the cost of housing is fair?",
+        "objective": "Did the user answer the question directly?",
+        "user_characteristics": {
+            "Name": "Amit",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Delhi"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for sharing that information. Do you think the cost of housing is fair?\nInterviewee: No, I don't think the cost of housing is fair. It's too expensive for people like me.\nInterviewer: Can you tell me more about why you think the cost of housing is unfair?\nInterviewee: Well, I think the landlords charge too much for rent. They know that people like me don't have many options, so they take advantage of us.\nInterviewer: I understand. Have you tried looking for other options for affordable housing?\nInterviewee: Yes, I have looked around but I haven't found anything that I can afford.\n",
+        "main_question": "Do you think the cost of housing is fair?",
+        "objective": "To know the person's opinion on the cost of housing.",
+        "user_characteristics": {
+            "Name": "Amit",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Delhi"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for sharing that information. Do you think the cost of housing is fair?\nInterviewee: No, I don't think the cost of housing is fair. It's too expensive for people like me.\nInterviewer: Can you tell me more about why you think the cost of housing is unfair?\nInterviewee: Well, I think the landlords charge too much for rent. They know that people like me don't have many options, so they take advantage of us.\nInterviewer: I understand. Have you tried looking for other options for affordable housing?\nInterviewee: Yes, I have looked around but I haven't found anything that I can afford.\n",
+        "main_question": "Do you think the cost of housing is fair?",
+        "objective": "Did the user answer the question directly?",
+        "user_characteristics": {
+            "Name": "Amit",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Delhi"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for sharing that information. Do you think the cost of housing is fair?\nInterviewee: No, I don't think the cost of housing is fair. It's too expensive for people like me.\nInterviewer: Can you tell me more about why you think the cost of housing is unfair?\nInterviewee: Well, I think the landlords charge too much for rent. They know that people like me don't have many options, so they take advantage of us.\nInterviewer: I understand. Have you tried looking for other options for affordable housing?\nInterviewee: Yes, I have looked around but I haven't found anything that I can afford.\nInterviewer: I see. Are there any specific challenges you face in finding affordable housing?\nInterviewee: Yes, there are very few options available for people like me who have a low income.\n",
+        "main_question": "Do you think the cost of housing is fair?",
+        "objective": "To know the person's opinion on the cost of housing.",
+        "user_characteristics": {
+            "Name": "Amit",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Delhi"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for sharing that information. Do you think the cost of housing is fair?\nInterviewee: No, I don't think the cost of housing is fair. It's too expensive for people like me.\nInterviewer: Can you tell me more about why you think the cost of housing is unfair?\nInterviewee: Well, I think the landlords charge too much for rent. They know that people like me don't have many options, so they take advantage of us.\nInterviewer: I understand. Have you tried looking for other options for affordable housing?\nInterviewee: Yes, I have looked around but I haven't found anything that I can afford.\nInterviewer: I see. Are there any specific challenges you face in finding affordable housing?\nInterviewee: Yes, there are very few options available for people like me who have a low income.\n",
+        "main_question": "Do you think the cost of housing is fair?",
+        "objective": "Did the user answer the question directly?",
+        "user_characteristics": {
+            "Name": "Amit",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Delhi"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for sharing that information. Do you think the cost of housing is fair?\nInterviewee: No, I don't think the cost of housing is fair. It's too expensive for people like me.\nInterviewer: Can you tell me more about why you think the cost of housing is unfair?\nInterviewee: Well, I think the landlords charge too much for rent. They know that people like me don't have many options, so they take advantage of us.\nInterviewer: I understand. Have you tried looking for other options for affordable housing?\nInterviewee: Yes, I have looked around but I haven't found anything that I can afford.\nInterviewer: I see. Are there any specific challenges you face in finding affordable housing?\nInterviewee: Yes, there are very few options available for people like me who have a low income.\nInterviewer: Thank you for sharing that with me. Is there anything else you would like to add about the issue of affordable housing?\nInterviewee: No, that's all I have to say. Thank you for listening to me.\n",
+        "main_question": "Do you think the cost of housing is fair?",
+        "objective": "To know the person's opinion on the cost of housing.",
+        "user_characteristics": {
+            "Name": "Amit",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Delhi"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for sharing that information. Do you think the cost of housing is fair?\nInterviewee: No, I don't think the cost of housing is fair. It's too expensive for people like me.\nInterviewer: Can you tell me more about why you think the cost of housing is unfair?\nInterviewee: Well, I think the landlords charge too much for rent. They know that people like me don't have many options, so they take advantage of us.\nInterviewer: I understand. Have you tried looking for other options for affordable housing?\nInterviewee: Yes, I have looked around but I haven't found anything that I can afford.\nInterviewer: I see. Are there any specific challenges you face in finding affordable housing?\nInterviewee: Yes, there are very few options available for people like me who have a low income.\nInterviewer: Thank you for sharing that with me. Is there anything else you would like to add about the issue of affordable housing?\nInterviewee: No, that's all I have to say. Thank you for listening to me.\n",
+        "main_question": "Do you think the cost of housing is fair?",
+        "objective": "Did the user answer the question directly?",
+        "user_characteristics": {
+            "Name": "Amit",
+            "Age": 35,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Delhi"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Hello Kavita, thank you for taking the time to speak with me today. Can you tell me if you have access to public parks and green spaces?\nInterviewee: Yes, I do have access to public parks and green spaces.\n",
+        "main_question": "Do you have access to public parks and green spaces?",
+        "objective": "To know if the person has access to public parks and green spaces or not.",
+        "user_characteristics": {
+            "Name": "Kavita",
+            "Age": 35,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Mumbai"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: That's great to hear. Can you tell me how far you have to travel to get to the nearest park?\nInterviewee: I have to travel around 30 minutes to get to the nearest park.\n",
+        "main_question": "How far do you have to travel to get to the nearest park?",
+        "objective": "To know the distance the person has to travel.",
+        "user_characteristics": {
+            "Name": "Kavita",
+            "Age": 35,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Mumbai"
+        },
+        "objective_met": false
+    },
+    {
+        "conversation": "Interviewer: That's great to hear. Can you tell me how far you have to travel to get to the nearest park?\nInterviewee: I have to travel around 30 minutes to get to the nearest park.\n",
+        "main_question": "How far do you have to travel to get to the nearest park?",
+        "objective": "Was the user answer specific?",
+        "user_characteristics": {
+            "Name": "Kavita",
+            "Age": 35,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Mumbai"
+        },
+        "objective_met": false
+    },
+    {
+        "conversation": "Interviewer: Thank you for letting me know. Do you think the condition of the parks is good?\nInterviewee: No, the condition of the parks is not good. They are not well-maintained and there is a lot of garbage lying around.\n",
+        "main_question": "Do you think the condition of the parks is good?",
+        "objective": "To know the person's opinion on the condition of the parks.",
+        "user_characteristics": {
+            "Name": "Kavita",
+            "Age": 35,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Mumbai"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for letting me know. Do you think the condition of the parks is good?\nInterviewee: No, the condition of the parks is not good. They are not well-maintained and there is a lot of garbage lying around.\n",
+        "main_question": "Do you think the condition of the parks is good?",
+        "objective": "Did the user answer the question directly?",
+        "user_characteristics": {
+            "Name": "Kavita",
+            "Age": 35,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Mumbai"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for letting me know. Do you think the condition of the parks is good?\nInterviewee: No, the condition of the parks is not good. They are not well-maintained and there is a lot of garbage lying around.\nInterviewer: I see. Can you tell me more about the condition of the parks?\nInterviewee: The grass is not cut regularly and there are no proper benches or seating arrangements. The play equipment is also broken and not safe for children to use.\n",
+        "main_question": "Do you think the condition of the parks is good?",
+        "objective": "To know the person's opinion on the condition of the parks.",
+        "user_characteristics": {
+            "Name": "Kavita",
+            "Age": 35,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Mumbai"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for letting me know. Do you think the condition of the parks is good?\nInterviewee: No, the condition of the parks is not good. They are not well-maintained and there is a lot of garbage lying around.\nInterviewer: I see. Can you tell me more about the condition of the parks?\nInterviewee: The grass is not cut regularly and there are no proper benches or seating arrangements. The play equipment is also broken and not safe for children to use.\n",
+        "main_question": "Do you think the condition of the parks is good?",
+        "objective": "Did the user answer the question directly?",
+        "user_characteristics": {
+            "Name": "Kavita",
+            "Age": 35,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Mumbai"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for sharing that with me. Do you think the lack of access to public parks and green spaces affects your daily life?\nInterviewee: Yes, it does affect my daily life. I have to travel a long distance to get to a park and when I do, it's not in a good condition.\n",
+        "main_question": "Do you have access to public parks and green spaces?",
+        "objective": "To know if the person has access to public parks and green spaces or not.",
+        "user_characteristics": {
+            "Name": "Kavita",
+            "Age": 35,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Mumbai"
+        },
+        "objective_met": false
+    },
+    {
+        "conversation": "Interviewer: I understand. Can you tell me how having access to public parks and green spaces would benefit you and your community?\nInterviewee: Having access to public parks and green spaces would provide a safe and healthy environment for children to play and for families to spend time together. It would also improve the overall aesthetic of the community.\n",
+        "main_question": "Do you have access to public parks and green spaces?",
+        "objective": "To know if the person has access to public parks and green spaces or not.",
+        "user_characteristics": {
+            "Name": "Kavita",
+            "Age": 35,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Mumbai"
+        },
+        "objective_met": false
+    },
+    {
+        "conversation": "Interviewer: Hello Sarita, thank you for taking the time to speak with me today. Can you tell me if you have access to affordable healthcare?\nInterviewee: No, I don't have access to affordable healthcare.\n",
+        "main_question": "Do you have access to affordable healthcare?",
+        "objective": "To know if the person has access to affordable healthcare or not.",
+        "user_characteristics": {
+            "Name": "Sarita",
+            "Age": 30,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Delhi"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: I'm sorry to hear that. Can you tell me how much you pay for healthcare?\nInterviewee: I pay around 500 rupees for a doctor's visit.\n",
+        "main_question": "How much do you pay for healthcare?",
+        "objective": "To know the amount the person pays for healthcare.",
+        "user_characteristics": {
+            "Name": "Sarita",
+            "Age": 30,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Delhi"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: I'm sorry to hear that. Can you tell me how much you pay for healthcare?\nInterviewee: I pay around 500 rupees for a doctor's visit.\n",
+        "main_question": "How much do you pay for healthcare?",
+        "objective": "Did the user answer the question directly?",
+        "user_characteristics": {
+            "Name": "Sarita",
+            "Age": 30,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Delhi"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for sharing that information. Do you think the cost of healthcare is fair?\nInterviewee: No, I don't think the cost of healthcare is fair. It's too expensive for people like me.\n",
+        "main_question": "Do you think the cost of healthcare is fair?",
+        "objective": "To know the person's opinion on the cost of healthcare.",
+        "user_characteristics": {
+            "Name": "Sarita",
+            "Age": 30,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Delhi"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for sharing that information. Do you think the cost of healthcare is fair?\nInterviewee: No, I don't think the cost of healthcare is fair. It's too expensive for people like me.\n",
+        "main_question": "Do you think the cost of healthcare is fair?",
+        "objective": "Did the user answer the question directly?",
+        "user_characteristics": {
+            "Name": "Sarita",
+            "Age": 30,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Delhi"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for sharing that information. Do you think the cost of healthcare is fair?\nInterviewee: No, I don't think the cost of healthcare is fair. It's too expensive for people like me.\nInterviewer: Thank you for sharing your opinion with me. Is there anything else you would like to add about the lack of access to affordable healthcare?\nInterviewee: Yes, sometimes I have to go to unqualified doctors because I can't afford to go to a proper hospital.\n",
+        "main_question": "Do you think the cost of healthcare is fair?",
+        "objective": "To know the person's opinion on the cost of healthcare.",
+        "user_characteristics": {
+            "Name": "Sarita",
+            "Age": 30,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Delhi"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for sharing that information. Do you think the cost of healthcare is fair?\nInterviewee: No, I don't think the cost of healthcare is fair. It's too expensive for people like me.\nInterviewer: Thank you for sharing your opinion with me. Is there anything else you would like to add about the lack of access to affordable healthcare?\nInterviewee: Yes, sometimes I have to go to unqualified doctors because I can't afford to go to a proper hospital.\n",
+        "main_question": "Do you think the cost of healthcare is fair?",
+        "objective": "Did the user answer the question directly?",
+        "user_characteristics": {
+            "Name": "Sarita",
+            "Age": 30,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Delhi"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for sharing that information. Do you think the cost of healthcare is fair?\nInterviewee: No, I don't think the cost of healthcare is fair. It's too expensive for people like me.\nInterviewer: Thank you for sharing your opinion with me. Is there anything else you would like to add about the lack of access to affordable healthcare?\nInterviewee: Yes, sometimes I have to go to unqualified doctors because I can't afford to go to a proper hospital.\nInterviewer: I see. Can you tell me more about your experiences with unqualified doctors?\nInterviewee: They don't always give me the right medicine and sometimes I end up getting sicker.\n",
+        "main_question": "Do you think the cost of healthcare is fair?",
+        "objective": "To know the person's opinion on the cost of healthcare.",
+        "user_characteristics": {
+            "Name": "Sarita",
+            "Age": 30,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Delhi"
+        },
+        "objective_met": false
+    },
+    {
+        "conversation": "Interviewer: Thank you for sharing that information. Do you think the cost of healthcare is fair?\nInterviewee: No, I don't think the cost of healthcare is fair. It's too expensive for people like me.\nInterviewer: Thank you for sharing your opinion with me. Is there anything else you would like to add about the lack of access to affordable healthcare?\nInterviewee: Yes, sometimes I have to go to unqualified doctors because I can't afford to go to a proper hospital.\nInterviewer: I see. Can you tell me more about your experiences with unqualified doctors?\nInterviewee: They don't always give me the right medicine and sometimes I end up getting sicker.\n",
+        "main_question": "Do you think the cost of healthcare is fair?",
+        "objective": "Did the user answer the question directly?",
+        "user_characteristics": {
+            "Name": "Sarita",
+            "Age": 30,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Delhi"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for sharing that information. Do you think the cost of healthcare is fair?\nInterviewee: No, I don't think the cost of healthcare is fair. It's too expensive for people like me.\nInterviewer: Thank you for sharing your opinion with me. Is there anything else you would like to add about the lack of access to affordable healthcare?\nInterviewee: Yes, sometimes I have to go to unqualified doctors because I can't afford to go to a proper hospital.\nInterviewer: I see. Can you tell me more about your experiences with unqualified doctors?\nInterviewee: They don't always give me the right medicine and sometimes I end up getting sicker.\nInterviewer: That sounds concerning. Have you ever faced any serious health issues because of the lack of access to affordable healthcare?\nInterviewee: Yes, I had to delay treatment for a serious illness because I couldn't afford it.\n",
+        "main_question": "Do you think the cost of healthcare is fair?",
+        "objective": "To know the person's opinion on the cost of healthcare.",
+        "user_characteristics": {
+            "Name": "Sarita",
+            "Age": 30,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Delhi"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for sharing that information. Do you think the cost of healthcare is fair?\nInterviewee: No, I don't think the cost of healthcare is fair. It's too expensive for people like me.\nInterviewer: Thank you for sharing your opinion with me. Is there anything else you would like to add about the lack of access to affordable healthcare?\nInterviewee: Yes, sometimes I have to go to unqualified doctors because I can't afford to go to a proper hospital.\nInterviewer: I see. Can you tell me more about your experiences with unqualified doctors?\nInterviewee: They don't always give me the right medicine and sometimes I end up getting sicker.\nInterviewer: That sounds concerning. Have you ever faced any serious health issues because of the lack of access to affordable healthcare?\nInterviewee: Yes, I had to delay treatment for a serious illness because I couldn't afford it.\n",
+        "main_question": "Do you think the cost of healthcare is fair?",
+        "objective": "Did the user answer the question directly?",
+        "user_characteristics": {
+            "Name": "Sarita",
+            "Age": 30,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Delhi"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Hello Rajesh, thank you for taking the time to speak with me today. Can you tell me if you have access to nutritious food?\nInterviewee: Yes, I do have access to nutritious food.\n",
+        "main_question": "Do you have access to nutritious food?",
+        "objective": "To know if the person has access to nutritious food or not.",
+        "user_characteristics": {
+            "Name": "Rajesh",
+            "Age": 45,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Mumbai"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: That's great to hear. Can you tell me how much you spend on food in a day?\nInterviewee: I spend around 100 rupees on food in a day.\n",
+        "main_question": "How much do you spend on food in a day?",
+        "objective": "To know the amount the person spends on food.",
+        "user_characteristics": {
+            "Name": "Rajesh",
+            "Age": 45,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Mumbai"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: That's great to hear. Can you tell me how much you spend on food in a day?\nInterviewee: I spend around 100 rupees on food in a day.\n",
+        "main_question": "How much do you spend on food in a day?",
+        "objective": "Did the user answer the question directly?",
+        "user_characteristics": {
+            "Name": "Rajesh",
+            "Age": 45,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Mumbai"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for sharing that with me. Do you think the cost of nutritious food is fair?\nInterviewee: No, I don't think the cost of nutritious food is fair. It's too expensive for me to afford.\n",
+        "main_question": "Do you think the cost of nutritious food is fair?",
+        "objective": "To know the person's opinion on the cost of nutritious food.",
+        "user_characteristics": {
+            "Name": "Rajesh",
+            "Age": 45,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Mumbai"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Thank you for sharing that with me. Do you think the cost of nutritious food is fair?\nInterviewee: No, I don't think the cost of nutritious food is fair. It's too expensive for me to afford.\n",
+        "main_question": "Do you think the cost of nutritious food is fair?",
+        "objective": "Did the user answer the question directly?",
+        "user_characteristics": {
+            "Name": "Rajesh",
+            "Age": 45,
+            "Gender": "Male",
+            "Income": "Low",
+            "Education": "Primary",
+            "Location": "Mumbai"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: Hello Anjali, thank you for taking the time to speak with me today. Can you tell me if you have access to clean air?\nInterviewee: No, I don't have access to clean air. The air quality in my area is very poor.\n",
+        "main_question": "Do you have access to clean air?",
+        "objective": "To know if the person has access to clean air or not.",
+        "user_characteristics": {
+            "Name": "Anjali",
+            "Age": 35,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Kolkata"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: I'm sorry to hear that. Do you think the air quality in your area is good?\nInterviewee: No, it's very bad. There is a lot of pollution from factories and vehicles.\n",
+        "main_question": "Do you think the air quality in your area is good?",
+        "objective": "To know the person's opinion on air quality.",
+        "user_characteristics": {
+            "Name": "Anjali",
+            "Age": 35,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Kolkata"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: I'm sorry to hear that. Do you think the air quality in your area is good?\nInterviewee: No, it's very bad. There is a lot of pollution from factories and vehicles.\n",
+        "main_question": "Do you think the air quality in your area is good?",
+        "objective": "Did the user answer the question directly?",
+        "user_characteristics": {
+            "Name": "Anjali",
+            "Age": 35,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Kolkata"
+        },
+        "objective_met": true
+    },
+    {
+        "conversation": "Interviewer: I understand. Do you think the government is doing enough to improve air quality?\nInterviewee: No, I don't think so. They need to take more action to reduce pollution and improve air quality.\n",
+        "main_question": "Do you think the government is doing enough to improve air quality?",
+        "objective": "To know the person's opinion on government action.",
+        "user_characteristics": {
+            "Name": "Anjali",
+            "Age": 35,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Kolkata"
+        },
+        "objective_met": false
+    },
+    {
+        "conversation": "Interviewer: I understand. Do you think the government is doing enough to improve air quality?\nInterviewee: No, I don't think so. They need to take more action to reduce pollution and improve air quality.\n",
+        "main_question": "Do you think the government is doing enough to improve air quality?",
+        "objective": "Did the user answer the question directly?",
+        "user_characteristics": {
+            "Name": "Anjali",
+            "Age": 35,
+            "Gender": "Female",
+            "Income": "Low",
+            "Education": "Secondary",
+            "Location": "Kolkata"
+        },
+        "objective_met": false
+    }
+]

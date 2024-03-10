@@ -5,8 +5,9 @@ from request import Question
 from typing import List, Optional
 from response import HistoryMessage
 import logging
+import uuid
 
-app = FastAPI()
+MAX_UUID_RETRIES = 10
 
 # Temporary persistence work around
 survey_store = {}
@@ -14,8 +15,10 @@ survey_store = {}
 # form_id -> fixed questions
 fixed_questions_store = {}
 
+app = FastAPI()
+
 class FormRequest(BaseModel):
-	form_id : int
+	form_id : Optional[str]
 	questions : List[Question]
 
 class FollowUpResponse(BaseModel):
@@ -25,10 +28,17 @@ class FollowUpResponse(BaseModel):
 @app.post("/store_data/")
 async def store_data(formRequest: FormRequest):
 	key = formRequest.form_id
+	if key is None:
+		key = uuid.uuid4()
+		for i in range(MAX_UUID_RETRIES):
+			if key in fixed_questions_store:
+				key = uuid.uuid4()
+			else:
+				break
 	value = formRequest.questions
 	fixed_questions_store[key] = value
 	# print("Current value of dictionary : ", fixed_questions_store)
-	return {"message": "Data stored successfully"}
+	return {"form_id": key}
 
 class UserRequest(BaseModel):
 	email: str
