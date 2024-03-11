@@ -40,7 +40,7 @@ def update_user_input_based_on_session_keys():
             id_q = int(key.split("_")[1])
             id_o = int(key.split("_")[2])
             st.session_state[USER_INPUT_KEY][id_q][OBJECTIVE_KEY][id_o] = st.session_state[key]
-        elif key.startswith("o_"):
+        elif key.startswith("fd_"):
             id_q = int(key.split("_")[1])
             st.session_state[USER_INPUT_KEY][id_q][FOLLOWUP_DEPTH_KEY] = st.session_state[key]
 _ = """
