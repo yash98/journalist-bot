@@ -30,11 +30,10 @@ async def store_data(formRequest: FormRequest):
 	key = formRequest.form_id
 	if key is None:
 		key = uuid.uuid4()
-		for i in range(MAX_UUID_RETRIES):
-			if key in fixed_questions_store:
-				key = uuid.uuid4()
-			else:
+		for _ in range(MAX_UUID_RETRIES):
+			if key not in fixed_questions_store:
 				break
+			key = uuid.uuid4()
 	value = formRequest.questions
 	fixed_questions_store[key] = value
 	# print("Current value of dictionary : ", fixed_questions_store)

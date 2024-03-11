@@ -9,6 +9,8 @@ QUESTION_KEY = "question"
 OBJECTIVE_KEY = "objective"
 FOLLOWUP_DEPTH_KEY = "followup_depth"
 
+FORM_ID_REPONSE_KEY = "form_id"
+
 def add_empty_question():
     st.session_state[USER_INPUT_KEY].append({QUESTION_KEY: "", OBJECTIVE_KEY: [""], FOLLOWUP_DEPTH_KEY: 0})
 
@@ -86,6 +88,10 @@ def survey_creator():
 
     if st.button("Submit Survey"):
         update_user_input_based_on_session_keys()
-        st.write(st.session_state[USER_INPUT_KEY])
+        resp = make_submit_survey_call()
+        if resp.status_code == 200:
+            st.success("Survey created successfully. Form created with form id: "+str(resp.json()[FORM_ID_REPONSE_KEY]))
+        else:
+            st.error("Oops! Something went wrong. Please try again")
 
 survey_creator()

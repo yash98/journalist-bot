@@ -42,7 +42,7 @@ class SurveyBotV1(BaseModel):
 		objective_left_list = [criteria for criteria, result in zip(self.fixed_questions[self.current_question_index][1], results) if not result]
 		return objective_left_list
 	
-	def transform_chat_history(self, chat_history: List[Tuple[int, str, str]], question_prefix="Interviewer: ", answer_prefix="Participant: ") -> str:
+	def transform_chat_history(self, chat_history: List[Tuple[int, str, str]], question_prefix="Interviewer: ", answer_prefix="Interviewee: ") -> str:
 		chat_history_str = ""
 		for chat in chat_history:
 			question = chat[1]
