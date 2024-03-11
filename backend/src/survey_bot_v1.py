@@ -33,11 +33,14 @@ class SurveyBotV1(BaseModel):
 		self.append_question_to_chat_history(next_question)
 
 	def parallel_objective_met_agent(self):
+		start_time = time.time()
 		futures = [parallel_objective_met_agent_executor.submit(objective_met_agent, \
 			self.transform_chat_history(self.chat_history), self.fixed_questions[self.current_question_index][0].question, criteria) \
 			for criteria in self.fixed_questions[self.current_question_index][1]]
 		results = [future.result() for future in concurrent.futures.as_completed(futures)]
 		objective_left_list = [criteria for criteria, result in zip(self.fixed_questions[self.current_question_index][1], results) if not result]
+		elapsed_time = end_time - start_time
+		print(f"parallel_objective_met_agent time taken: {elapsed_time} seconds")
 		return objective_left_list
 	
 	def transform_chat_history(self, chat_history: List[Tuple[int, str, str]], question_prefix="Interviewer: ", answer_prefix="Interviewee: ") -> str:
@@ -83,8 +86,12 @@ class SurveyBotV1(BaseModel):
 				return (COMPLETION_MESSAGE, self.state)
 		
 		self.current_question_followup_depth += 1
+		start_time = time.time()
 		next_question = question_generation_agent(self.transform_chat_history(self.chat_history), self.fixed_questions[self.current_question_index][0].question, \
 			self.fixed_questions[self.current_question_index][1], self.user_characteristics)
+		end_time = time.time()
+		elapsed_time = end_time - start_time
+		print(f"question_generation_agent time taken: {elapsed_time} seconds")
 		self.append_question_to_chat_history(next_question)
 		return (next_question, self.state)
 	
