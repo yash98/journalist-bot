@@ -46,6 +46,7 @@ def question_generation_agent(chat_history, main_question, objectives_left, user
 
     # fetch llm response
     prompt = prompt_template.format(chat_history=chat_history, main_question=main_question, objectives_left=objectives_left)
+    print("Prompt for Question generation: ", prompt)
     response =  generate_response(prompt)
 
     # Use regular expressions to parse the llm output
