@@ -48,13 +48,13 @@ def objective_met_agent(chat_history, main_question, objectives_left):
 
     # fetch response from llm
     prompt = prompt_template.format(chat_history=chat_history, main_question=main_question, objectives_left=objectives_left)
-    # print("***"+prompt+"***")
+    print("Objective Met Agent prompt: \n", prompt)
     response = generate_response(prompt)
 
     # Use regular expressions to parse llm output
     end_of_turn_tags = re.findall(r'<start_of_turn>model(.*?)<eos>', response, re.DOTALL)
     # parsed_response = end_of_turn_tags[0].strip().split('\n')[0]
-    print("Objective LLM response :", response)
+    print("Objective Met Agent LLM response: \n", response)
     parsed_response = find_occurrences(response)
     print(parsed_response)
     return parsed_response >= THRESH

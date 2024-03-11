@@ -35,8 +35,9 @@ class SurveyBotV1(BaseModel):
 
 	def parallel_objective_met_agent(self):
 		start_time = time.time()
+		last_question_chat_history = self.transform_chat_history(self.get_last_question_chat_history(self.chat_history))
 		futures = [parallel_objective_met_agent_executor.submit(objective_met_agent, \
-			self.transform_chat_history(self.chat_history), self.fixed_questions[self.current_question_index][0].question, criteria) \
+			last_question_chat_history, self.fixed_questions[self.current_question_index][0].question, criteria) \
 			for criteria in self.fixed_questions[self.current_question_index][1]]
 		results = [future.result() for future in concurrent.futures.as_completed(futures)]
 		objective_left_list = [criteria for criteria, result in zip(self.fixed_questions[self.current_question_index][1], results) if not result]
@@ -57,6 +58,13 @@ class SurveyBotV1(BaseModel):
 			if answer is not None and len(answer) > 0:
 				chat_history_str += answer_prefix + answer + "\n"
 		return chat_history_str
+
+	def get_last_question_chat_history(self, chat_history: List[Tuple[int, str, str]]) -> List[Tuple[int, str, str]]:
+		chat_list = []
+		for chat in chat_history:
+			if chat[0] == self.current_question_index:
+				chat_list.append(chat)
+		return chat_list
 
 	def get_next_question(self, user_answer: str):
 		if (self.state == COMPLETED_STATUS):
@@ -90,7 +98,7 @@ class SurveyBotV1(BaseModel):
 		
 		self.current_question_followup_depth += 1
 		start_time = time.time()
-		next_question = question_generation_agent(self.transform_chat_history(self.chat_history), self.fixed_questions[self.current_question_index][0].question, \
+		next_question = question_generation_agent(self.transform_chat_history(self.get_last_question_chat_history(self.chat_history)), self.fixed_questions[self.current_question_index][0].question, \
 			self.fixed_questions[self.current_question_index][1], self.user_characteristics)
 		end_time = time.time()
 		elapsed_time = end_time - start_time
