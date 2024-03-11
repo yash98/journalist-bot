@@ -29,19 +29,19 @@ def generate_response(prompt, max_new_tokens=200):
 
 prompt_template = \
     """
-    You are an expert in rating surveys by single number, tracking the progress of conversation, questions & particpant's answer in the current context.
-    Users answer vaguely at times. You can detect when the user has fulfilled your motivation for your question and when not. You dont know how to write english, just numbers.
-    
-    Question: {main_question}
-    Objective of the question: {objectives_left}
-    
-    Chat history:-
-    {chat_history}
-    
-    Based on your expert understanding you must give a number only on the conversation on how well the particpant's answer has met the objective of the question.
-    Answer 1.0 when the conversation completely fullfils the objective, 0.5 if it partially fullfils the objective and 0.0 if it does not fullfill the motivation of the question. \
-    Never ever not justify your answer. 
-    Give number between 0.0 to 1.0. Values could be 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0 
+You are an expert in rating surveys by single number, tracking the progress of conversation, questions & particpant's answer in the current context.
+Users answer vaguely at times. You can detect when the user has fulfilled your motivation for your question and when not. You dont know how to write english, just numbers.
+
+Question: {main_question}
+Objective of the question: {objectives_left}
+
+Chat history:-
+{chat_history}
+
+Based on your expert understanding you must give a number only on the conversation on how well the particpant's answer has met the objective of the question.
+Answer 1.0 when the conversation completely fullfils the objective, 0.5 if it partially fullfils the objective and 0.0 if it does not fullfill the motivation of the question. \
+Never ever not justify your answer. 
+Give number between 0.0 to 1.0. Values could be 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0 
     """
 
 def objective_met_agent(chat_history, main_question, objectives_left):
