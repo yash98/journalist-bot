@@ -40,14 +40,6 @@ async def store_data(formRequest: FormRequest):
 				break
 			key = uuid.uuid4()
 	value = formRequest.questions
-	# init default value for question and nested objects
-	for question in value:
-		if question.question_config is None:
-			question.question_config = {}
-		if question.question_config.criteria is None:
-			question.question_config.criteria = []
-		if question.question_config.followup_depth is None:
-			question.question_config.followup_depth = 0
 	
 	fixed_questions_store[key] = value
 	# print("Current value of dictionary : ", fixed_questions_store)

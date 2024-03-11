@@ -59,13 +59,13 @@ def make_submit_survey_call():
         question_data["question"] = input_data[QUESTION_KEY]
         question_data["question_config"] = {}
 
+        question_data["question_config"]["followup_depth"] = 0
         if input_data[FOLLOWUP_DEPTH_KEY]:
             question_data["question_config"]["followup_depth"] = input_data[FOLLOWUP_DEPTH_KEY]
 
+        question_data["question_config"]["criteria"] = []
         for objective in input_data[OBJECTIVE_KEY]:
             if objective != "":
-                if "criteria" not in question_data["question_config"]:
-                    question_data["question_config"]["criteria"] = []
                 question_data["question_config"]["criteria"].append(objective)
 
         questions_list.append(question_data)
