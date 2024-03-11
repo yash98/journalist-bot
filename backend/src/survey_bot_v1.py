@@ -66,8 +66,9 @@ class SurveyBotV1(BaseModel):
 		last_tuple = self.chat_history[-1]
 		self.chat_history[-1] = (last_tuple[0], last_tuple[1], user_answer)
 
-		objective_remaining_list = self.parallel_objective_met_agent()
-		self.fixed_questions[self.current_question_index] = (self.fixed_questions[self.current_question_index][0], objective_remaining_list)
+		if self.current_question_followup_depth < self.fixed_questions[self.current_question_index][0].question_config.followup_depth:
+			objective_remaining_list = self.parallel_objective_met_agent()
+			self.fixed_questions[self.current_question_index] = (self.fixed_questions[self.current_question_index][0], objective_remaining_list)
 
 		if len(objective_remaining_list) == 0 or self.current_question_followup_depth >= self.fixed_questions[self.current_question_index][0].question_config.followup_depth:
 			self.current_question_index += 1
