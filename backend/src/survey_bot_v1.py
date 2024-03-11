@@ -85,7 +85,7 @@ class SurveyBotV1(BaseModel):
 		
 		self.current_question_followup_depth += 1
 		next_question = self.question_generation_agent(self.transform_chat_history(self.chat_history), self.fixed_questions[self.current_question_index][0].question, \
-			self.fixed_questions[self.current_question_index][1], self.user_charecteristics)
+			self.fixed_questions[self.current_question_index][1], self.user_characteristics)
 		self.append_question_to_chat_history(next_question)
 		return (next_question, self.state)
 	
