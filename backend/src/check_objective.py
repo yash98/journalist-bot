@@ -54,7 +54,7 @@ def objective_met_agent(chat_history, main_question, objectives_left):
     # Use regular expressions to parse llm output
     end_of_turn_tags = re.findall(r'<start_of_turn>model(.*?)<eos>', response, re.DOTALL)
     # parsed_response = end_of_turn_tags[0].strip().split('\n')[0]
-    # print("LLM response :", response)
+    print("Objective LLM response :", response)
     parsed_response = find_occurrences(response)
     print(parsed_response)
     return parsed_response >= THRESH
