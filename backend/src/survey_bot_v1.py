@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import List, Dict, Union, Tuple
-from check_objective import objective_met_agent
-from generate_question import question_generation_agent
+from check_objective import objective_met_agent as objective_met_agent
+from generate_question import question_generation_agent as question_generation_agent
 from request import Question
 from response import HistoryMessage
 
@@ -14,8 +14,6 @@ COMPLETED_STATUS = "completed"
 IN_PROGRESS_STATUS = "in progress"
 
 class SurveyBotV1(BaseModel):
-	question_generation_agent = question_generation_agent
-	objective_met_agent = objective_met_agent
 	user_characteristics: Dict[str, Union[str, int, float, bool, None]] = {}
 	# List of tuples of main question index, main question or followup question, user answer
 	chat_history: List[Tuple[int, str, str]] = []
@@ -84,7 +82,7 @@ class SurveyBotV1(BaseModel):
 				return (COMPLETION_MESSAGE, self.state)
 		
 		self.current_question_followup_depth += 1
-		next_question = self.question_generation_agent(self.transform_chat_history(self.chat_history), self.fixed_questions[self.current_question_index][0].question, \
+		next_question = question_generation_agent(self.transform_chat_history(self.chat_history), self.fixed_questions[self.current_question_index][0].question, \
 			self.fixed_questions[self.current_question_index][1], self.user_characteristics)
 		self.append_question_to_chat_history(next_question)
 		return (next_question, self.state)
