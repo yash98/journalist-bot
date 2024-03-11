@@ -40,6 +40,7 @@ class SurveyBotV1(BaseModel):
 			for criteria in self.fixed_questions[self.current_question_index][1]]
 		results = [future.result() for future in concurrent.futures.as_completed(futures)]
 		objective_left_list = [criteria for criteria, result in zip(self.fixed_questions[self.current_question_index][1], results) if not result]
+		end_time = time.time()
 		elapsed_time = end_time - start_time
 		print(f"parallel_objective_met_agent time taken: {elapsed_time} seconds")
 		return objective_left_list
