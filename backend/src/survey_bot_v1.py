@@ -4,6 +4,7 @@ from check_objective import objective_met_agent as objective_met_agent
 from generate_question import question_generation_agent as question_generation_agent
 from request import Question
 from response import HistoryMessage
+import time
 
 import concurrent.futures
 
