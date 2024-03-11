@@ -65,8 +65,8 @@ def chat():
                 response = generate_bot_response(prompt)
                 if response["next_question"]:
                         st.write(response["next_question"])
-            if response and response["status"] == COMPLETION_STATUS:
-                st.stop()
+        if response and response["status"] == COMPLETION_STATUS:
+            st.stop()
         message = {"role": "assistant", "content": response["next_question"]}
         st.session_state.messages.append(message)
 

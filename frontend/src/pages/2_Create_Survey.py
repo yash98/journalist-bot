@@ -74,6 +74,7 @@ def make_submit_survey_call():
         "form_id": None,
         "questions": questions_list
     }
+    print(data)
     response = requests.post(BACKEND_URL+"/store_data/", json=data)
     return response
 
