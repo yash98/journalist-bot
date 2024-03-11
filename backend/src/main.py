@@ -21,6 +21,11 @@ class FormRequest(BaseModel):
 	form_id : Optional[str]
 	questions : List[Question]
 
+class UserRequest(BaseModel):
+	email: str
+	form_id: str
+	user_answer: str
+
 class FollowUpResponse(BaseModel):
 	next_question: Optional[str]
 	status: str
@@ -38,11 +43,6 @@ async def store_data(formRequest: FormRequest):
 	fixed_questions_store[key] = value
 	# print("Current value of dictionary : ", fixed_questions_store)
 	return {"form_id": key}
-
-class UserRequest(BaseModel):
-	email: str
-	form_id: int
-	user_answer: str
 
 def create_new_survey_bot(email: str, form_id: int):
 	if form_id in fixed_questions_store:
