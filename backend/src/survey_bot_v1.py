@@ -1,9 +1,10 @@
 from pydantic import BaseModel
 from typing import List, Dict, Union, Tuple
-from check_objective import objective_met_agent
-from generate_question import question_generation_agent
+from check_objective import objective_met_agent as objective_met_agent
+from generate_question import question_generation_agent as question_generation_agent
 from request import Question
 from response import HistoryMessage
+import time
 
 import concurrent.futures
 
@@ -14,8 +15,6 @@ COMPLETED_STATUS = "completed"
 IN_PROGRESS_STATUS = "in progress"
 
 class SurveyBotV1(BaseModel):
-	question_generation_agent = question_generation_agent
-	objective_met_agent = objective_met_agent
 	user_characteristics: Dict[str, Union[str, int, float, bool, None]] = {}
 	# List of tuples of main question index, main question or followup question, user answer
 	chat_history: List[Tuple[int, str, str]] = []
@@ -35,14 +34,19 @@ class SurveyBotV1(BaseModel):
 		self.append_question_to_chat_history(next_question)
 
 	def parallel_objective_met_agent(self):
+		start_time = time.time()
+		last_question_chat_history = self.transform_chat_history(self.get_last_question_chat_history(self.chat_history))
 		futures = [parallel_objective_met_agent_executor.submit(objective_met_agent, \
-			self.transform_chat_history(self.chat_history), self.fixed_questions[self.current_question_index][0].question, criteria) \
+			last_question_chat_history, self.fixed_questions[self.current_question_index][0].question, criteria) \
 			for criteria in self.fixed_questions[self.current_question_index][1]]
 		results = [future.result() for future in concurrent.futures.as_completed(futures)]
 		objective_left_list = [criteria for criteria, result in zip(self.fixed_questions[self.current_question_index][1], results) if not result]
+		end_time = time.time()
+		elapsed_time = end_time - start_time
+		print(f"parallel_objective_met_agent time taken: {elapsed_time} seconds")
 		return objective_left_list
 	
-	def transform_chat_history(self, chat_history: List[Tuple[int, str, str]], question_prefix="Interviewer: ", answer_prefix="Participant: ") -> str:
+	def transform_chat_history(self, chat_history: List[Tuple[int, str, str]], question_prefix="Interviewer: ", answer_prefix="Interviewee: ") -> str:
 		chat_history_str = ""
 		for chat in chat_history:
 			question = chat[1]
@@ -54,6 +58,13 @@ class SurveyBotV1(BaseModel):
 			if answer is not None and len(answer) > 0:
 				chat_history_str += answer_prefix + answer + "\n"
 		return chat_history_str
+
+	def get_last_question_chat_history(self, chat_history: List[Tuple[int, str, str]]) -> List[Tuple[int, str, str]]:
+		chat_list = []
+		for chat in chat_history:
+			if chat[0] == self.current_question_index:
+				chat_list.append(chat)
+		return chat_list
 
 	def get_next_question(self, user_answer: str):
 		if (self.state == COMPLETED_STATUS):
@@ -68,8 +79,10 @@ class SurveyBotV1(BaseModel):
 		last_tuple = self.chat_history[-1]
 		self.chat_history[-1] = (last_tuple[0], last_tuple[1], user_answer)
 
-		objective_remaining_list = self.parallel_objective_met_agent()
-		self.fixed_questions[self.current_question_index] = (self.fixed_questions[self.current_question_index][0], objective_remaining_list)
+		objective_remaining_list = self.fixed_questions[self.current_question_index][1]
+		if self.current_question_followup_depth < self.fixed_questions[self.current_question_index][0].question_config.followup_depth:
+			objective_remaining_list = self.parallel_objective_met_agent()
+			self.fixed_questions[self.current_question_index] = (self.fixed_questions[self.current_question_index][0], objective_remaining_list)
 
 		if len(objective_remaining_list) == 0 or self.current_question_followup_depth >= self.fixed_questions[self.current_question_index][0].question_config.followup_depth:
 			self.current_question_index += 1
@@ -84,8 +97,12 @@ class SurveyBotV1(BaseModel):
 				return (COMPLETION_MESSAGE, self.state)
 		
 		self.current_question_followup_depth += 1
-		next_question = self.question_generation_agent(self.transform_chat_history(self.chat_history), self.fixed_questions[self.current_question_index][0].question, \
-			self.fixed_questions[self.current_question_index][1], self.user_charecteristics)
+		start_time = time.time()
+		next_question = question_generation_agent(self.transform_chat_history(self.get_last_question_chat_history(self.chat_history)), self.fixed_questions[self.current_question_index][0].question, \
+			self.fixed_questions[self.current_question_index][1], self.user_characteristics)
+		end_time = time.time()
+		elapsed_time = end_time - start_time
+		print(f"question_generation_agent time taken: {elapsed_time} seconds")
 		self.append_question_to_chat_history(next_question)
 		return (next_question, self.state)
 	

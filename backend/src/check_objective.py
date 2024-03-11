@@ -4,6 +4,9 @@
 import requests
 import re
 
+
+THRESH = 0.7
+
 def generate_response(prompt, max_new_tokens=200):
     # Set the API endpoint URL
     api_url = "http://localhost:8000/generate_follow_up/"  # Update with your actual server URL
@@ -26,27 +29,40 @@ def generate_response(prompt, max_new_tokens=200):
 
 prompt_template = \
     """
-    You are an expert in analysing survey questions & particpant's answer as per given chat history.
-    
-    Main question: {main_question}
-    Objective: {objectives_left}
-    
-    Chat history:-
-    {chat_history}
-    
-    Based on your analysis you can decide whether or not the particpant's answer meets the objective of the question asked.
-    Answer "True" if it meets the objective and "False" if it does not. Only answer True or False and do not try to justify your answer.
+You are an expert in rating surveys by single number, tracking the progress of conversation, questions & particpant's answer in the current context.
+Users answer vaguely at times. You can detect when the user has fulfilled your motivation for your question and when not. You dont know how to write english, just numbers.
+
+Question: {main_question}
+Objective of the question: {objectives_left}
+
+Chat history:-
+{chat_history}
+
+Based on your expert understanding you must give a number only on the conversation on how well the particpant's answer has met the objective of the question.
+Answer 1.0 when the conversation completely fullfils the objective, 0.5 if it partially fullfils the objective and 0.0 if it does not fullfill the motivation of the question. \
+Never ever not justify your answer. 
+Give number between 0.0 to 1.0. Values could be 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0 
     """
 
 def objective_met_agent(chat_history, main_question, objectives_left):
 
     # fetch response from llm
     prompt = prompt_template.format(chat_history=chat_history, main_question=main_question, objectives_left=objectives_left)
+    print("Objective Met Agent prompt: \n", prompt)
     response = generate_response(prompt)
 
     # Use regular expressions to parse llm output
     end_of_turn_tags = re.findall(r'<start_of_turn>model(.*?)<eos>', response, re.DOTALL)
-    parsed_response = end_of_turn_tags[0].strip().split('\n')[0]
+    # parsed_response = end_of_turn_tags[0].strip().split('\n')[0]
+    print("Objective Met Agent LLM response: \n", response)
+    parsed_response = find_occurrences(response)
+    print(parsed_response)
+    return parsed_response >= THRESH
 
-    print("Parsed LLM response :", parsed_response)
-    return parsed_response.lower() == "true"
+
+def find_occurrences(input_string):
+    pattern = r'(?:[0-1]\.[0-9]+)'
+    occurrences = re.findall(pattern, input_string)
+    if len(occurrences)>0:
+        return float(occurrences[-1])
+    return 0.0
