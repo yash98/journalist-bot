@@ -61,8 +61,8 @@ def chat():
     if st.session_state.messages[-1]["role"] != "assistant":
         with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
-                response = generate_bot_response(prompt)
                 placeholder = st.empty()
+                response = generate_bot_response(prompt)
                 if response["next_question"]:
                         placeholder.markdown(response["next_question"])
                 if response["status"] == COMPLETION_STATUS:
