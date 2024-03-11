@@ -1,2 +1,4 @@
 [server]
-port = 8502
+port = 8501
+[browser]
+gatherUsageStats = False
