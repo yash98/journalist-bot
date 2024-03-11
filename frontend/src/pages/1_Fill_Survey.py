@@ -59,13 +59,14 @@ def chat():
 
     # Generate a new response if last message is not from assistant
     if st.session_state.messages[-1]["role"] != "assistant":
+        response = None
         with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
                 response = generate_bot_response(prompt)
                 if response["next_question"]:
                         st.write(response["next_question"])
-                if response["status"] == COMPLETION_STATUS:
-                    st.stop()
+            if response and response["status"] == COMPLETION_STATUS:
+                st.stop()
         message = {"role": "assistant", "content": response["next_question"]}
         st.session_state.messages.append(message)
 
