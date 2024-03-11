@@ -61,7 +61,7 @@ def objective_met_agent(chat_history, main_question, objectives_left):
 
 
 def find_occurrences(input_string):
-    pattern = r'\b(?:0\.[1-9]|[1-9]\.[0-9]|1\.0)\b'
+    pattern = r'(?:[0-1]\.[0-9]+)'
     occurrences = re.findall(pattern, input_string)
     if len(occurrences)>0:
         return float(occurrences[-1])
