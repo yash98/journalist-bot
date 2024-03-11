@@ -17,6 +17,11 @@ The introduction of a Large Language Model (LLM)-based survey tool revolutionize
 # Collaborators
 [Yash Malviya](https://github.com/yash98), [Santanu Senapati](https://github.com/KSSSenapati), and [Pushkar Aggrawal](https://github.com/Pushkaraaa), representing Search Relevance at Myntra, are honored to participate. With collective expertise, we aim to innovate solutions. Our team has worked on Gen AI enabled features and Deep Learning tools ex. [MyFashionGPT for Myntra](https://indianexpress.com/article/technology/artificial-intelligence/myntra-microsoft-collaboration-myfashiongpt-azure-9074891/)
 
+# How to run?
+1. Setup backend, frontend, lm-server as mentioned in `README.md` in their respective folders
+2. Then UI can be access at `http://localhost:8501`
+3. Recommended hardware Nvidia T4 GPU (you need about 16GB GPU RAM)
+
 # User Experience
 
 ## User Journey
