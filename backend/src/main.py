@@ -18,12 +18,12 @@ fixed_questions_store = {}
 app = FastAPI()
 
 class FormRequest(BaseModel):
-	form_id : Optional[str]
+	form_id : Optional[uuid.UUID]
 	questions : List[Question]
 
 class UserRequest(BaseModel):
 	email: str
-	form_id: str
+	form_id: uuid.UUID
 	user_answer: str
 
 class FollowUpResponse(BaseModel):
@@ -45,7 +45,7 @@ async def store_data(formRequest: FormRequest):
 	# print("Current value of dictionary : ", fixed_questions_store)
 	return {"form_id": key}
 
-def create_new_survey_bot(email: str, form_id: str):
+def create_new_survey_bot(email: str, form_id: uuid.UUID):
 	if form_id in fixed_questions_store:
 		survey_bot = SurveyBotV1(fixed_questions_store[form_id])
 		survey_store[(email, form_id)] = survey_bot
@@ -71,7 +71,7 @@ async def generate_follow_up(userRequest: UserRequest):
 
 # Get API takes email and form_id as input and deletes the survey_bot object from the survey_store
 @app.get("/user/clear_history")
-async def clear_history(email: str, form_id: str):
+async def clear_history(email: str, form_id: uuid.UUID):
 	try:
 		if (email, form_id) in survey_store:
 			del survey_store[(email, form_id)]
@@ -83,7 +83,7 @@ async def clear_history(email: str, form_id: str):
 
 # Get API takes email and form_id as input and returns the survey_bot object from the survey_store
 @app.get("/user/get_history")
-async def get_history(email: str, form_id: str) -> List[HistoryMessage]:
+async def get_history(email: str, form_id: uuid.UUID) -> List[HistoryMessage]:
 	try:
 		if (email, form_id) in survey_store:
 			return survey_store[(email, form_id)].get_chat_history()
