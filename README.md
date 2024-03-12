@@ -11,9 +11,6 @@ Moreover, the process of identifying when a respondent's answers lack clarity or
 ## Proposed Solution
 The introduction of a Large Language Model (LLM)-based survey tool revolutionizes data collection by dynamically interacting with respondents in a conversational manner. This tool is designed to understand and evaluate users' responses in real-time, enabling it to ask follow-up questions that are tailored to the individual's answers and the nuances within them. By employing a combination of advanced language understanding capabilities and real-time response evaluation, this application not only enhances engagement and participation rates but also ensures the collection of more detailed and meaningful data.
 
-## Acknoledgement of similar solutions
-
-
 # Collaborators
 [Yash Malviya](https://github.com/yash98), [Santanu Senapati](https://github.com/KSSSenapati), and [Pushkar Aggrawal](https://github.com/Pushkaraaa), representing Search Relevance at Myntra, are honored to participate. With collective expertise, we aim to innovate solutions. Our team has worked on Gen AI enabled features and Deep Learning tools ex. [MyFashionGPT for Myntra](https://indianexpress.com/article/technology/artificial-intelligence/myntra-microsoft-collaboration-myfashiongpt-azure-9074891/)
 
@@ -26,7 +23,7 @@ The introduction of a Large Language Model (LLM)-based survey tool revolutionize
 
 ## User Journey
 
-User opens our application - what di they see, what can they do there. With every user action what changes and are the the next possible user actions
+User opens our application - what do they see, what can they do there. With every user action what changes and are the the next possible user actions
 
 ### Survey Creator
 
@@ -48,7 +45,7 @@ User opens our application - what di they see, what can they do there. With ever
                   4. Did user understand the question? Did they answer the asked question or something else?
                   5. Did user find the question unrelevant?
                   6. Is question objective reached?
-            2. With every question creator gets a field to explain / reprhase the question differently
+            2. With every question creator gets a field to explain / rephrase the question differently
                1. Suggest options using LLM
 2. Survey Analysis
    1. Research
@@ -56,13 +53,19 @@ User opens our application - what di they see, what can they do there. With ever
 
 ### Survey Participant (Filler)
 
+Basic UI were user answers the configured questions one after the other
+
 ## Features
 
 Priority - P0 to P4
 
 ### High Priority
-1. Multiple type of questions - MCQ (Single select and multi select), Text paragraph P0
+1. Multiple type of questions
+   1. MCQ (Single select and multi select) P1
+   2. Text paragraph P0
 2. Multilingual Support P1
+3. Survey Bot (Collection of agents) P0
+4. Authentication P1
 
 ### Low priority
 
@@ -70,8 +73,19 @@ Priority - P0 to P4
    1. STT P3
    2. TTS P4
 
-# Roadmap
+# Solution Decription
 
+## High Level Diagram
 
+### Survey Creation
+![Survey Creation](https://github.com/yash98/journalist-bot/blob/main/docs/img/survey-creator-diagram.png?raw=true)
+
+### Survey Bot Chain of Agents
+![Survey Bot Chain of Agents](https://github.com/yash98/journalist-bot/blob/main/docs/img/survey-filler-diagram.png?raw=true)
 
 # Automated Evaluation
+
+## Objective Met Agent
+We generated 20 surveys with questions (about 3 questions each survey) and associated motivation (some motivation were also added manually). We generated associated survey participant descriptions and question answers conversation based on survey questions. Then we sliced the conversations into multiple as the expected input by the agent and manually annotated the data (i.e. manually marked which conversation slice had which objectives met). This gave use approximately 100 test cases which we used to evaluate different prompts and thresholds for prompts    
+
+All the generations were done by prompt engeering and using GPT
