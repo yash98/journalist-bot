@@ -34,3 +34,16 @@ sudo docker run --runtime nvidia --gpus all \
     custom-vllm-image \
     --model TechxGenus/gemma-7b-it-AWQ
 ```
+
+### Curls
+```
+curl http://localhost:8000/v1/models
+curl http://localhost:8000/v1/chat/completions \
+-H "Content-Type: application/json" \
+-d '{
+"model": "TechxGenus/gemma-7b-it-AWQ",
+"messages": [
+{"role": "user", "content": "You are a helpful assistant. Who won the world series in 2020?"}
+]
+}'
+```
