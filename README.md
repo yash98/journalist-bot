@@ -1,4 +1,5 @@
-# Core Idea
+# Dynamic Survey
+## Core Idea
 Knowledge Gathering: Utilizing minimal initial input to generate targeted questions that maximize information gathering by having a dialogue with people.
 Knowledge Organization: Streamlining the structuring and analysis of gathered data for enhanced insights.
 
