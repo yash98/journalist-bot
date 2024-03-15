@@ -5,8 +5,6 @@ Knowledge Organization: Streamlining the structuring and analysis of gathered da
 
 Another use case with a lot of overlap with the current one: [Journalist bot - conduct interview with people to distill and preserve niche and novel information](https://github.com/yash98/journalist-bot/blob/main/journalist-bot-original-idea.md)
 
-# Current Use Case
-
 ## Motivation
 Traditionally, surveys have predominantly consisted of multiple-choice and close-ended short answer questions. This is partly because analyzing responses to open-ended questions can be challenging. However, advancements in Natural Language Processing (NLP), such as Large Language Models (LLMs), have made it easier to tackle this issue. The efficiency and depth of traditional survey tools are often compromised by their inability to engage respondents fully, resulting in low participation rates and superficial data. The rigidity of preset questionnaires contributes to this problem, as they fail to adapt to the respondent's unique perspectives or probe for deeper understanding. However, the evolution of machine learning, especially in natural language processing, now offers a solution to these challenges by enabling more nuanced interpretation of text-based responses.
 
@@ -73,8 +71,10 @@ Basic UI were user answers the configured questions one after the other
 
 A fronted app written using streamlit can be used to create surveys and for filling survey
 The fronted app interacts with a backend service written using FastAPI
-The backend service contains the survey bot which use two agent - objective met agent, question generation agent to generate follow up questions wherever needed 
-The data for survey questions, conversation done with a survey participant and state of survey is stored in mongodb
+The backend service contains the survey bot which use two agent - objective met agent, question generation agent to generate follow up questions wherever needed
+The data for survey questions, conversation done with a survey participant and state of survey is stored in mongodb.
+For LLM capabilities we host the model using vLLM which comes with a lot of LLM inference optimisations out of the box. 
+LLM used is quantised gemma-7b-it
 
 # Automated Evaluation
 
