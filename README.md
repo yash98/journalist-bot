@@ -1,18 +1,21 @@
 # Core Idea
-Knowledge Extraction: Utilizing minimal initial input to generate targeted questions that maximize information extraction.
+Knowledge Gathering: Utilizing minimal initial input to generate targeted questions that maximize information gathering by having a dialogue with people.
 Knowledge Organization: Streamlining the structuring and analysis of gathered data for enhanced insights.
 
-# Idea
+Another use case with a lot of overlap with the current one: [Journalist bot - conduct interview with people to distill and preserve niche and novel information](https://github.com/yash98/journalist-bot/blob/main/journalist-bot-original-idea.md)
+
+# Current Use Case
+
 ## Motivation
-The efficiency and depth of traditional survey tools are often compromised by their inability to engage respondents fully, resulting in low participation rates and superficial data. The rigidity of preset questionnaires contributes to this problem, as they fail to adapt to the respondent's unique perspectives or probe for deeper understanding. This limitation is particularly evident in the inability of multiple-choice questions (MCQs) to capture the diverse range of possible responses, necessitating a shift towards open-ended formats that have historically presented challenges in data analysis. However, the evolution of machine learning, especially in natural language processing, now offers a solution to these challenges by enabling more nuanced interpretation of text-based responses.
+Traditionally, surveys have predominantly consisted of multiple-choice and close-ended short answer questions. This is partly because analyzing responses to open-ended questions can be challenging. However, advancements in Natural Language Processing (NLP), such as Large Language Models (LLMs), have made it easier to tackle this issue. The efficiency and depth of traditional survey tools are often compromised by their inability to engage respondents fully, resulting in low participation rates and superficial data. The rigidity of preset questionnaires contributes to this problem, as they fail to adapt to the respondent's unique perspectives or probe for deeper understanding. However, the evolution of machine learning, especially in natural language processing, now offers a solution to these challenges by enabling more nuanced interpretation of text-based responses.
 
-Moreover, the process of identifying when a respondent's answers lack clarity or context—and therefore require follow-up for clarification or additional detail—is traditionally manual, leading to inconsistency and missed opportunities for deeper data collection. This challenge is often only recognizable after the fact, underscoring the need for a more dynamic and responsive survey mechanism.
+Open-ended questions allow survey participants to express their thoughts and opinions more freely, potentially revealing insights that the survey creator hadn't anticipated. In contrast, multiple-choice questions can inadvertently influence responses by presenting predefined options. However, open-ended questions also pose challenges, such as vagueness or lack of specificity, which may hinder the extraction of useful insights. Moreover, the process of identifying when a respondent's answers lack clarity or context—and therefore require follow-up for clarification or additional detail—is traditionally manual, leading to inconsistency and missed opportunities for deeper data collection. In such cases, follow-up questions can help prompt participants to provide more specific information. Our focus is on addressing the challenges associated with open-ended questions, particularly regarding vagueness and staying aligned with the purpose of the question. This challenge is often only recognizable after the fact, underscoring the need for a more dynamic and responsive survey mechanism.
 
-## Proposed Solution
+## Solution
 The introduction of a Large Language Model (LLM)-based survey tool revolutionizes data collection by dynamically interacting with respondents in a conversational manner. This tool is designed to understand and evaluate users' responses in real-time, enabling it to ask follow-up questions that are tailored to the individual's answers and the nuances within them. By employing a combination of advanced language understanding capabilities and real-time response evaluation, this application not only enhances engagement and participation rates but also ensures the collection of more detailed and meaningful data.
 
-# Collaborators
-[Yash Malviya](https://github.com/yash98), [Santanu Senapati](https://github.com/KSSSenapati), and [Pushkar Aggrawal](https://github.com/Pushkaraaa), representing Search Relevance at Myntra, are honored to participate. With collective expertise, we aim to innovate solutions. Our team has worked on Gen AI enabled features and Deep Learning tools ex. [MyFashionGPT for Myntra](https://indianexpress.com/article/technology/artificial-intelligence/myntra-microsoft-collaboration-myfashiongpt-azure-9074891/)
+## Demo
+[![Dynamic Survey Demo](https://github.com/yash98/journalist-bot/blob/main/docs/img/dynamic-survey-demo.png?raw=true)](https://www.youtube.com/watch?v=1kTk0raKQX8 "Dynamic Survey Demo")
 
 # How to run?
 1. Setup backend, frontend, lm-server as mentioned in `README.md` in their respective folders
@@ -55,15 +58,22 @@ User opens our application - what do they see, what can they do there. With ever
 
 Basic UI were user answers the configured questions one after the other
 
-# Solution Description
+# Solution Details
 
-## High Level Diagram
-
-### Survey Creation
+## Survey Creation (High Level Design)
 ![Survey Creation](https://github.com/yash98/journalist-bot/blob/main/docs/img/survey-creator-diagram.png?raw=true)
 
-### Survey Bot Chain of Agents
+## Survey Bot Chain of Agents (High Level Design)
 ![Survey Bot Chain of Agents](https://github.com/yash98/journalist-bot/blob/main/docs/img/survey-filler-diagram.png?raw=true)
+
+## Tech Architecture
+
+![Tech Architecture](https://github.com/yash98/journalist-bot/blob/main/docs/img/dynamic-survey-tech-arch.png?raw=true)
+
+A fronted app written using streamlit can be used to create surveys and for filling survey
+The fronted app interacts with a backend service written using FastAPI
+The backend service contains the survey bot which use two agent - objective met agent, question generation agent to generate follow up questions wherever needed 
+The data for survey questions, conversation done with a survey participant and state of survey is stored in mongodb
 
 # Automated Evaluation
 
@@ -89,3 +99,6 @@ Priority - P0 to P4
 1. Voice integration
    1. STT P3
    2. TTS P4
+
+# Collaborators
+[Yash Malviya](https://github.com/yash98), [Santanu Senapati](https://github.com/KSSSenapati), and [Pushkar Aggrawal](https://github.com/Pushkaraaa), representing Search Relevance at Myntra, are honored to participate. With collective expertise, we aim to innovate solutions. Our team has worked on Gen AI enabled features and Deep Learning tools ex. [MyFashionGPT for Myntra](https://indianexpress.com/article/technology/artificial-intelligence/myntra-microsoft-collaboration-myfashiongpt-azure-9074891/)
