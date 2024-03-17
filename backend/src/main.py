@@ -77,8 +77,10 @@ async def generate_follow_up(userRequest: UserRequest, request: Request):
 			raise HTTPException(status_code=404, detail="Survey bot for Email, Form ID pair not found")
 		survey_bot = SurveyBotV1(**survey_bot_model["SurveyBotV1"])
 		(next_question, state) = survey_bot.get_next_question(user_answer)
-		await request.app.mongodb["forms"].update_one(
-			{"_id": hash_id}, {"$set": jsonable_encoder(survey_bot)}
+		survey_bot_model["SurveyBotV1"] = survey_bot
+		print(survey_bot)
+		await request.app.mongodb["survey_bot"].update_one(
+			{"_id": hash_id}, {"$set": jsonable_encoder(survey_bot_model)}
 		)
 		return FollowUpResponse(next_question=next_question, status=state)
 	except Exception as e:
