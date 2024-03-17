@@ -17,3 +17,24 @@ def generate_response(prompt, max_new_tokens=200):
         # Something went wrong
         print(f"Error: {response.status_code}, {response.text}")
         return None
+
+def initialize_pydantic_from_dict(model_cls, data_dict):
+    """
+    Initialize a Pydantic object from a dictionary, sending missing fields as None.
+
+    Args:
+        model_cls (type): Pydantic model class.
+        data_dict (dict): Dictionary containing data for the model.
+
+    Returns:
+        model_cls: Initialized Pydantic object.
+    """
+    # Get all fields from the Pydantic model class
+    fields = model_cls.__fields__
+    print(fields)
+
+    # Prepare kwargs for initializing the Pydantic object
+    kwargs = {field: data_dict.get(field) for field in fields}
+
+    # Initialize the Pydantic object
+    return model_cls(**kwargs)
