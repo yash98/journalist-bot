@@ -16,6 +16,9 @@ The introduction of a Large Language Model (LLM)-based survey tool revolutionize
 ## Demo
 [![Dynamic Survey Demo](https://github.com/yash98/journalist-bot/blob/main/docs/img/dynamic-survey-demo.png?raw=true)](https://www.youtube.com/watch?v=1kTk0raKQX8 "Dynamic Survey Demo")
 
+## Presentation
+[Presentation Link](https://docs.google.com/presentation/d/1c0cKJ5f5kSuq8tplEJpUmQDFVEhOC0W2ookLA_vHAYM/edit#slide=id.g26bd4b1d05e_0_2)
+
 # How to run?
 1. Setup backend, frontend, lm-server as mentioned in `README.md` in their respective folders
 2. Then UI can be access at `http://localhost:8501`
