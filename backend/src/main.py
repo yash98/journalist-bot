@@ -71,9 +71,10 @@ async def generate_follow_up(userRequest: UserRequest, request: Request):
 		survey_bot_model = await request.app.mongodb["survey_bot"].find_one(
 			{"_id": hash_id}
 		)
+		print(survey_bot_model)
 		if survey_bot_model is None:
 			raise HTTPException(status_code=404, detail="Survey bot for Email, Form ID pair not found")
-		survey_bot = SurveyBotV1Model(**survey_bot_model.SurveyBotV1)
+		survey_bot = SurveyBotV1Model(**survey_bot_model["SurveyBotV1"])
 		(next_question, state) = survey_bot.get_next_question(user_answer)
 		survey_bot_model["SurveyBotV1"] = survey_bot
 		await request.app.mongodb["survey_bot"].insert_one(jsonable_encoder(survey_bot_model))
@@ -108,8 +109,9 @@ async def get_history(email: str, form_id: uuid.UUID, request: Request) -> List[
 		survey_bot_model = await request.app.mongodb["survey_bot"].find_one(
 			{"_id": hash_id}
 		)
+		print(survey_bot_model)
 		if survey_bot_model is not None:
-			survey_bot = SurveyBotV1Model(**survey_bot_model.SurveyBotV1)
+			survey_bot = SurveyBotV1Model(**survey_bot_model["SurveyBotV1"])
 			return survey_bot.get_chat_history()
 		else:
 			survey_bot = await create_new_survey_bot(email, form_id, request.app.mongodb)
