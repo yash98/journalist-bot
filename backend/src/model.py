@@ -1,8 +1,15 @@
-
 from request import Question
+from survey_bot_v1 import SurveyBotV1
 from pydantic import BaseModel, Field
 from typing import List
 import uuid
+
+class SurveyBotV1Model(BaseModel):
+	hash_id : int = Field(alias="_id")
+	SurveyBotV1 : SurveyBotV1
+
+	class Config:
+		populate_by_name = True
 
 class FormModel(BaseModel):
     
