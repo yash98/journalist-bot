@@ -1,51 +1,21 @@
 from fastapi import FastAPI, HTTPException, Request, Body
-from pydantic import BaseModel, Field
 from survey_bot_v1 import SurveyBotV1
-from request import Question
-from typing import List, Optional
-from response import HistoryMessage
+from request import FormRequest, UserRequest
+from model import FormModel
+from typing import List
+from response import HistoryMessage, FollowUpResponse
 import logging
 import uuid
 from fastapi.encoders import jsonable_encoder
 from motor.motor_asyncio import AsyncIOMotorClient
 
-
-MAX_UUID_RETRIES = 10
-
-# Temporary persistence work around
 survey_store = {}
-
-# form_id -> fixed questions
-fixed_questions_store = {}
 
 app = FastAPI()
 
-class FormRequest(BaseModel):
-	form_id : str = Field(default_factory=uuid.uuid4, alias="_id")
-	questions : List[Question]
-
-	class Config:
-		allow_population_by_field_name = True
-		schema_extra = {
-			"example": {
-				"id": "00010203-0405-0607-0809-0a0b0c0d0e0f",
-				"questions": []
-			}
-		}
-
-
-class UserRequest(BaseModel):
-	email: str
-	form_id: uuid.UUID
-	user_answer: str
-
-class FollowUpResponse(BaseModel):
-	next_question: Optional[str]
-	status: str
-
 @app.on_event("startup")
 async def startup_db_client():
-	app.mongodb_client = AsyncIOMotorClient("localhost:27017")
+	app.mongodb_client = AsyncIOMotorClient("localhost:27017",uuidRepresentation="standard")
 	app.mongodb = app.mongodb_client["dynamic-survey"]
 
 
@@ -55,13 +25,26 @@ async def shutdown_db_client():
 
 @app.post("/store_data/")
 async def store_data(request: Request, formRequest: FormRequest = Body(...)):
-	form_request = jsonable_encoder(formRequest)
-	new_form = await request.app.mongodb["forms"].insert_one(form_request)
-	created_form = await request.app.mongodb["forms"].find_one(
-		{"_id": new_form.inserted_id}
-	)
+	created_form = None
+	if formRequest.form_id is not None:
+		created_form = await request.app.mongodb["forms"].find_one(
+			{"_id": str(formRequest.form_id)}
+		)
+
+		if created_form is None:
+			raise HTTPException(status_code=404, detail="Form ID to be updated not found") 
+		
+		created_form["questions"] = formRequest.questions
+		await request.app.mongodb["forms"].update_one(
+			{"_id": formRequest.form_id}, {"$set": jsonable_encoder(created_form)}
+		)
+	else:
+		form_model = FormModel(questions=formRequest.questions)
+		new_form = await request.app.mongodb["forms"].insert_one(jsonable_encoder(form_model))
+		created_form = await request.app.mongodb["forms"].find_one(
+			{"_id": new_form.inserted_id}
+		)
 	
-	print("value of created form : ", created_form)
 	return {"form_id": created_form["_id"]}
 
 def create_new_survey_bot(email: str, form_id: uuid.UUID):
