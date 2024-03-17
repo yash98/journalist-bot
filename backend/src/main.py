@@ -55,7 +55,7 @@ async def create_new_survey_bot(email: str, form_id: uuid.UUID, mongodb):
 		)
 	if created_form is not None:
 		created_form = FormModel(**created_form)
-		survey_bot = SurveyBotV1(created_form.questions)
+		survey_bot = SurveyBotV1().init_with_questions(created_form.questions)
 		survey_bot_model = SurveyBotV1Model(hash_id=get_hash(email, form_id), SurveyBotV1=survey_bot)
 		mongodb["survey_bot"].insert_one(jsonable_encoder(survey_bot_model))
 		return survey_bot
@@ -68,10 +68,11 @@ async def generate_follow_up(userRequest: UserRequest, request: Request):
 		email = userRequest.email
 		form_id = userRequest.form_id
 		hash_id = get_hash(email, form_id)
+		print("hash_id: ", hash_id)
 		survey_bot_model = await request.app.mongodb["survey_bot"].find_one(
 			{"_id": hash_id}
 		)
-		print(survey_bot_model)
+		print("survey_bot_model: ", survey_bot_model)
 		if survey_bot_model is None:
 			raise HTTPException(status_code=404, detail="Survey bot for Email, Form ID pair not found")
 		survey_bot = SurveyBotV1(**survey_bot_model["SurveyBotV1"])
@@ -105,11 +106,12 @@ async def clear_history(email: str, form_id: uuid.UUID, request: Request):
 @app.get("/user/get_history")
 async def get_history(email: str, form_id: uuid.UUID, request: Request) -> List[HistoryMessage]:
 	hash_id = get_hash(email, form_id)
+	print("hash_id: ", hash_id)
 	try:
 		survey_bot_model = await request.app.mongodb["survey_bot"].find_one(
 			{"_id": hash_id}
 		)
-		print(survey_bot_model)
+		print("survey_bot_model: ", survey_bot_model)
 		if survey_bot_model is not None:
 			survey_bot = SurveyBotV1(**survey_bot_model["SurveyBotV1"])
 			return survey_bot.get_chat_history()

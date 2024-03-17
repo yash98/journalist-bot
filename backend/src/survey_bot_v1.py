@@ -15,7 +15,6 @@ COMPLETED_STATUS = "completed"
 IN_PROGRESS_STATUS = "in progress"
 
 class SurveyBotV1(BaseModel):
-	user_characteristics: Dict[str, Union[str, int, float, bool, None]] = {}
 	# List of tuples of main question index, main question or followup question, user answer
 	chat_history: List[Tuple[int, str, str]] = []
 	# List of tuples of question and its left criteria
@@ -25,13 +24,20 @@ class SurveyBotV1(BaseModel):
 	state: str = IN_PROGRESS_STATUS
 
 	def append_question_to_chat_history(self, question: str):
-		self.chat_history.append((self.current_question_index, question, None))
+		self.chat_history.append((self.current_question_index, question, ""))
 
-	def __init__(self, questions):
-		super().__init__()
+	def init_with_questions(self, questions):
 		self.fixed_questions = [(question, question.question_config.criteria) for question in questions]
 		next_question = self.fixed_questions[self.current_question_index][0].question
 		self.append_question_to_chat_history(next_question)
+		return self
+	
+	def __init__(self, **kwargs):
+		print(kwargs)
+		# print type of each key in kwargs
+		for key, value in kwargs.items():
+			print(key, type(value))
+		super().__init__(**kwargs)
 
 	def parallel_objective_met_agent(self):
 		start_time = time.time()
@@ -98,8 +104,9 @@ class SurveyBotV1(BaseModel):
 		
 		self.current_question_followup_depth += 1
 		start_time = time.time()
+		# TODO user characteristic is not used and tested, so just passing empty dict. It's a hacky interim solution
 		next_question = question_generation_agent(self.transform_chat_history(self.get_last_question_chat_history(self.chat_history)), self.fixed_questions[self.current_question_index][0].question, \
-			self.fixed_questions[self.current_question_index][1], self.user_characteristics)
+			self.fixed_questions[self.current_question_index][1], {})
 		end_time = time.time()
 		elapsed_time = end_time - start_time
 		print(f"question_generation_agent time taken: {elapsed_time} seconds")
