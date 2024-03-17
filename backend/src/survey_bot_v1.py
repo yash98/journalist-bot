@@ -33,10 +33,10 @@ class SurveyBotV1(BaseModel):
 		return self
 	
 	def __init__(self, **kwargs):
-		print(kwargs)
+		# print(kwargs)
 		# print type of each key in kwargs
-		for key, value in kwargs.items():
-			print(key, type(value))
+		# for key, value in kwargs.items():
+		# 	print(key, type(value))
 		super().__init__(**kwargs)
 
 	def parallel_objective_met_agent(self):
