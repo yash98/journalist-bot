@@ -1,11 +1,14 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from fastapi import FastAPI, HTTPException, Request, Body
+from pydantic import BaseModel, Field
 from survey_bot_v1 import SurveyBotV1
 from request import Question
 from typing import List, Optional
 from response import HistoryMessage
 import logging
 import uuid
+from fastapi.encoders import jsonable_encoder
+from motor.motor_asyncio import AsyncIOMotorClient
+
 
 MAX_UUID_RETRIES = 10
 
@@ -18,8 +21,18 @@ fixed_questions_store = {}
 app = FastAPI()
 
 class FormRequest(BaseModel):
-	form_id : Optional[uuid.UUID]
+	form_id : str = Field(default_factory=uuid.uuid4, alias="_id")
 	questions : List[Question]
+
+	class Config:
+		allow_population_by_field_name = True
+		schema_extra = {
+			"example": {
+				"id": "00010203-0405-0607-0809-0a0b0c0d0e0f",
+				"questions": []
+			}
+		}
+
 
 class UserRequest(BaseModel):
 	email: str
@@ -30,20 +43,26 @@ class FollowUpResponse(BaseModel):
 	next_question: Optional[str]
 	status: str
 
+@app.on_event("startup")
+async def startup_db_client():
+	app.mongodb_client = AsyncIOMotorClient("localhost:27017")
+	app.mongodb = app.mongodb_client["dynamic-survey"]
+
+
+@app.on_event("shutdown")
+async def shutdown_db_client():
+	app.mongodb_client.close()
+
 @app.post("/store_data/")
-async def store_data(formRequest: FormRequest):
-	key = formRequest.form_id
-	if key is None:
-		key = uuid.uuid4()
-		for _ in range(MAX_UUID_RETRIES):
-			if key not in fixed_questions_store:
-				break
-			key = uuid.uuid4()
-	value = formRequest.questions
+async def store_data(request: Request, formRequest: FormRequest = Body(...)):
+	form_request = jsonable_encoder(formRequest)
+	new_form = await request.app.mongodb["forms"].insert_one(form_request)
+	created_form = await request.app.mongodb["forms"].find_one(
+		{"_id": new_form.inserted_id}
+	)
 	
-	fixed_questions_store[key] = value
-	# print("Current value of dictionary : ", fixed_questions_store)
-	return {"form_id": key}
+	print("value of created form : ", created_form)
+	return {"form_id": created_form["_id"]}
 
 def create_new_survey_bot(email: str, form_id: uuid.UUID):
 	if form_id in fixed_questions_store:

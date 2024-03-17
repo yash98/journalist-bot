@@ -32,7 +32,7 @@ sudo docker run --runtime nvidia --gpus all \
     -p 8000:8000 \
     --ipc=host \
     custom-vllm-image \
-    --model TechxGenus/gemma-7b-it-AWQ
+    --model TechxGenus/gemma-7b-it-GPTQ
 ```
 
 ### Curls
@@ -41,7 +41,7 @@ curl http://localhost:8000/v1/models
 curl http://localhost:8000/v1/chat/completions \
 -H "Content-Type: application/json" \
 -d '{
-"model": "TechxGenus/gemma-7b-it-AWQ",
+"model": "TechxGenus/gemma-7b-it-GPTQ",
 "messages": [
 {"role": "user", "content": "You are a helpful assistant. Who won the world series in 2020?"}
 ]
