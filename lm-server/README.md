@@ -7,6 +7,7 @@ uvicorn run_gemma-7it:app --host 0.0.0.0 --port 8000 --reload
 ```
 
 ## vLLM
+### Setup
 ```sh
 # Add Docker's official GPG key:
 sudo apt-get update
@@ -26,6 +27,10 @@ sudo apt install nvidia-docker2
 git clone https://github.com/yash98/vllm.git
 cd vllm
 sudo docker build -t custom-vllm-image .
+```
+
+### Startup
+```sh
 sudo docker run --runtime nvidia --gpus all \
     -v ~/.cache/huggingface:/root/.cache/huggingface \
     --env "HUGGING_FACE_HUB_TOKEN=$HF_AUTH" \

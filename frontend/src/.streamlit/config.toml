@@ -2,3 +2,5 @@
 port = 8501
 [browser]
 gatherUsageStats = false
+[app]
+google_auth_client_id=
