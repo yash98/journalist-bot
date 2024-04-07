@@ -40,6 +40,15 @@ sudo docker run --runtime nvidia --gpus all \
     --model TechxGenus/gemma-7b-it-GPTQ
 ```
 
+### Restart
+```sh
+sudo docker ps -a
+# See the id to start, replace it in the next command
+sudo docker start 15856cb7c3e7
+# Attach shell to 
+sudo docker exec -it 15856cb7c3e7 /bin/bash
+```
+
 ### Curls
 ```
 curl http://localhost:8000/v1/models

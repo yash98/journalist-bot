@@ -15,7 +15,6 @@ def main():
     REDIRECT_URI = app_config["oauth"]["REDIRECT_URI"]
     SCOPE = app_config["oauth"]["SCOPE"]
     
-
     oauth2 = OAuth2Component(CLIENT_ID, CLIENT_SECRET, AUTHORIZE_URL, TOKEN_URL, REFRESH_TOKEN_URL, REVOKE_TOKEN_URL)
 
     # Check if token exists in session state

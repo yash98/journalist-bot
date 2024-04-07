@@ -10,11 +10,8 @@ from fastapi.encoders import jsonable_encoder
 from motor.motor_asyncio import AsyncIOMotorClient
 from google.oauth2 import id_token
 from google.auth.transport import requests
-
-from config_loader import app_config
-
-test_config = app_config["test"]["test_key"]
-
+from constants import *
+from config_loader import *
 
 app = FastAPI()
 
@@ -32,7 +29,8 @@ async def shutdown_db_client():
 async def store_data(request: Request, formRequest: FormRequest = Body(...)):
 	# get header from the request
 	authorization_token = request.headers.get(AUTH_HEADER_KEY)
-	idinfo = id_token.verify_oauth2_token(authorization_token, requests.Request(), CLIENT_ID)
+	idinfo = id_token.verify_oauth2_token(authorization_token, requests.Request(), GOOGLE_OATH_CLIENT_ID)
+	print("idinfo: ", idinfo)
 
 	created_form = None
 	if formRequest.form_id is not None:

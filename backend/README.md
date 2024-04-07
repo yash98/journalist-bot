@@ -21,6 +21,15 @@ db.forms.drop()
 db.survey_bot.drop()
 ```
 
+### Restart mongo
+```sh
+sudo docker ps -a
+# See the id to start, replace it in the next command
+sudo docker start d23830e457a3
+# Attach shell to 
+sudo docker exec -it d23830e457a3 /bin/bash
+```
+
 ## Export keys in the environment
 
 ```sh
