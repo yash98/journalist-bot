@@ -19,7 +19,7 @@ def main():
         if result and SESSION_TOKEN_KEY in result:
             st.session_state[SESSION_OATH_KEY] = result
             st.session_state[SESSION_TOKEN_KEY] = result.get(SESSION_TOKEN_KEY)
-            id_info = None
+            print("result: ", result)
             try:
                 id_info = id_token.verify_oauth2_token(result[SESSION_ID_TOKEN_KEY], requests.Request(), GOOGLE_OATH_CLIENT_ID)
                 st.session_state[SESSION_USER_INFO_KEY] = id_info
@@ -27,8 +27,6 @@ def main():
             except Exception as e:
                 st.error(f"Auth error: {e}")
                 logging.exception("Failed with authenticating id token: " + str(e))
-            # print("id_info: ", id_info)
-            email = id_info["email"]
             st.rerun()
     else:
         refresh_token_if_needed()
