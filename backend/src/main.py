@@ -61,10 +61,10 @@ async def store_data(request: Request, formRequest: FormRequest = Body(...)):
 			{"_id": email}
 		)
 		if created_user is None:
-			users_model = UserModel(_id=email, created_surveys=[str(new_form.inserted_id)])
+			users_model = UserModel(_id=email, created_surveys=[new_form.inserted_id])
 			await request.app.mongodb["users"].insert_one(jsonable_encoder(users_model))
 		else:
-			created_user["created_surveys"].append(str(new_form.inserted_id))
+			created_user["created_surveys"].append(new_form.inserted_id)
 			await request.app.mongodb["users"].update_one(
 				{"_id": email}, {"$set": jsonable_encoder(created_user)}
 			)
@@ -173,10 +173,10 @@ async def get_history(form_id: uuid.UUID, request: Request) -> List[HistoryMessa
 				{"_id": email}
 			)
 		if created_user is None:
-			users_model = UserModel(_id=email, filled_surveys=[str(form_id)])
+			users_model = UserModel(_id=email, filled_surveys=[form_id])
 			await request.app.mongodb["users"].insert_one(jsonable_encoder(users_model))
 		else:
-			created_user["created_surveys"].append(str(form_id))
+			created_user["created_surveys"].append(form_id)
 			await request.app.mongodb["users"].update_one(
 				{"_id": email}, {"$set": jsonable_encoder(created_user)}
 			)
