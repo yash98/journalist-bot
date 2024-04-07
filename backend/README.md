@@ -20,3 +20,10 @@ db.createCollection("survey_bot")
 db.forms.drop()
 db.survey_bot.drop()
 ```
+
+## Export keys in the environment
+
+```sh
+export GOOGLE_OATH_CLIENT_ID="YOUR_GOOGLE_OATH_CLIENT_ID"
+export GOOGLE_OATH_CLIENT_SECRET="YOUR_GOOGLE_OATH_CLIENT_SECRET"
+```

@@ -18,8 +18,6 @@ test_config = app_config["test"]["test_key"]
 
 app = FastAPI()
 
-AUTH_HEADER_KEY="Authorization"
-
 @app.on_event("startup")
 async def startup_db_client():
 	app.mongodb_client = AsyncIOMotorClient("localhost:27017",uuidRepresentation="standard")
