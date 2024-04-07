@@ -9,6 +9,10 @@ import uuid
 from fastapi.encoders import jsonable_encoder
 from motor.motor_asyncio import AsyncIOMotorClient
 
+from config_loader import app_config
+
+test_config = app_config["test"]["test_key"]
+
 app = FastAPI()
 
 @app.on_event("startup")
