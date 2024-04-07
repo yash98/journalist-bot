@@ -32,7 +32,9 @@ async def shutdown_db_client():
 
 @app.post("/store_data/")
 async def store_data(request: Request, formRequest: FormRequest = Body(...)):
-	idinfo = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
+	# get header from the request
+	authorization_token = request.headers.get(AUTH_HEADER_KEY)
+	idinfo = id_token.verify_oauth2_token(authorization_token, requests.Request(), CLIENT_ID)
 
 	created_form = None
 	if formRequest.form_id is not None:
