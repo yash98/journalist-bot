@@ -1,0 +1,3 @@
+AUTH_HEADER_KEY="Authorization"
+SESSION_TOKEN_KEY="token"
+SESSION_ID_TOKEN_KEY="id_token"

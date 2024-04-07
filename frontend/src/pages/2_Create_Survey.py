@@ -1,5 +1,6 @@
 import streamlit as st
 import requests
+from ..constants import *
 
 BACKEND_URL = "http://localhost:8080"
 
@@ -10,8 +11,6 @@ OBJECTIVE_KEY = "objective"
 FOLLOWUP_DEPTH_KEY = "followup_depth"
 
 FORM_ID_REPONSE_KEY = "form_id"
-
-AUTH_HEADER_KEY="Authorization"
 
 def add_empty_question():
     st.session_state[USER_INPUT_KEY].append({QUESTION_KEY: "", OBJECTIVE_KEY: [""], FOLLOWUP_DEPTH_KEY: 0})
@@ -78,9 +77,8 @@ def make_submit_survey_call():
     }
 
     headers = {}
-
-    if "token" in st.session_state and "id_token" in st.session_state["token"]:
-        headers[AUTH_HEADER_KEY] = st.session_state["token"]["id_token"]
+    if SESSION_TOKEN_KEY in st.session_state and SESSION_ID_TOKEN_KEY in st.session_state[SESSION_TOKEN_KEY]:
+        headers[AUTH_HEADER_KEY] = st.session_state[SESSION_TOKEN_KEY][SESSION_ID_TOKEN_KEY]
 
     print(data)
     response = requests.post(BACKEND_URL+"/store_data/", json=data, headers=headers)

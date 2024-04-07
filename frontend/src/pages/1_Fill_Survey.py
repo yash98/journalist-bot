@@ -1,5 +1,6 @@
 import streamlit as st
 import requests
+from ..constants import *
 # import streamlit_debug
 # streamlit_debug.set(flag=True, wait_for_client=True, host='localhost', port=8765)
 
@@ -13,7 +14,6 @@ def state_values_exists_eq(key, value):
 def fill_survery():
     st.title("Fill Survey")
     if not state_values_exists_eq("survey_started", True):
-        st.session_state.email = st.text_input("Enter your email:")
         st.session_state.form_id = st.text_input("Enter form id:")
 
     if state_values_exists_eq("survey_started", True):
@@ -24,7 +24,11 @@ def fill_survery():
             chat()
 
 def generate_bot_response(prompt_input):
-    response = requests.post(backend_url+"/user/get_next_question", json={"email": st.session_state.email, "form_id": st.session_state.form_id, "user_answer": prompt_input})
+    headers = {}
+    if SESSION_TOKEN_KEY in st.session_state and SESSION_ID_TOKEN_KEY in st.session_state[SESSION_TOKEN_KEY]:
+        headers[AUTH_HEADER_KEY] = st.session_state[SESSION_TOKEN_KEY][SESSION_ID_TOKEN_KEY]
+    response = requests.post(backend_url+"/user/get_next_question", json={\
+                            "form_id": st.session_state.form_id, "user_answer": prompt_input}, headers=headers)
     if response.status_code == 200:
         return response.json()
     else:
@@ -33,7 +37,12 @@ def generate_bot_response(prompt_input):
         return None
 
 def get_chat_history():
-    response = requests.get(backend_url+"/user/get_history?email="+st.session_state.email+"&form_id="+str(st.session_state.form_id))
+    headers = {}
+    if SESSION_TOKEN_KEY in st.session_state and SESSION_ID_TOKEN_KEY in st.session_state[SESSION_TOKEN_KEY]:
+        headers[AUTH_HEADER_KEY] = st.session_state[SESSION_TOKEN_KEY][SESSION_ID_TOKEN_KEY]
+    response = requests.get(\
+        backend_url+"/user/get_history?"+"form_id="+str(st.session_state.form_id), \
+            headers=headers)
     if response.status_code == 200:
         return response.json()
     else:

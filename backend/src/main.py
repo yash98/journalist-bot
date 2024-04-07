@@ -27,10 +27,15 @@ async def shutdown_db_client():
 
 @app.post("/store_data/")
 async def store_data(request: Request, formRequest: FormRequest = Body(...)):
-	# get header from the request
 	authorization_token = request.headers.get(AUTH_HEADER_KEY)
-	idinfo = id_token.verify_oauth2_token(authorization_token, requests.Request(), GOOGLE_OATH_CLIENT_ID)
-	print("idinfo: ", idinfo)
+	id_info = None
+	try:
+		id_info = id_token.verify_oauth2_token(authorization_token, requests.Request(), GOOGLE_OATH_CLIENT_ID)
+	except Exception as e:
+		logging.exception("Failed with auth error: " + str(e))
+		raise HTTPException(status_code=401, detail="Invalid token")
+	# print("id_info: ", id_info)
+	email = id_info["email"]
 
 	created_form = None
 	if formRequest.form_id is not None:
@@ -72,9 +77,18 @@ async def create_new_survey_bot(email: str, form_id: uuid.UUID, mongodb):
 
 @app.post("/user/get_next_question")
 async def generate_follow_up(userRequest: UserRequest, request: Request):
+	authorization_token = request.headers.get(AUTH_HEADER_KEY)
+	id_info = None
+	try:
+		id_info = id_token.verify_oauth2_token(authorization_token, requests.Request(), GOOGLE_OATH_CLIENT_ID)
+	except Exception as e:
+		logging.exception("Failed with auth error: " + str(e))
+		raise HTTPException(status_code=401, detail="Invalid token")
+	# print("id_info: ", id_info)
+	email = id_info["email"]
+
 	try:
 		user_answer = userRequest.user_answer
-		email = userRequest.email
 		form_id = userRequest.form_id
 		hash_id = get_hash(email, form_id)
 		print("hash_id: ", hash_id)
@@ -116,7 +130,17 @@ async def clear_history(email: str, form_id: uuid.UUID, request: Request):
 
 # Get API takes email and form_id as input and returns the survey_bot object from the survey_store
 @app.get("/user/get_history")
-async def get_history(email: str, form_id: uuid.UUID, request: Request) -> List[HistoryMessage]:
+async def get_history(form_id: uuid.UUID, request: Request) -> List[HistoryMessage]:
+	authorization_token = request.headers.get(AUTH_HEADER_KEY)
+	id_info = None
+	try:
+		id_info = id_token.verify_oauth2_token(authorization_token, requests.Request(), GOOGLE_OATH_CLIENT_ID)
+	except Exception as e:
+		logging.exception("Failed with auth error: " + str(e))
+		raise HTTPException(status_code=401, detail="Invalid token")
+	# print("id_info: ", id_info)
+	email = id_info["email"]
+
 	hash_id = get_hash(email, form_id)
 	print("hash_id: ", hash_id)
 	try:
