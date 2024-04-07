@@ -1,6 +1,6 @@
 import streamlit as st
 import requests
-from ..constants import *
+from constants import *
 # import streamlit_debug
 # streamlit_debug.set(flag=True, wait_for_client=True, host='localhost', port=8765)
 

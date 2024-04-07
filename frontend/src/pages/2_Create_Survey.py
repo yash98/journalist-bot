@@ -1,6 +1,6 @@
 import streamlit as st
 import requests
-from ..constants import *
+from constants import *
 
 BACKEND_URL = "http://localhost:8080"
 
