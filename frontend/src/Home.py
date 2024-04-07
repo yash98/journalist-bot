@@ -17,11 +17,11 @@ def main():
     if SESSION_TOKEN_KEY not in st.session_state:
         result = OATH2.authorize_button("Login with Google", REDIRECT_URI, SCOPE)
         if result and SESSION_TOKEN_KEY in result:
-            st.session_state[SESSION_OATH_KEY] = result
             st.session_state[SESSION_TOKEN_KEY] = result.get(SESSION_TOKEN_KEY)
             print("result: ", result)
             try:
-                id_info = id_token.verify_oauth2_token(result[SESSION_ID_TOKEN_KEY], requests.Request(), GOOGLE_OATH_CLIENT_ID)
+                id_info = id_token.verify_oauth2_token(st.session_state[SESSION_TOKEN_KEY][SESSION_ID_TOKEN_KEY], \
+                                                       requests.Request(), GOOGLE_OATH_CLIENT_ID)
                 st.session_state[SESSION_USER_INFO_KEY] = id_info
                 st.session_state[SESSION_USER_NAME_KEY] = id_info["name"]
             except Exception as e:
