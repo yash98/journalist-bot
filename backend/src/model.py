@@ -113,8 +113,8 @@ class FormModel(BaseModel):
 		
 class UserModel(BaseModel):
 	email : str =  Field(alias="_id")
-	filled_surveys : List[uuid.uuid4] = Field(default_factory=list)
-	created_surveys : List[uuid.uuid4] = Field(default_factory=list)
+	filled_surveys : List[uuid.UUID] = Field(default_factory=list)
+	created_surveys : List[uuid.UUID] = Field(default_factory=list)
 
 	class Config:
 		populate_by_name = True
