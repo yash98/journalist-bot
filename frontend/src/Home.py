@@ -14,7 +14,6 @@ def main():
     if SESSION_TOKEN_KEY not in st.session_state:
         # If not, show authorize button
         result = OATH2.authorize_button("Login with Google", REDIRECT_URI, SCOPE)
-        print("result", result)
         if result and SESSION_TOKEN_KEY in result:
             # If authorization successful, save token in session state
             st.session_state[SESSION_TOKEN_KEY] = result.get(SESSION_TOKEN_KEY)
@@ -22,13 +21,11 @@ def main():
     else:
         # If token exists in session state, show the token
         token = st.session_state[SESSION_TOKEN_KEY]
-        st.json(token)
         # "expires_at":1712421356 < time in milliseconds
-        if token["expires_at"] < math.ceil(time.time()):
+        if token["expires_at"] <= math.floor(time.time()):
             # If refresh token button is clicked, refresh the token
             token = OATH2.refresh_token(token)
             st.session_state[SESSION_TOKEN_KEY] = token
-            st.rerun()
         if st.button("Logout"):
             OATH2.revoke_token(st.session_state[SESSION_TOKEN_KEY][SESSION_ID_TOKEN_KEY], SESSION_ID_TOKEN_KEY)
             OATH2.revoke_token(st.session_state[SESSION_TOKEN_KEY][SESSION_ACCESS_TOKEN_KEY], SESSION_ACCESS_TOKEN_KEY)
