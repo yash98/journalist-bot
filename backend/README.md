@@ -17,8 +17,10 @@ mongosh
 use dynamic-survey
 db.createCollection("forms")
 db.createCollection("survey_bot")
+db.createCollection("user")
 db.forms.drop()
 db.survey_bot.drop()
+db.user.drop()
 ```
 
 ### Restart mongo

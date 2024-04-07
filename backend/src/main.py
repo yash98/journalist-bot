@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException, Request, Body
 from survey_bot_v1 import SurveyBotV1
 from request import FormRequest, UserRequest
-from model import FormModel, SurveyBotV1Model
+from model import *
 from typing import List
 from response import HistoryMessage, FollowUpResponse
 import logging
@@ -56,7 +56,19 @@ async def store_data(request: Request, formRequest: FormRequest = Body(...)):
 		created_form = await request.app.mongodb["forms"].find_one(
 			{"_id": new_form.inserted_id}
 		)
-	
+
+		created_user = await request.app.mongodb["users"].find_one(
+			{"_id": email}
+		)
+		if created_user is None:
+			users_model = UserModel(_id=email, created_surveys=[str(new_form.inserted_id)])
+			await request.app.mongodb["users"].insert_one(jsonable_encoder(users_model))
+		else:
+			created_user["created_surveys"].append(str(new_form.inserted_id))
+			await request.app.mongodb["users"].update_one(
+				{"_id": email}, {"$set": jsonable_encoder(created_user)}
+			)
+
 	return {"form_id": created_form["_id"]}
 
 # Function to return Hash of form_id and email
@@ -148,15 +160,28 @@ async def get_history(form_id: uuid.UUID, request: Request) -> List[HistoryMessa
 			{"_id": hash_id}
 		)
 		print("survey_bot_model: ", survey_bot_model)
+		survey_bot = None
 		if survey_bot_model is not None:
 			survey_bot = SurveyBotV1(**survey_bot_model["SurveyBotV1"])
-			return survey_bot.get_chat_history()
 		else:
 			survey_bot = await create_new_survey_bot(email, form_id, request.app.mongodb)
-			if survey_bot:
-				return survey_bot.get_chat_history()
-			else:
-				raise HTTPException(status_code=404, detail="Survey bot for Email, Form ID pair not found")
+		
+		if not survey_bot:
+			raise HTTPException(status_code=404, detail="Survey bot for Email, Form ID pair not found")
+			
+		created_user = await request.app.mongodb["users"].find_one(
+				{"_id": email}
+			)
+		if created_user is None:
+			users_model = UserModel(_id=email, filled_surveys=[str(form_id)])
+			await request.app.mongodb["users"].insert_one(jsonable_encoder(users_model))
+		else:
+			created_user["created_surveys"].append(str(form_id))
+			await request.app.mongodb["users"].update_one(
+				{"_id": email}, {"$set": jsonable_encoder(created_user)}
+			)
+		
+		return survey_bot.get_chat_history()
 	except Exception as e:
 		logging.exception("/user/get_history failed email: " + email + " form_id: " + str(form_id) + " error: " + str(e))
 		raise HTTPException(status_code=500, detail=str(e))
