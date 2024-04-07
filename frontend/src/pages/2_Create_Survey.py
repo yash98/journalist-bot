@@ -83,7 +83,7 @@ def make_submit_survey_call():
         headers[AUTH_HEADER_KEY] = st.session_state["token"]["access_token"]
 
     print(data)
-    response = requests.post(BACKEND_URL+"/store_data/", json=data)
+    response = requests.post(BACKEND_URL+"/store_data/", json=data, headers=headers)
     return response
 
 def survey_creator():
