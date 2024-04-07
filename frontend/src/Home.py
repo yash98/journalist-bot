@@ -2,6 +2,8 @@ import streamlit as st
 from config_loader import app_config
 from streamlit_oauth import OAuth2Component
 import os
+import time
+import math
 
 def main():
     st.title("Dynamic Survey")
@@ -29,7 +31,8 @@ def main():
         # If token exists in session state, show the token
         token = st.session_state['token']
         st.json(token)
-        if st.button("Refresh Token"):
+        # "expires_at":1712421356 < time in milliseconds
+        if token["expires_at"] < math.ceil(time.time()):
             # If refresh token button is clicked, refresh the token
             token = oauth2.refresh_token(token)
             st.session_state.token = token

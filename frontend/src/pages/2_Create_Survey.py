@@ -11,6 +11,8 @@ FOLLOWUP_DEPTH_KEY = "followup_depth"
 
 FORM_ID_REPONSE_KEY = "form_id"
 
+AUTH_HEADER_KEY="Authorization"
+
 def add_empty_question():
     st.session_state[USER_INPUT_KEY].append({QUESTION_KEY: "", OBJECTIVE_KEY: [""], FOLLOWUP_DEPTH_KEY: 0})
 
@@ -74,6 +76,12 @@ def make_submit_survey_call():
         "form_id": None,
         "questions": questions_list
     }
+
+    headers = {}
+
+    if "token" in st.session_state and "access_token" in st.session_state["token"]:
+        headers[AUTH_HEADER_KEY] = st.session_state["token"]["access_token"]
+
     print(data)
     response = requests.post(BACKEND_URL+"/store_data/", json=data)
     return response
