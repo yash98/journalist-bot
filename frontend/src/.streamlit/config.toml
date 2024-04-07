@@ -1,6 +1,5 @@
 [server]
 port = 8501
+headless = true
 [browser]
 gatherUsageStats = false
-[app]
-google_auth_client_id=

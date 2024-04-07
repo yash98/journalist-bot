@@ -1,18 +1,39 @@
 import streamlit as st
+from config_loader import app_config
+from streamlit_oauth import OAuth2Component
 
 def main():
     st.title("Dynamic Survey")
 
-    if st.button("Sign in with Google"):
-        # Redirect the user to the Google Sign-In page
-        auth_url = "https://accounts.google.com/o/oauth2/auth"
-        client_id = "1040282229654-ir49kts7gk23gin6s07ksee96cb8crga.apps.googleusercontent.com"  # Replace with your actual client ID
-        redirect_uri = "http://localhost:8501/"  # Replace with your redirect URI
-        # scope = "openid"  # Replace with the desired scopes
-        # state = "state123"  # Replace with a unique state value
-        # auth_endpoint = f"{auth_url}?response_type=code&client_id={client_id}&redirect_uri={redirect_uri}&scope={scope}&state={state}"
-        auth_endpoint = f"{auth_url}?response_type=code&client_id={client_id}&redirect_uri={redirect_uri}"
-        st.markdown(f'<a href="{auth_endpoint}">Click here to sign in with Google</a>', unsafe_allow_html=True)
+    AUTHORIZE_URL = app_config["oauth"]["AUTHORIZE_URL"]
+    TOKEN_URL = app_config["oauth"]["TOKEN_URL"]
+    REFRESH_TOKEN_URL = app_config["oauth"]["REFRESH_TOKEN_URL"]
+    REVOKE_TOKEN_URL = app_config["oauth"]["REVOKE_TOKEN_URL"]
+    CLIENT_ID = app_config["oauth"]["CLIENT_ID"]
+    CLIENT_SECRET = app_config["oauth"]["CLIENT_SECRET"]
+    REDIRECT_URI = app_config["oauth"]["REDIRECT_URI"]
+    SCOPE = app_config["oauth"]["SCOPE"]
+    
+
+    oauth2 = OAuth2Component(CLIENT_ID, CLIENT_SECRET, AUTHORIZE_URL, TOKEN_URL, REFRESH_TOKEN_URL, REVOKE_TOKEN_URL)
+
+    # Check if token exists in session state
+    if 'token' not in st.session_state:
+        # If not, show authorize button
+        result = oauth2.authorize_button("Login with Google", REDIRECT_URI, SCOPE)
+        if result and 'token' in result:
+            # If authorization successful, save token in session state
+            st.session_state.token = result.get('token')
+            st.rerun()
+    else:
+        # If token exists in session state, show the token
+        token = st.session_state['token']
+        st.json(token)
+        if st.button("Refresh Token"):
+            # If refresh token button is clicked, refresh the token
+            token = oauth2.refresh_token(token)
+            st.session_state.token = token
+            st.rerun()
 
 if __name__ == "__main__":
     main()

@@ -8,12 +8,17 @@ import logging
 import uuid
 from fastapi.encoders import jsonable_encoder
 from motor.motor_asyncio import AsyncIOMotorClient
+from google.oauth2 import id_token
+from google.auth.transport import requests
 
 from config_loader import app_config
 
 test_config = app_config["test"]["test_key"]
 
+
 app = FastAPI()
+
+AUTH_HEADER_KEY="Authorization"
 
 @app.on_event("startup")
 async def startup_db_client():
@@ -27,6 +32,8 @@ async def shutdown_db_client():
 
 @app.post("/store_data/")
 async def store_data(request: Request, formRequest: FormRequest = Body(...)):
+	idinfo = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
+
 	created_form = None
 	if formRequest.form_id is not None:
 		created_form = await request.app.mongodb["forms"].find_one(
