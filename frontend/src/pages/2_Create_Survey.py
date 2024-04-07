@@ -79,8 +79,8 @@ def make_submit_survey_call():
 
     headers = {}
 
-    if "token" in st.session_state and "access_token" in st.session_state["token"]:
-        headers[AUTH_HEADER_KEY] = st.session_state["token"]["access_token"]
+    if "token" in st.session_state and "id_token" in st.session_state["token"]:
+        headers[AUTH_HEADER_KEY] = st.session_state["token"]["id_token"]
 
     print(data)
     response = requests.post(BACKEND_URL+"/store_data/", json=data, headers=headers)
