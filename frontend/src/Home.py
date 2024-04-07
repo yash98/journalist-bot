@@ -1,41 +1,40 @@
 import streamlit as st
-from config_loader import app_config
-from streamlit_oauth import OAuth2Component
+from constants import *
+from utils import *
 import os
 import time
 import math
 
 def main():
-    st.title("Dynamic Survey")
-
-    AUTHORIZE_URL = app_config["oauth"]["AUTHORIZE_URL"]
-    TOKEN_URL = app_config["oauth"]["TOKEN_URL"]
-    REFRESH_TOKEN_URL = app_config["oauth"]["REFRESH_TOKEN_URL"]
-    REVOKE_TOKEN_URL = app_config["oauth"]["REVOKE_TOKEN_URL"]
-    CLIENT_ID = os.getenv("GOOGLE_OATH_CLIENT_ID")
-    CLIENT_SECRET = os.getenv("GOOGLE_OATH_CLIENT_SECRET")
-    REDIRECT_URI = app_config["oauth"]["REDIRECT_URI"]
-    SCOPE = app_config["oauth"]["SCOPE"]
-    
-    oauth2 = OAuth2Component(CLIENT_ID, CLIENT_SECRET, AUTHORIZE_URL, TOKEN_URL, REFRESH_TOKEN_URL, REVOKE_TOKEN_URL)
+    if SESSION_USER_NAME_KEY in st.session_state and SESSION_TOKEN_KEY in st.session_state:
+        st.title(f"Welcome {st.session_state[SESSION_USER_NAME_KEY]}")
+    else:
+        st.title("Dynamic Survey")
 
     # Check if token exists in session state
-    if 'token' not in st.session_state:
+    if SESSION_TOKEN_KEY not in st.session_state:
         # If not, show authorize button
-        result = oauth2.authorize_button("Login with Google", REDIRECT_URI, SCOPE)
-        if result and 'token' in result:
+        result = OATH2.authorize_button("Login with Google", REDIRECT_URI, SCOPE)
+        print("result", result)
+        if result and SESSION_TOKEN_KEY in result:
             # If authorization successful, save token in session state
-            st.session_state.token = result.get('token')
+            st.session_state[SESSION_TOKEN_KEY] = result.get(SESSION_TOKEN_KEY)
             st.rerun()
     else:
         # If token exists in session state, show the token
-        token = st.session_state['token']
+        token = st.session_state[SESSION_TOKEN_KEY]
         st.json(token)
         # "expires_at":1712421356 < time in milliseconds
         if token["expires_at"] < math.ceil(time.time()):
             # If refresh token button is clicked, refresh the token
-            token = oauth2.refresh_token(token)
-            st.session_state.token = token
+            token = OATH2.refresh_token(token)
+            st.session_state[SESSION_TOKEN_KEY] = token
+            st.rerun()
+        if st.button("Logout"):
+            OATH2.revoke_token(st.session_state[SESSION_TOKEN_KEY][SESSION_ID_TOKEN_KEY], SESSION_ID_TOKEN_KEY)
+            OATH2.revoke_token(st.session_state[SESSION_TOKEN_KEY][SESSION_ACCESS_TOKEN_KEY], SESSION_ACCESS_TOKEN_KEY)
+            del st.session_state[SESSION_TOKEN_KEY]
+            del st.session_state[SESSION_USER_NAME_KEY]
             st.rerun()
 
 if __name__ == "__main__":
