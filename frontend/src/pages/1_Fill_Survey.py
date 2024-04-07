@@ -1,8 +1,7 @@
 import streamlit as st
 import requests
 from constants import *
-# import streamlit_debug
-# streamlit_debug.set(flag=True, wait_for_client=True, host='localhost', port=8765)
+from utils import *
 
 backend_url = "http://127.0.0.1:8080"
 
@@ -12,6 +11,7 @@ def state_values_exists_eq(key, value):
     return key in st.session_state and st.session_state[key] == value
 
 def fill_survery():
+    refresh_token_if_needed()
     st.title("Fill Survey")
     if not state_values_exists_eq("survey_started", True):
         st.session_state.form_id = st.text_input("Enter form id:")
