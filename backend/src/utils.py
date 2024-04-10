@@ -1,6 +1,9 @@
 import requests
 import traceback
 from config_loader import app_config
+import os
+
+LLM_AUTHORIZATION_KEY=os.getenv("LLM_AUTHORIZATION_KEY")
 
 def generate_response(prompt, temperature, max_tokens):
     message_data = {
@@ -14,10 +17,17 @@ def generate_response(prompt, temperature, max_tokens):
 
     try:
         # Request for chat completions
+        headers = {"Content-Type": "application/json"}
+        if LLM_AUTHORIZATION_KEY and app_config["llm-server"]["chatgpt_hosting_service"]:
+            if app_config["llm-server"]["chatgpt_hosting_service"] == "openai":
+                headers["Authorization"] = f"Bearer {LLM_AUTHORIZATION_KEY}"
+            elif app_config["llm-server"]["chatgpt_hosting_service"] == "azure":
+                headers["api-key"] = f"{LLM_AUTHORIZATION_KEY}"
+
         completions_response = requests.post(
             app_config["llm-server"]["url"]+app_config["llm-server"]["endpoint"],
             json=message_data,
-            headers={"Content-Type": "application/json"}
+            headers=headers
         )
         # {'id': 'cmpl-8e05afc0c9704f4eaffd586d311d255f',
         # 'object': 'chat.completion',
