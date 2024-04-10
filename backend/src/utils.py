@@ -7,13 +7,15 @@ LLM_AUTHORIZATION_KEY=os.getenv("LLM_AUTHORIZATION_KEY")
 
 def generate_response(prompt, temperature, max_tokens):
     message_data = {
-        "model": app_config["llm-server"]["model"],
         "messages": [
             {"role": "user", "content": prompt}
         ],
         "temperature": temperature,
         "max_tokens": max_tokens
     }
+
+    if app_config["llm-server"]["model"]:
+        message_data["model"] = app_config["llm-server"]["model"]
 
     try:
         # Request for chat completions
