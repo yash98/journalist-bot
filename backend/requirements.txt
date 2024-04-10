@@ -2,3 +2,5 @@ fastapi==0.110.0
 requests==2.31.0
 uvicorn==0.27.1
 motor==3.3.2
+toml==0.10.2
+google-auth==2.29.0

@@ -15,6 +15,5 @@ class FormRequest(BaseModel):
 	questions : List[Question]
 
 class UserRequest(BaseModel):
-	email: str
 	form_id: uuid.UUID
 	user_answer: str

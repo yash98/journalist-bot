@@ -110,3 +110,18 @@ class FormModel(BaseModel):
 			]
 			}
 		}
+		
+class UserModel(BaseModel):
+	email : str =  Field(alias="_id")
+	filled_surveys : List[uuid.UUID] = Field(default_factory=list)
+	created_surveys : List[uuid.UUID] = Field(default_factory=list)
+
+	class Config:
+		populate_by_name = True
+		json_schema_extra = {
+			"example": {
+				"email": "abc@gmail.com",
+				"filled_surveys": ["00010203-0405-0607-0809-0a0b0c0d0e0f", "510aeb2b-59af-4716-bbea-6198a423ea92"],
+				"created_surveys": ["00010203-0405-0607-0809-0a0b0c0d0e0f"]
+            }
+		}
