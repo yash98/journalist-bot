@@ -1,47 +1,7 @@
-import requests
 import re
-import traceback
 
-completions_url = "http://localhost:8000/v1/chat/completions"
 THRESH = 0.8
 
-def generate_response(prompt, temperature, max_tokens):
-    message_data = {
-        "model": "TechxGenus/gemma-7b-it-GPTQ",
-        "messages": [
-            {"role": "user", "content": prompt}
-        ],
-        "temperature": temperature,
-        "max_tokens": max_tokens
-    }
-
-    try:
-        # Request for chat completions
-        completions_response = requests.post(
-            completions_url,
-            json=message_data,
-            headers={"Content-Type": "application/json"}
-        )
-        # {'id': 'cmpl-8e05afc0c9704f4eaffd586d311d255f',
-        # 'object': 'chat.completion',
-        # 'created': 163914,
-        # 'model': 'TechxGenus/gemma-7b-it-GPTQ',
-        # 'choices': [{'index': 0,
-        # 'message': {'role': 'assistant',
-        #     'content': "Hi! 👋\n\nIt's nice to hear from you. What would you like to talk about today?"},
-        # 'logprobs': None,
-        # 'finish_reason': 'stop'}],
-        # 'usage': {'prompt_tokens': 10, 'total_tokens': 33, 'completion_tokens': 23}}
-    except Exception as e:
-        print(f"Error: {e}")
-        traceback.print_exc()
-        return ""
-
-    if completions_response.status_code != 200:
-        print(f"Error: {completions_response.status_code}, {completions_response.text}")
-        return ""
-
-    return completions_response.json()["choices"][0]["message"]["content"]
 
 prompt_template = \
     """
@@ -61,12 +21,12 @@ Otherwise answer a rating in between 0.0 to 1.0 if the conversation partially fu
 Just give the Rating between 0.0 to 1.0. Do not say anything else.
     """
 
-def objective_met_agent(chat_history, main_question, objectives_left):
+def objective_met_agent(call_llm_fn, chat_history, main_question, objectives_left):
 
     # fetch response from llm
     prompt = prompt_template.format(chat_history=chat_history, main_question=main_question, objectives_left=objectives_left)
     # print("***"+prompt+"***")
-    response = generate_response(prompt, temperature=0, max_tokens=4)
+    response = call_llm_fn(prompt, temperature=0, max_tokens=4)
     print(response)
     parsed_response = find_occurrences(response)
     print(parsed_response)

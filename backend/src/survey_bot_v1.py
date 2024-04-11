@@ -6,6 +6,8 @@ from request import Question
 from response import HistoryMessage
 import time
 
+from utils import generate_response as call_llm_fn
+
 import concurrent.futures
 
 PARALLEL_WORKERS = 4
@@ -43,7 +45,7 @@ class SurveyBotV1(BaseModel):
 		start_time = time.time()
 		last_question_chat_history = self.transform_chat_history(self.get_last_question_chat_history(self.chat_history))
 		futures = [parallel_objective_met_agent_executor.submit(objective_met_agent, \
-			last_question_chat_history, self.fixed_questions[self.current_question_index][0].question, criteria) \
+			call_llm_fn, last_question_chat_history, self.fixed_questions[self.current_question_index][0].question, criteria) \
 			for criteria in self.fixed_questions[self.current_question_index][1]]
 		results = [future.result() for future in concurrent.futures.as_completed(futures)]
 		objective_left_list = [criteria for criteria, result in zip(self.fixed_questions[self.current_question_index][1], results) if not result]
@@ -105,7 +107,7 @@ class SurveyBotV1(BaseModel):
 		self.current_question_followup_depth += 1
 		start_time = time.time()
 		# TODO user characteristic is not used and tested, so just passing empty dict. It's a hacky interim solution
-		next_question = question_generation_agent(self.transform_chat_history(self.get_last_question_chat_history(self.chat_history)), self.fixed_questions[self.current_question_index][0].question, \
+		next_question = question_generation_agent(call_llm_fn, self.transform_chat_history(self.get_last_question_chat_history(self.chat_history)), self.fixed_questions[self.current_question_index][0].question, \
 			self.fixed_questions[self.current_question_index][1], {})
 		end_time = time.time()
 		elapsed_time = end_time - start_time

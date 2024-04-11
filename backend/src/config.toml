@@ -1,2 +1,5 @@
-[test]
-test_key = "abc"
+[llm-server]
+url="http://localhost:8000"
+endpoint="/v1/chat/completions"
+model="TechxGenus/gemma-7b-it-GPTQ"
+chatgpt_hosting_service=

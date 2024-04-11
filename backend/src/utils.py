@@ -1,22 +1,56 @@
 import requests
+import traceback
+from config_loader import app_config
+import os
 
-api_url = "http://127.0.0.1:8080/generate-response"
+LLM_AUTHORIZATION_KEY=os.getenv("LLM_AUTHORIZATION_KEY")
 
-def generate_response(prompt, max_new_tokens=200):    
-    # Prepare the request payload
-    prompt_data = {"prompt": prompt, "max_new_tokens" : max_new_tokens}
-    
-    # Send the POST request
-    response = requests.post(api_url, json=prompt_data)
-    if response.status_code == 200:
-        # The request was successful
-        generated_text = response.json()["generated_text"]
-        # print(f"Generated Text: {generated_text}")
-        return generated_text
-    else:
-        # Something went wrong
-        print(f"Error: {response.status_code}, {response.text}")
-        return None
+def generate_response(prompt, temperature, max_tokens):
+    message_data = {
+        "messages": [
+            {"role": "user", "content": prompt}
+        ],
+        "temperature": temperature,
+        "max_tokens": max_tokens
+    }
+
+    if app_config["llm-server"]["model"]:
+        message_data["model"] = app_config["llm-server"]["model"]
+
+    try:
+        # Request for chat completions
+        headers = {"Content-Type": "application/json"}
+        if LLM_AUTHORIZATION_KEY and app_config["llm-server"]["chatgpt_hosting_service"]:
+            if app_config["llm-server"]["chatgpt_hosting_service"] == "openai":
+                headers["Authorization"] = f"Bearer {LLM_AUTHORIZATION_KEY}"
+            elif app_config["llm-server"]["chatgpt_hosting_service"] == "azure":
+                headers["api-key"] = f"{LLM_AUTHORIZATION_KEY}"
+
+        completions_response = requests.post(
+            app_config["llm-server"]["url"]+app_config["llm-server"]["endpoint"],
+            json=message_data,
+            headers=headers
+        )
+        # {'id': 'cmpl-8e05afc0c9704f4eaffd586d311d255f',
+        # 'object': 'chat.completion',
+        # 'created': 163914,
+        # 'model': 'TechxGenus/gemma-7b-it-GPTQ',
+        # 'choices': [{'index': 0,
+        # 'message': {'role': 'assistant',
+        #     'content': "Hi! 👋\n\nIt's nice to hear from you. What would you like to talk about today?"},
+        # 'logprobs': None,
+        # 'finish_reason': 'stop'}],
+        # 'usage': {'prompt_tokens': 10, 'total_tokens': 33, 'completion_tokens': 23}}
+    except Exception as e:
+        print(f"Error: {e}")
+        traceback.print_exc()
+        return ""
+
+    if completions_response.status_code != 200:
+        print(f"Error: {completions_response.status_code}, {completions_response.text}")
+        return ""
+
+    return completions_response.json()["choices"][0]["message"]["content"]
 
 def initialize_pydantic_from_dict(model_cls, data_dict):
     """

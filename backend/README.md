@@ -37,4 +37,15 @@ sudo docker exec -it d23830e457a3 /bin/bash
 ```sh
 export GOOGLE_OATH_CLIENT_ID="YOUR_GOOGLE_OATH_CLIENT_ID"
 export GOOGLE_OATH_CLIENT_SECRET="YOUR_GOOGLE_OATH_CLIENT_SECRET"
+# Only needed for using ChatGPT Integration
+export LLM_AUTHORIZATION_KEY="YOUR_LLM_AUTHORIZATION_KEY"
+```
+
+## For using ChatGPT for LLM Agents
+### Sample config.toml for Azure chatGPT hosting
+```
+url="https://YOUR_ENDPOINT.com"
+endpoint="/openai/deployments/YOUR_DEPLOYMENT_NAME/chat/completions?api-version=YOUR_API_VERSION"
+model=""
+chatgpt_hosting_service="azure"
 ```
