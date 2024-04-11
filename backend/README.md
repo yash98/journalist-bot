@@ -42,5 +42,10 @@ export LLM_AUTHORIZATION_KEY="YOUR_LLM_AUTHORIZATION_KEY"
 ```
 
 ## For using ChatGPT for LLM Agents
+### Sample config.toml for Azure chatGPT hosting
 ```
+url="https://YOUR_ENDPOINT.com"
+endpoint="/openai/deployments/YOUR_DEPLOYMENT_NAME/chat/completions?api-version=YOUR_API_VERSION"
+model=""
+chatgpt_hosting_service="azure"
 ```
