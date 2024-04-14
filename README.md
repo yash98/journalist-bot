@@ -1,4 +1,4 @@
-# Dynamic Survey
+# Dynamic Surveys
 
 <img src="https://github.com/yash98/journalist-bot/blob/main/docs/img/IMG-20240406-WA0010.jpg?raw=true" alt="Image" width="33%">
 
