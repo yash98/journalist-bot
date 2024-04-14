@@ -9,7 +9,7 @@ Closed-ended questions lack engagement, leading to low participation and superfi
 They fail to adapt to respondents' perspectives.
 Generative AI can interact with users within their context and also enable nuanced interpretation of text-based responses.
 
-Solution:
+## Solution
 
 Introduce an LLM-based survey tool which interacts dynamically, understanding and evaluating responses in real-time.
 Tailors follow-up questions based on individual answers and nuances.
