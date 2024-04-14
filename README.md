@@ -106,7 +106,7 @@ Priority - P0 to P4
 2. Multilingual Support P1
 3. Survey Bot (Collection of agents) P0
 4. Authentication P1
-5. Conversation summarizer into stats and insights : segmented by questions
+5. Conversation summarizer into stats and insights : segmented by questions P0
 
 ### Low priority
 
