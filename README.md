@@ -1,4 +1,8 @@
 # Dynamic Survey
+
+![LOGO]([https://github.com/yash98/journalist-bot/blob/main/docs/img/creator-ui.drawio.png?raw=true](https://github.com/yash98/journalist-bot/blob/main/docs/img/IMG-20240406-WA0010.jpg?raw=true
+))
+
 ## Core Idea
 Knowledge Gathering: Generate targeted questions that maximize information gathering by having a dialogue with people.
 
