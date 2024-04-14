@@ -58,7 +58,7 @@ Basic UI were user answers the configured questions one after the other
 ## Survey Creation (High Level Design)
 ![Survey Creation](https://github.com/yash98/journalist-bot/blob/main/docs/img/creator-ui.drawio.png?raw=true)
 
-## Survey Bot Chain of Agents (High Level Design)
+## Multiagent system
 ![Survey Bot Chain of Agents](https://github.com/yash98/journalist-bot/blob/main/docs/img/multiagent-flow.drawio.png?raw=true)
 
 ## Tech Architecture
