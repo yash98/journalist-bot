@@ -63,14 +63,14 @@ Basic UI were user answers the configured questions one after the other
 # Solution Details
 
 ## Survey Creation (High Level Design)
-![Survey Creation](https://github.com/yash98/journalist-bot/blob/main/docs/img/survey-creator-diagram.png?raw=true)
+![Survey Creation](https://github.com/yash98/journalist-bot/blob/main/docs/img/creator-ui.drawio.png?raw=true)
 
 ## Survey Bot Chain of Agents (High Level Design)
-![Survey Bot Chain of Agents](https://github.com/yash98/journalist-bot/blob/main/docs/img/survey-filler-diagram.png?raw=true)
+![Survey Bot Chain of Agents](https://github.com/yash98/journalist-bot/blob/main/docs/img/multiagent-flow.drawio.png?raw=true)
 
 ## Tech Architecture
 
-![Tech Architecture](https://github.com/yash98/journalist-bot/blob/main/docs/img/dynamic-survey-tech-arch.png?raw=true)
+![Tech Architecture](https://github.com/yash98/journalist-bot/blob/main/docs/img/hld-new.drawio.png?raw=true)
 
 A fronted app written using streamlit can be used to create surveys and for filling survey
 The fronted app interacts with a backend service written using FastAPI
